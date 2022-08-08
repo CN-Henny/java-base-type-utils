@@ -1,0 +1,609 @@
+package extensions.java.lang.Long;
+
+import manifold.ext.rt.api.Extension;
+import manifold.ext.rt.api.This;
+
+import java.math.BigDecimal;
+import java.util.regex.Pattern;
+
+/**
+ * Long Extension
+ * Copyright: Copyright (C) 2022 DLANGEL, Inc. All rights reserved.
+ * Company: 大连安琪科技有限公司
+ *
+ * @author Henny
+ * @since 2022/8/8 16:07
+ */
+@Extension
+public class LongExtension {
+
+    final static short maxShort = 32767;
+
+    final static int maxInteger = 0x7fffffff;
+
+    /**
+     * Null Exception Throw
+     *
+     * @param source
+     * @return void
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:29
+     * @version 1.0
+     * @mdate 2022/8/8 13:29
+     * @since 1.0
+     */
+    private static void isNullException(Long source) {
+        if (source.isNull()) {
+            //TODO 增加异常返回
+            System.out.println(source + "是空的");
+        }
+    }
+
+    /**
+     * 判断转换是否超出最大值
+     *
+     * @param source
+     * @param max
+     * @return void
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 19:46
+     * @version 1.0
+     * @mdate 2022/8/8 19:46
+     * @since 1.0
+     */
+    private static void isMax(Long source, String max) {
+        boolean flag = false;
+        switch (max) {
+            case "Short": {
+                if (source > maxShort) {
+                    //TODO 超长提醒
+                    flag = true;
+                }
+                break;
+            }
+            case "Integer": {
+                if (source > maxInteger) {
+                    //TODO 超长提醒
+                    flag = true;
+                }
+                break;
+            }
+        }
+        if (flag) {
+            System.out.println("超出长度");
+        }
+    }
+
+    //region   判断型
+
+    /**
+     * If source Is Null Re true Else Re false
+     *
+     * @param source
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:30
+     * @version 1.0
+     * @mdate 2022/8/8 13:30
+     * @since 1.0
+     */
+    public static Boolean isNull(@This Long source) {
+        return source == null;
+    }
+
+    /**
+     * If source Is Not Null Re true Else Re false
+     * Null Range : Null
+     *
+     * @param source
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:30
+     * @version 1.0
+     * @mdate 2022/8/8 13:30
+     * @since 1.0
+     */
+    public static Boolean isNotNull(@This Long source) {
+        return !source.isNull();
+    }
+
+    /**
+     * If source Is Not Null Re source Else Re errorBack
+     * Null Range : Null
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:30
+     * @version 1.0
+     * @mdate 2022/8/8 13:30
+     * @since 1.0
+     */
+    public static Long isNotNull(@This Long source, Long errorBack) {
+        return source.isNotNull() ? source : errorBack;
+    }
+
+    /**
+     * If source Is Zero Re true Else Re false
+     *
+     * @param source
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:34
+     * @version 1.0
+     * @mdate 2022/8/8 13:34
+     * @since 1.0
+     */
+    public static Boolean isZero(@This Long source) {
+        return source.isNull() ? false : source == 0 ? true : false;
+    }
+
+    /**
+     * If source Is Not Zero Re true Else Re false
+     *
+     * @param source
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:34
+     * @version 1.0
+     * @mdate 2022/8/8 13:34
+     * @since 1.0
+     */
+    public static Boolean isNotZero(@This Long source) {
+        return !source.isZero();
+    }
+
+    /**
+     * If source Is Not Zero Re source Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:34
+     * @version 1.0
+     * @mdate 2022/8/8 13:34
+     * @since 1.0
+     */
+    public static Long isNotZero(@This Long source, Integer errorBack) {
+        return !source.isZero() ? source : errorBack;
+    }
+
+    /**
+     * source Judge Positive And Negative Numbers
+     * If source=0 Re 0
+     * If source>0 Re 1
+     * If source<0 Re -1
+     *
+     * @param source
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:47
+     * @version 1.0
+     * @mdate 2022/8/8 15:47
+     * @since 1.0
+     */
+    public static Integer isSign(@This Long source) {
+        isNullException(source);
+        return source > 0 ? 1 : source == 0 ? 0 : -1;
+    }
+    //endregion
+
+    //region 功能型
+
+    //TODO 比较需不需要区分类型
+
+    /**
+     * source Equal condition If Identical Re true Else Re false
+     *
+     * @param source
+     * @param condition
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:36
+     * @version 1.0
+     * @mdate 2022/8/8 13:36
+     * @since 1.0
+     */
+    public static Boolean equal(@This Long source, Long condition) {
+        isNullException(source);
+        return source == condition ? true : false;
+    }
+
+    /**
+     * source Equal condition If Identical Re true Else Re false Exception Re errorBack
+     *
+     * @param source
+     * @param condition
+     * @param errorBack
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:36
+     * @version 1.0
+     * @mdate 2022/8/8 13:36
+     * @since 1.0
+     */
+    public static Boolean equal(@This Long source, Long condition, Boolean errorBack) {
+        try {
+            return source == condition ? true : false;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * source Compare To condition
+     * If source=condition Re 0
+     * If source>condition Re 1
+     * If source<condition Re -1
+     *
+     * @param source
+     * @param condition
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:37
+     * @version 1.0
+     * @mdate 2022/8/8 13:37
+     * @since 1.0
+     */
+    public static Integer compareTo(@This Long source, Long condition) {
+        isNullException(source);
+        isNullException(condition);
+        return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
+    }
+
+    /**
+     * source ABS
+     *
+     * @param source
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:52
+     * @version 1.0
+     * @mdate 2022/8/8 15:52
+     * @since 1.0
+     */
+    public static Long abs(@This Long source) {
+        isNullException(source);
+        return source > 0 ? source : -source;
+    }
+
+    /**
+     * Enter source Re Judgment Digits
+     *
+     * @param source
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:38
+     * @version 1.0
+     * @mdate 2022/8/8 13:38
+     * @since 1.0
+     */
+    public static Integer length(@This Long source) {
+        long p = 10;
+        for (int i = 1; i < 19; i++) {
+            if (source < p)
+                return i;
+            p = 10 * p;
+        }
+        return 19;
+    }
+
+    /**
+     * Enter source Re Judgment Digits Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 13:38
+     * @version 1.0
+     * @mdate 2022/8/8 13:38
+     * @since 1.0
+     */
+    public static Integer length(@This Long source, Integer errorBack) {
+        try {
+            long p = 10;
+            for (int i = 1; i < 19; i++) {
+                if (source < p)
+                    return i;
+                p = 10 * p;
+            }
+            return 19;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+    //endregion
+
+    //region   转换型
+
+    /**
+     * Long To Byte Re byte
+     *
+     * @param source
+     * @return java.lang.Byte
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:05
+     * @version 1.0
+     * @mdate 2022/8/8 15:05
+     * @since 1.0
+     */
+    public static Byte toByte(@This Long source) {
+        isNullException(source);
+        return (byte) source.intValue();
+    }
+
+    /**
+     * Long To Byte Re byte Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:05
+     * @version 1.0
+     * @mdate 2022/8/8 15:05
+     * @since 1.0
+     */
+    public static Byte toByte(@This Long source, Byte errorBack) {
+        try {
+            return (byte) source.intValue();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To Double Re double
+     *
+     * @param source
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:10
+     * @version 1.0
+     * @mdate 2022/8/8 15:10
+     * @since 1.0
+     */
+    public static Double toDouble(@This Long source) {
+        isNullException(source);
+        return source.doubleValue();
+    }
+
+    /**
+     * Long To Double Re double Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:28
+     * @version 1.0
+     * @mdate 2022/8/8 15:28
+     * @since 1.0
+     */
+    public static Double toDouble(@This Long source, Double errorBack) {
+        try {
+            return source.doubleValue();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To Float Re float
+     *
+     * @param source
+     * @return java.lang.Float
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:28
+     * @version 1.0
+     * @mdate 2022/8/8 15:28
+     * @since 1.0
+     */
+    public static Float toFloat(@This Long source) {
+        isNullException(source);
+        return source.floatValue();
+    }
+
+    /**
+     * Long To Float Re float Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Float
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:28
+     * @version 1.0
+     * @mdate 2022/8/8 15:28
+     * @since 1.0
+     */
+    public static Float toFloat(@This Long source, Float errorBack) {
+        try {
+            return source.floatValue();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To Integer Re integer
+     *
+     * @param source
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:32
+     * @version 1.0
+     * @mdate 2022/8/8 15:32
+     * @since 1.0
+     */
+    public static Integer toInteger(@This Long source) {
+        isNullException(source);
+        isMax(source, "Integer");
+        return source.intValue();
+    }
+
+    /**
+     * Long To Integer Re integer Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:32
+     * @version 1.0
+     * @mdate 2022/8/8 15:32
+     * @since 1.0
+     */
+    public static Integer toInteger(@This Long source, Integer errorBack) {
+        try {
+            return source.intValue();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To Short Re short
+     *
+     * @param source
+     * @return java.lang.Short
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:33
+     * @version 1.0
+     * @mdate 2022/8/8 15:33
+     * @since 1.0
+     */
+    public static Short toShort(@This Long source) {
+        isNullException(source);
+        isMax(source, "Short");
+        return source.shortValue();
+    }
+
+    /**
+     * Long To Short Re short Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Short
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:33
+     * @version 1.0
+     * @mdate 2022/8/8 15:33
+     * @since 1.0
+     */
+    public static Short toShort(@This Long source, Short errorBack) {
+        try {
+            return source.shortValue();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To String Re string
+     *
+     * @param source
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:35
+     * @version 1.0
+     * @mdate 2022/8/8 15:35
+     * @since 1.0
+     */
+    public static String toString(@This Long source) {
+        isNullException(source);
+        return source.toString();
+    }
+
+    /**
+     * Long To String Re string Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:35
+     * @version 1.0
+     * @mdate 2022/8/8 15:35
+     * @since 1.0
+     */
+    public static String toString(@This Long source, String errorBack) {
+        try {
+            return source.toString();
+        } catch (Exception ex) {
+            //TODO 警告
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To BigDecimal Re bigDecimal
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:36
+     * @version 1.0
+     * @mdate 2022/8/8 15:36
+     * @since 1.0
+     */
+    public static BigDecimal toBigDecimal(@This Long source) {
+        isNullException(source);
+        return new BigDecimal(source.toString());
+    }
+
+    /**
+     * Long To BigDecimal Re bigDecimal Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/8 15:36
+     * @version 1.0
+     * @mdate 2022/8/8 15:36
+     * @since 1.0
+     */
+    public static BigDecimal toBigDecimal(@This Long source, BigDecimal errorBack) {
+        try {
+            return new BigDecimal(source.toString());
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+    //endregion
+}
