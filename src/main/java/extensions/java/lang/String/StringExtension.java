@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 /**
  * String Extension
  * Copyright: Copyright (C) 2022 DLANGEL, Inc. All rights reserved.
- * Company: 大连安琪科技有限公司
+ * Company: Henny
  *
  * @author Henny
  * @since 2022/8/8 16:06
