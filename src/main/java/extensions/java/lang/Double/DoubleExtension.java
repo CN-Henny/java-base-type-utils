@@ -112,6 +112,27 @@ public class DoubleExtension {
         }
     }
 
+    /**
+     * 比较截取位数和源小数位数
+     *
+     * @param source
+     * @param decimalsLength
+     * @return void
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 13:46
+     * @version 1.0
+     * @mdate 2022/8/9 13:46
+     * @since 1.0
+     */
+    private static void compareDecimalsLengthToEnter(Double source, Integer decimalsLength) {
+        Integer sourceDecimalsLength = source.decimalsLength();
+        if (decimalsLength > sourceDecimalsLength) {
+            //TODO 提示截取位数不够
+            System.out.println("源数据小数位不够");
+        }
+    }
+
     //region 判断型
 
     /**
@@ -236,6 +257,395 @@ public class DoubleExtension {
     //endregion
 
     //region 功能型
+
+    /**
+     * source Equal condition If Identical Re true Else Re false
+     *
+     * @param source
+     * @param condition
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:15
+     * @version 1.0
+     * @mdate 2022/8/9 10:15
+     * @since 1.0
+     */
+    public static Boolean equal(@This Double source, Double condition) {
+        isNullException(source);
+        return source == condition ? true : false;
+    }
+
+    //TODO 比较需不需要区分类型
+
+    /**
+     * source Equal condition If Identical Re true Else Re false Exception Re errorBack
+     *
+     * @param source
+     * @param condition
+     * @param errorBack
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:15
+     * @version 1.0
+     * @mdate 2022/8/9 10:15
+     * @since 1.0
+     */
+    public static Boolean equal(@This Double source, Double condition, Boolean errorBack) {
+        try {
+            return source == condition ? true : false;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * source Compare To condition
+     * If source=condition Re 0
+     * If source>condition Re 1
+     * If source<condition Re -1
+     *
+     * @param source
+     * @param condition
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:15
+     * @version 1.0
+     * @mdate 2022/8/9 10:15
+     * @since 1.0
+     */
+    public static Integer compareTo(@This Double source, Double condition) {
+        isNullException(source);
+        isNullException(condition);
+        return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
+    }
+
+    /**
+     * source ABS
+     *
+     * @param source
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:16
+     * @version 1.0
+     * @mdate 2022/8/9 10:16
+     * @since 1.0
+     */
+    public static Double abs(@This Double source) {
+        isNullException(source);
+        return source > 0 ? source : -source;
+    }
+
+    /**
+     * Double Decimals Length Re length
+     * eg: 100.01001  Re 5
+     *
+     * @param source
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:25
+     * @version 1.0
+     * @mdate 2022/8/9 10:25
+     * @since 1.0
+     */
+    public static Integer decimalsLength(@This Double source) {
+        isNullException(source);
+        String[] doubleArray = source.toString().split("\\.");
+        switch (doubleArray.length) {
+            case 1: {
+                return 0;
+            }
+            case 2: {
+                return doubleArray[1].length();
+            }
+            default: {
+                //TODO 异常
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Double Decimals Length Re length Exception Re errorBack
+     * eg: 100.01001  Re 5
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:26
+     * @version 1.0
+     * @mdate 2022/8/9 10:26
+     * @since 1.0
+     */
+    public static Integer decimalsLength(@This Double source, Integer errorBack) {
+        try {
+            String[] doubleArray = source.toString().split("\\.");
+            return doubleArray[1].length();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * Double Integer Length Re length
+     * eg: 100.01001  Re 3
+     *
+     * @param source
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:26
+     * @version 1.0
+     * @mdate 2022/8/9 10:26
+     * @since 1.0
+     */
+    public static Integer integerLength(@This Double source) {
+        isNullException(source);
+        String[] doubleArray = source.toString().split("\\.");
+        switch (doubleArray.length) {
+            case 1: {
+                return 0;
+            }
+            case 2: {
+                return doubleArray[0].length();
+            }
+            default: {
+                //TODO 异常
+                return null;
+            }
+        }
+    }
+
+    /**
+     * Double Integer Length Re length Exception Re errorBack
+     * eg: 100.01001  Re 3
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:27
+     * @version 1.0
+     * @mdate 2022/8/9 10:27
+     * @since 1.0
+     */
+    public static Integer integerLength(@This Double source, Integer errorBack) {
+        try {
+            String[] doubleArray = source.toString().split("\\.");
+            return doubleArray[0].length();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double
+     * Contain Five
+     * eg: decimalsLength=0 1.5->2
+     * eg: decimalsLength=1 1.55->1.6
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundHalfUp(@This Double source, Integer decimalsLength) {
+        isNullException(source);
+        compareDecimalsLengthToEnter(source, decimalsLength);
+        return new BigDecimal(source).setScale(decimalsLength.isNotNull(0), BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double Exception Re errorBack
+     * Contain Five
+     * eg: decimalsLength=0 1.5->2
+     * eg: decimalsLength=1 1.55->1.6
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundHalfUp(@This Double source, Integer decimalsLength, Double errorBack) {
+        try {
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double
+     * Not Contain Five
+     * eg: decimalsLength=0 1.5->1
+     * eg: decimalsLength=1 1.55->1.5
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundHalfDown(@This Double source, Integer decimalsLength) {
+        isNullException(source);
+        compareDecimalsLengthToEnter(source, decimalsLength);
+        return new BigDecimal(source).setScale(decimalsLength.isNotNull(0), BigDecimal.ROUND_HALF_DOWN).doubleValue();
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double Exception Re errorBack
+     * Not Contain Five
+     * eg: decimalsLength=0 1.5->1
+     * eg: decimalsLength=1 1.55->1.5
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundHalfDown(@This Double source, Integer decimalsLength, Double errorBack) {
+        try {
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double
+     * Discard
+     * eg: decimalsLength=0 1.5->1
+     * eg: decimalsLength=1 1.55->1.5   1.56->1.5
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundDown(@This Double source, Integer decimalsLength) {
+        isNullException(source);
+        compareDecimalsLengthToEnter(source, decimalsLength);
+        return new BigDecimal(source).setScale(decimalsLength.isNotNull(0), BigDecimal.ROUND_DOWN).doubleValue();
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double Exception Re errorBack
+     * Discard
+     * eg: decimalsLength=0 1.5->1      1.9->1
+     * eg: decimalsLength=1 1.55->1.5   1.56->1.5
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundDown(@This Double source, Integer decimalsLength, Double errorBack) {
+        try {
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double
+     * Enter
+     * eg: decimalsLength=0 1.5->2      1.1->2
+     * eg: decimalsLength=1 1.55->1.6   1.51->1.6
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundUp(@This Double source, Integer decimalsLength) {
+        isNullException(source);
+        compareDecimalsLengthToEnter(source, decimalsLength);
+        return new BigDecimal(source).setScale(decimalsLength.isNotNull(0), BigDecimal.ROUND_UP).doubleValue();
+    }
+
+    /**
+     * According To decimalsLength Rounding Re double Exception Re errorBack
+     * Enter
+     * eg: decimalsLength=0 1.5->1      1.1->2
+     * eg: decimalsLength=1 1.55->1.5   1.56->1.5
+     *
+     * @param source
+     * @param decimalsLength
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 10:44
+     * @version 1.0
+     * @mdate 2022/8/9 10:44
+     * @since 1.0
+     */
+    public static Double roundUp(@This Double source, Integer decimalsLength, Double errorBack) {
+        try {
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * 格式化数据，不使用科学计数法
+     *
+     * @param source
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 13:41
+     * @version 1.0
+     * @mdate 2022/8/9 13:41
+     * @since 1.0
+     */
+    public static String nousedF_E(@This Double source) {
+        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        return nf.format(source);
+    }
 
     //endregion
 
