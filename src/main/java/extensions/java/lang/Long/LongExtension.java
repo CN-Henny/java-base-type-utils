@@ -4,6 +4,8 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 /**
@@ -330,6 +332,47 @@ public class LongExtension {
             return errorBack;
         }
     }
+
+    /**
+     * Long To Date And Format Re formatStr
+     *
+     * @param source
+     * @param formatStr
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 14:43
+     * @version 1.0
+     * @mdate 2022/8/9 14:43
+     * @since 1.0
+     */
+    public static String toDateFormat(@This Long source, String formatStr) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatStr);
+        return simpleDateFormat.format(source.toDate());
+    }
+
+    /**
+     * Long To Date And Format Re formatStr Exception Re errorBack
+     *
+     * @param source
+     * @param formatStr
+     * @param errorBack
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 14:46
+     * @version 1.0
+     * @mdate 2022/8/9 14:46
+     * @since 1.0
+     */
+    public static String toDateFormat(@This Long source, String formatStr, String errorBack) {
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatStr);
+            return simpleDateFormat.format(source.toDate());
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
     //endregion
 
     //region   转换型
@@ -601,6 +644,43 @@ public class LongExtension {
     public static BigDecimal toBigDecimal(@This Long source, BigDecimal errorBack) {
         try {
             return new BigDecimal(source.toString());
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * Long To Date Re date
+     *
+     * @param source
+     * @return java.util.Date
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 14:47
+     * @version 1.0
+     * @mdate 2022/8/9 14:47
+     * @since 1.0
+     */
+    public static Date toDate(@This Long source) {
+        return new Date(source);
+    }
+
+    /**
+     * Long To Date Re date Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.util.Date
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/9 14:48
+     * @version 1.0
+     * @mdate 2022/8/9 14:48
+     * @since 1.0
+     */
+    public static Date toDate(@This Long source, Date errorBack) {
+        try {
+            return new Date(source);
         } catch (Exception ex) {
             return errorBack;
         }
