@@ -1,9 +1,21 @@
 package extensions.java.lang.String;
 
+import cn.hutool.core.date.DateTime;
+import cn.hutool.core.date.DateUtil;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,7 +51,7 @@ public class StringExtension {
      * @since 1.0
      */
     private static void isNullException(String source) {
-        if (source.isNull()) {
+        if (source.customIsNull()) {
             //TODO 增加异常返回
             System.out.println(source + "是空的");
         }
@@ -59,7 +71,7 @@ public class StringExtension {
      * @since 1.0
      */
     private static void isIntegerException(String source) {
-        Character[] chars = source.toCharacterArray();
+        Character[] chars = source.customToCharacterArray();
         for (Character charValue : chars) {
             if (!Character.isDigit(charValue)) {
                 //TODO 增加异常返回
@@ -152,6 +164,22 @@ public class StringExtension {
         }
     }
 
+    private static String replaceChSym(String templateContent) {
+        isNullException(templateContent);
+        templateContent = templateContent.replaceAll("《", "&#x300A;");
+        templateContent = templateContent.replaceAll("》", "&#x300B;");
+        templateContent = templateContent.replaceAll("（", "&#xFF08;");
+        templateContent = templateContent.replaceAll("）", "&#xFF09;");
+        templateContent = templateContent.replaceAll("“", "&#x201C;");
+        templateContent = templateContent.replaceAll("”", "&#x201D;");
+        templateContent = templateContent.replaceAll("、", "&#x3001;");
+        templateContent = templateContent.replaceAll("，", "&#xFF0C;");
+        templateContent = templateContent.replaceAll("。", "&#x3002;");
+        templateContent = templateContent.replaceAll("；", "&#xFF1B;");
+        templateContent = templateContent.replaceAll("：", "&#xFF1A;");
+        return templateContent;
+    }
+
     //region 判断型
 
     /**
@@ -167,7 +195,7 @@ public class StringExtension {
      * @mdate 2022/8/5 14:25
      * @since 1.0
      */
-    public static Boolean isNull(@This String source) {
+    public static Boolean customIsNull(@This String source) {
         return source == null;
     }
 
@@ -184,8 +212,8 @@ public class StringExtension {
      * @mdate 2022/8/5 14:26
      * @since 1.0
      */
-    public static Boolean isNotNull(@This String source) {
-        return !source.isNull();
+    public static Boolean customIsNotNull(@This String source) {
+        return !source.customIsNull();
     }
 
     /**
@@ -202,8 +230,8 @@ public class StringExtension {
      * @mdate 2022/8/5 15:08
      * @since 1.0
      */
-    public static String isNotNull(@This String source, String errorBack) {
-        return source.isNotNull() ? source : errorBack;
+    public static String customIsNotNull(@This String source, String errorBack) {
+        return source.customIsNotNull() ? source : errorBack;
     }
 
     /**
@@ -219,8 +247,8 @@ public class StringExtension {
      * @mdate 2022/8/5 14:54
      * @since 1.0
      */
-    public static Boolean isEmpty(@This String source) {
-        return source.isNull() ? true : source.equals("") ? true : false;
+    public static Boolean customIsEmpty(@This String source) {
+        return source.customIsNull() ? true : source.equals("") ? true : false;
     }
 
     /**
@@ -236,7 +264,7 @@ public class StringExtension {
      * @mdate 2022/8/5 14:57
      * @since 1.0
      */
-    public static Boolean isNotEmpty(@This String source) {
+    public static Boolean customIsNotEmpty(@This String source) {
         return !source.isEmpty();
     }
 
@@ -254,8 +282,8 @@ public class StringExtension {
      * @mdate 2022/8/5 15:09
      * @since 1.0
      */
-    public static String isNotEmpty(@This String source, String errorBack) {
-        return source.isNotEmpty() ? source : errorBack;
+    public static String customIsNotEmpty(@This String source, String errorBack) {
+        return source.customIsNotEmpty() ? source : errorBack;
     }
 
     /**
@@ -271,7 +299,7 @@ public class StringExtension {
      * @mdate 2022/8/5 15:00
      * @since 1.0
      */
-    public static Boolean isBlank(@This String source) {
+    public static Boolean customIsBlank(@This String source) {
         int strLen;
         if (source == null || (strLen = source.length()) == 0) {
             return true;
@@ -297,8 +325,8 @@ public class StringExtension {
      * @mdate 2022/8/5 15:01
      * @since 1.0
      */
-    public static Boolean isNotBlank(@This String source) {
-        return !source.isBlank();
+    public static Boolean customIsNotBlank(@This String source) {
+        return !source.customIsBlank();
     }
 
     /**
@@ -315,8 +343,8 @@ public class StringExtension {
      * @mdate 2022/8/5 15:10
      * @since 1.0
      */
-    public static String isNotBlank(@This String source, String errorBack) {
-        return source.isNotBlank() ? source : errorBack;
+    public static String customIsNotBlank(@This String source, String errorBack) {
+        return source.customIsNotBlank() ? source : errorBack;
     }
 
     /**
@@ -331,9 +359,9 @@ public class StringExtension {
      * @mdate 2022/8/6 15:51
      * @since 1.0
      */
-    public static Boolean isInteger(@This String source) {
+    public static Boolean customIsInteger(@This String source) {
         isNullException(source);
-        Character[] chars = source.toCharacterArray();
+        Character[] chars = source.customToCharacterArray();
         for (Character charValue : chars) {
             if (!Character.isDigit(charValue)) {
                 return false;
@@ -355,8 +383,8 @@ public class StringExtension {
      * @mdate 2022/8/6 15:53
      * @since 1.0
      */
-    public static String isInteger(@This String source, String errorBack) {
-        return source.isNotInteger() ? source : errorBack;
+    public static String customIsInteger(@This String source, String errorBack) {
+        return source.customIsNotInteger() ? source : errorBack;
     }
 
     /**
@@ -371,8 +399,8 @@ public class StringExtension {
      * @mdate 2022/8/6 15:53
      * @since 1.0
      */
-    public static Boolean isNotInteger(@This String source) {
-        return !source.isInteger();
+    public static Boolean customIsNotInteger(@This String source) {
+        return !source.customIsInteger();
     }
 
     /**
@@ -387,7 +415,7 @@ public class StringExtension {
      * @mdate 2022/8/6 15:51
      * @since 1.0
      */
-    public static Boolean isFloat(@This String source) {
+    public static Boolean customIsFloat(@This String source) {
         isNullException(source);
         Pattern pattern = Pattern.compile("[0-9]*");
         if (source.indexOf(".") > 0) {//判断是否有小数点
@@ -414,8 +442,8 @@ public class StringExtension {
      * @mdate 2022/8/6 15:53
      * @since 1.0
      */
-    public static String isFloat(@This String source, String errorBack) {
-        return source.isNotFloat() ? source : errorBack;
+    public static String customIsFloat(@This String source, String errorBack) {
+        return source.customIsNotFloat() ? source : errorBack;
     }
 
     /**
@@ -430,12 +458,359 @@ public class StringExtension {
      * @mdate 2022/8/6 15:53
      * @since 1.0
      */
-    public static Boolean isNotFloat(@This String source) {
-        return !source.isFloat();
+    public static Boolean customIsNotFloat(@This String source) {
+        return !source.customIsFloat();
+    }
+
+    /**
+     * source Compare To condition
+     * If content is JSONObject Re 1
+     * If content is JSONArray Re 2
+     * If content is Not JSON Re 0
+     *
+     * @param source
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:28
+     * @version 1.0
+     * @mdate 2022/10/18 15:28
+     * @since 1.0
+     */
+    public static Integer customIsJson(@This String source) {
+        try {
+            isNullException(source);
+            Object object = JSON.parse(source);
+            if (object instanceof JSONObject) {
+                JSONObject jsonObject = (JSONObject) object;
+                return 1;
+            } else if (object instanceof JSONArray) {
+                JSONArray jsonArray = (JSONArray) object;
+                return 2;
+            } else {
+                return 0;
+            }
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    /**
+     * If source Is JSON Re true Else Re fasle
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:35
+     * @version 1.0
+     * @mdate 2022/10/18 15:35
+     * @since 1.0
+     */
+    public static String customIsJson(@This String source, String errorBack) {
+        if (source.customIsJson() == 0) {
+            return errorBack;
+        } else {
+            return source;
+        }
     }
     //endregion
 
     //region 功能型
+
+    /**
+     * 替换富文本中的特殊符号以便在XNL中使用
+     *
+     * @param html
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/17 20:12
+     * @version 1.0
+     * @mdate 2022/10/17 20:12
+     * @since 1.0
+     */
+    public static String customReplaceSpecialSymbols(@This String html) {
+        isNullException(html);
+        //替换单引号
+        html = html.replace("'", "&apos;");
+        //替换&
+        html = html.replaceAll("&", "&amp;");
+        //替换双引号
+        html = html.replace("\"", "&quot;");
+        // 替换跳格
+        html = html.replace("\t", "&nbsp;&nbsp;");
+        // 替换空格
+        html = html.replace(" ", "&nbsp;");
+        //替换左尖括号
+        html = html.replace("<", "&lt;");
+        //替换右尖括号
+        html = html.replaceAll(">", "&gt;");
+        html = html.replaceAll("\r", "");
+        html = html.replaceAll("\n", "");
+        return html;
+    }
+
+    /**
+     * 获取富文本字数
+     *
+     * @param html
+     * @return int
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/17 20:26
+     * @version 1.0
+     * @mdate 2022/10/17 20:26
+     * @since 1.0
+     */
+    public static int customGetTextAreaWordCount(@This String html) {
+        isNullException(html);
+        String resultNoTag = html.customRemoveHtmlTag();
+        return resultNoTag.length();
+    }
+
+    /**
+     * 删除Html标签
+     *
+     * @param inputString
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/17 20:18
+     * @version 1.0
+     * @mdate 2022/10/17 20:18
+     * @since 1.0
+     */
+    public static String customRemoveHtmlTag(@This String inputString) {
+        isNullException(inputString);
+        // 含html标签的字符串
+        String textStr = "";
+        try {
+            //定义script的正则表达式{或<script[^>]*?>[\\s\\S]*?<\\/script>
+            String regExScript = "<[\\s]*?script[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?script[\\s]*?>";
+            //定义style的正则表达式{或<style[^>]*?>[\\s\\S]*?<\\/style>
+            String regExStyle = "<[\\s]*?style[^>]*?>[\\s\\S]*?<[\\s]*?\\/[\\s]*?style[\\s]*?>";
+            // 定义HTML标签的正则表达式
+            String regExHtml = "<[^>]+>";
+            // 定义一些特殊字符的正则表达式 如：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            String regExSpecial = "\\&[a-zA-Z]{1,10};";
+            textStr = inputString.customRegexStr(regExScript, regExStyle, regExHtml, regExSpecial);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        // 返回文本字符串
+        return textStr;
+    }
+
+    /**
+     * 按照正则获取字符串
+     *
+     * @param htmlStr
+     * @param args
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/17 20:19
+     * @version 1.0
+     * @mdate 2022/10/17 20:19
+     * @since 1.0
+     */
+    public static String customRegexStr(@This String htmlStr, String... args) {
+        Pattern pScript;
+        Matcher mScript;
+        for (String regEx : args) {
+            pScript = Pattern.compile(regEx, Pattern.CASE_INSENSITIVE);
+            mScript = pScript.matcher(htmlStr);
+            // 过滤
+            htmlStr = mScript.replaceAll("");
+        }
+        return htmlStr;
+    }
+
+    /**
+     * 替换占位符
+     *
+     * @param templateContent
+     * @param paramMap
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 14:02
+     * @version 1.0
+     * @mdate 2022/10/18 14:02
+     * @since 1.0
+     */
+    public static String customReplaceTemplateContent(@This String templateContent, Map<String, Object> paramMap) {
+        if (templateContent == null || "".equals(templateContent)) {
+            return null;
+        }
+        for (String key : paramMap.keySet()) {
+            String regex = String.format("\\$\\{%s\\}", key);
+            String value = paramMap.get(key).toString();
+            value = replaceChSym(value);
+            templateContent = templateContent.replaceAll(regex, value);
+        }
+        return templateContent;
+    }
+
+    /**
+     * 手机号打码
+     *
+     * @param phone
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:11
+     * @version 1.0
+     * @mdate 2022/10/18 15:11
+     * @since 1.0
+     */
+    public static String customMaskPhone(@This String phone) {
+        return phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
+    }
+
+    /**
+     * 获取日期间隔月份集合
+     *
+     * @param startTime
+     * @param endTime
+     * @return java.util.List<java.lang.String>
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 17:07
+     * @version 1.0
+     * @mdate 2022/10/18 17:07
+     * @since 1.0
+     */
+    public static List<String> customGetMonthListByDateRange(@This String startTime, String endTime) {
+        SimpleDateFormat dfm = new SimpleDateFormat("yyyy-MM");
+        Date startDate = DateUtil.parse(startTime);
+        Date endDate = DateUtil.parse(endTime);
+        List<String> month = new ArrayList<>();
+        month.add(dfm.format(startDate));
+        if (!dfm.format(startDate).equals(dfm.format(endDate))) {
+            long monthsBetween = ChronoUnit.MONTHS.between(
+                    LocalDate.parse(startTime).withDayOfMonth(1),
+                    LocalDate.parse(endTime).withDayOfMonth(1));
+            for (int i = 1; i <= (int) monthsBetween; i++) {
+                Date addDate = DateUtil.offsetMonth(startDate, i);
+                month.add(dfm.format(addDate));
+            }
+        }
+        return month;
+    }
+
+    /**
+     * 给定时间段和星期几，计算该时间段内共有多少个给定的星期几
+     *
+     * @param start 开始时间,格式yyyy-MM-dd
+     * @param end   结束时间，格式yyyy-MM-dd
+     * @param a     星期几，从星期一到星期天，分别用数字1-7表示
+     * @return long  星期几统计数
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 17:17
+     * @version 1.0
+     * @mdate 2022/10/18 17:17
+     * @since 1.0
+     */
+    public static long customGetWeekNumberByDateRange(@This String start, String end, int a) {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        //计数
+        long sunDay = 0;
+        try {
+            Calendar startDate = Calendar.getInstance();
+            startDate.setTime(format.parse(start));
+            Calendar endDate = Calendar.getInstance();
+            endDate.setTime(format.parse(end));
+            //开始日期是星期几 结束日期是星期几
+            int sw = startDate.get(Calendar.DAY_OF_WEEK) - 1;
+            int ew = endDate.get(Calendar.DAY_OF_WEEK) - 1;
+            long diff = endDate.getTimeInMillis() - startDate.getTimeInMillis();
+            //给定时间段内一共有多少天
+            long days = diff / (1000 * 60 * 60 * 24);
+            //给定时间内，共有多少个星期
+            //总的星期几统计数
+            sunDay = Math.round(Math.ceil(((days + sw + (7 - ew)) / 7.0)));
+            //给定的星期几小于起始日期的星期几，需要减少一天
+            if (a < sw) {
+                sunDay--;
+            }
+            //给定的星期几大于结束日期的星期几，需要减少一天
+            if (a > ew) {
+                sunDay--;
+            }
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        return sunDay;
+    }
+
+    /**
+     * 获取时间段内的日期集合
+     *
+     * @param startDate
+     * @param endDate
+     * @return java.util.List<java.lang.String>
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 17:20
+     * @version 1.0
+     * @mdate 2022/10/18 17:20
+     * @since 1.0
+     */
+    public static List<String> getWeekListOfDateRange(@This String startDate, String endDate) {
+        List<String> dateList = new ArrayList<>();
+        long betweenDay = DateUtil.betweenDay(DateUtil.parse(startDate), DateUtil.parse(endDate), true);
+        for (int i = 0; i <= betweenDay; i++) {
+            DateTime dateTime = DateUtil.offsetDay(DateUtil.parse(startDate), i);
+            dateList.add(DateUtil.format(dateTime, "yyyy-MM-dd"));
+        }
+        return dateList;
+    }
+
+    /**
+     * 获取日期范围内指定星期的日期
+     *
+     * @param start
+     * @param end
+     * @param week
+     * @return java.util.List<java.lang.String>
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 17:22
+     * @version 1.0
+     * @mdate 2022/10/18 17:22
+     * @since 1.0
+     */
+    public static List<String> getDateListOfDateRangeByWeek(@This String start, String end, int week) {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        List<String> list = new ArrayList<>();
+        //字符串转LocalDate
+        LocalDate startLocalDate = LocalDate.parse(start, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        LocalDate endLocalDate = LocalDate.parse(end, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        long days = ChronoUnit.DAYS.between(startLocalDate, endLocalDate);
+
+        //计算有多少, 指定星期几
+        Calendar startCalender = GregorianCalendar.from(startLocalDate.atStartOfDay(ZoneId.systemDefault()));
+        //for (int i = 0; i < days - 1; i++) {
+        for (int i = 0; i < days; i++) {
+            startCalender.add(Calendar.DATE, 1);
+
+            if (startCalender.get(Calendar.DAY_OF_WEEK) == week + 1) {
+                // 1代表周日，7代表周六
+                LocalDate localDate = LocalDateTime.ofInstant(startCalender.toInstant(), ZoneOffset.systemDefault()).toLocalDate();
+                ZoneId zone = ZoneId.systemDefault();
+                Instant instant = localDate.atStartOfDay().atZone(zone).toInstant();
+                Date date = Date.from(instant);
+                list.add(df.format(date));
+            }
+        }
+        return list;
+    }
+
     //endregion
 
     //region 转换型
@@ -452,7 +827,7 @@ public class StringExtension {
      * @mdate 2022/8/6 14:56
      * @since 1.0
      */
-    public static Byte[] toByteArray(@This String source) {
+    public static Byte[] customToByteArray(@This String source) {
         isNullException(source);
         byte[] byteArray = source.getBytes();
         Byte[] byteObjects = new Byte[byteArray.length];
@@ -475,7 +850,7 @@ public class StringExtension {
      * @mdate 2022/8/6 14:57
      * @since 1.0
      */
-    public static Byte[] toByteArray(@This String source, Byte[] errorBack) {
+    public static Byte[] customToByteArray(@This String source, Byte[] errorBack) {
         try {
             byte[] byteArray = source.getBytes();
             Byte[] byteObjects = new Byte[byteArray.length];
@@ -500,7 +875,7 @@ public class StringExtension {
      * @mdate 2022/8/6 14:58
      * @since 1.0
      */
-    public static Character[] toCharacterArray(@This String source) {
+    public static Character[] customToCharacterArray(@This String source) {
         isNullException(source);
         return source.chars().mapToObj(c -> (char) c).toArray(Character[]::new);
     }
@@ -518,7 +893,7 @@ public class StringExtension {
      * @mdate 2022/8/6 14:59
      * @since 1.0
      */
-    public static Character[] toCharacterArray(@This String source, Character[] errorBack) {
+    public static Character[] customToCharacterArray(@This String source, Character[] errorBack) {
         try {
             return source.chars().mapToObj(c -> (char) c).toArray(Character[]::new);
         } catch (Exception ex) {
@@ -538,7 +913,7 @@ public class StringExtension {
      * @mdate 2022/8/6 15:57
      * @since 1.0
      */
-    public static Double toDouble(@This String source) {
+    public static Double customToDouble(@This String source) {
         isNullException(source);
         isFloatException(source);
         return Double.parseDouble(source);
@@ -557,7 +932,7 @@ public class StringExtension {
      * @mdate 2022/8/6 15:57
      * @since 1.0
      */
-    public static Double toDouble(@This String source, Double errorBack) {
+    public static Double customToDouble(@This String source, Double errorBack) {
         try {
             return Double.parseDouble(source);
         } catch (Exception ex) {
@@ -577,7 +952,7 @@ public class StringExtension {
      * @mdate 2022/8/6 16:53
      * @since 1.0
      */
-    public static Float toFloat(@This String source) {
+    public static Float customToFloat(@This String source) {
         isNullException(source);
         isFloatException(source);
         isMax(source, "Float");
@@ -597,7 +972,7 @@ public class StringExtension {
      * @mdate 2022/8/6 16:53
      * @since 1.0
      */
-    public static Float toFloat(@This String source, Float errorBack) {
+    public static Float customToFloat(@This String source, Float errorBack) {
         try {
             return Float.parseFloat(source);
         } catch (Exception ex) {
@@ -617,7 +992,7 @@ public class StringExtension {
      * @mdate 2022/8/6 17:04
      * @since 1.0
      */
-    public static Integer toInteger(@This String source) {
+    public static Integer customToInteger(@This String source) {
         isNullException(source);
         isIntegerException(source);
         isMax(source, "Integer");
@@ -637,7 +1012,7 @@ public class StringExtension {
      * @mdate 2022/8/6 17:05
      * @since 1.0
      */
-    public static Integer toInteger(@This String source, Integer errorBack) {
+    public static Integer customToInteger(@This String source, Integer errorBack) {
         try {
             return Integer.parseInt(source);
         } catch (Exception ex) {
@@ -657,7 +1032,7 @@ public class StringExtension {
      * @mdate 2022/8/6 17:07
      * @since 1.0
      */
-    public static Long toLong(@This String source) {
+    public static Long customToLong(@This String source) {
         isNullException(source);
         isIntegerException(source);
         isMax(source, "Long");
@@ -677,7 +1052,7 @@ public class StringExtension {
      * @mdate 2022/8/6 17:07
      * @since 1.0
      */
-    public static Long toLong(@This String source, Long errorBack) {
+    public static Long customToLong(@This String source, Long errorBack) {
         try {
             return Long.parseLong(source);
         } catch (Exception ex) {
@@ -697,7 +1072,7 @@ public class StringExtension {
      * @mdate 2022/8/6 17:07
      * @since 1.0
      */
-    public static Short toShort(@This String source) {
+    public static Short customToShort(@This String source) {
         isNullException(source);
         isIntegerException(source);
         isMax(source, "Short");
@@ -717,7 +1092,7 @@ public class StringExtension {
      * @mdate 2022/8/6 17:07
      * @since 1.0
      */
-    public static Short toShort(@This String source, Short errorBack) {
+    public static Short customToShort(@This String source, Short errorBack) {
         try {
             return Short.parseShort(source);
         } catch (Exception ex) {
@@ -737,7 +1112,7 @@ public class StringExtension {
      * @mdate 2022/8/6 15:01
      * @since 1.0
      */
-    public static BigDecimal toBigDecimal(@This String source) {
+    public static BigDecimal customToBigDecimal(@This String source) {
         isNullException(source);
         return new BigDecimal(source);
     }
@@ -755,7 +1130,7 @@ public class StringExtension {
      * @mdate 2022/8/6 15:02
      * @since 1.0
      */
-    public static BigDecimal toBigDecimal(@This String source, BigDecimal errorBack) {
+    public static BigDecimal customToBigDecimal(@This String source, BigDecimal errorBack) {
         try {
             return new BigDecimal(source);
         } catch (Exception ex) {

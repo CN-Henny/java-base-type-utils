@@ -15,5 +15,52 @@ import java.math.BigDecimal;
  */
 @Extension
 public class BigDecimalExtension {
-    
+    public static String customNousedF_E(@This BigDecimal source) {
+        java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        return nf.format(source);
+    }
+
+    /**
+     * Sum Number Re bigDecimal
+     *
+     * @param source
+     * @param nums
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:55
+     * @version 1.0
+     * @mdate 2022/10/18 15:55
+     * @since 1.0
+     */
+    public static BigDecimal customSumAll(@This BigDecimal source, BigDecimal... nums) {
+        BigDecimal result = BigDecimal.ZERO;
+        for (BigDecimal item : nums) {
+            result = result.add(item);
+        }
+        return result;
+    }
+
+    /**
+     * Sum Number Re bigDecimal Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @param nums
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:47
+     * @version 1.0
+     * @mdate 2022/10/18 15:47
+     * @since 1.0
+     */
+    public static BigDecimal customSumAll(@This BigDecimal source, BigDecimal errorBack, BigDecimal... nums) {
+        try {
+            return source.customSumAll(nums);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
 }

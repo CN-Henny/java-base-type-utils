@@ -4,6 +4,7 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 /**
  * Integer Extension
@@ -35,7 +36,7 @@ public class IntegerExtension {
      * @since 1.0
      */
     private static void isNullException(Integer source) {
-        if (source.isNull()) {
+        if (source.customIsNull()) {
             //TODO 增加异常返回
 
         }
@@ -84,7 +85,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:26
      * @since 1.0
      */
-    public static Boolean isNull(@This Integer source) {
+    public static Boolean customIsNull(@This Integer source) {
         return source == null ? true : false;
     }
 
@@ -100,8 +101,8 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:27
      * @since 1.0
      */
-    public static Boolean isNotNull(@This Integer source) {
-        return !source.isNull();
+    public static Boolean customIsNotNull(@This Integer source) {
+        return !source.customIsNull();
     }
 
     /**
@@ -117,8 +118,8 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:27
      * @since 1.0
      */
-    public static Integer isNotNull(@This Integer source, Integer errorBack) {
-        return source.isNotNull() ? source : errorBack;
+    public static Integer customIsNotNull(@This Integer source, Integer errorBack) {
+        return source.customIsNotNull() ? source : errorBack;
     }
 
     /**
@@ -133,8 +134,8 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:26
      * @since 1.0
      */
-    public static Boolean isZero(@This Integer source) {
-        return source.isNull() ? false : source == 0 ? true : false;
+    public static Boolean customIsZero(@This Integer source) {
+        return source.customIsNull() ? false : source == 0 ? true : false;
     }
 
     /**
@@ -149,8 +150,8 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:27
      * @since 1.0
      */
-    public static Boolean isNotZero(@This Integer source) {
-        return !source.isZero();
+    public static Boolean customIsNotZero(@This Integer source) {
+        return !source.customIsZero();
     }
 
     /**
@@ -166,8 +167,8 @@ public class IntegerExtension {
      * @mdate 2022/8/8 13:33
      * @since 1.0
      */
-    public static Integer isNotZero(@This Integer source, Integer errorBack) {
-        return !source.isZero() ? source : errorBack;
+    public static Integer customIsNotZero(@This Integer source, Integer errorBack) {
+        return !source.customIsZero() ? source : errorBack;
     }
 
     /**
@@ -185,7 +186,7 @@ public class IntegerExtension {
      * @mdate 2022/8/8 15:47
      * @since 1.0
      */
-    public static Integer isSign(@This Integer source) {
+    public static Integer customIsSign(@This Integer source) {
         isNullException(source);
         return source > 0 ? 1 : source == 0 ? 0 : -1;
     }
@@ -206,7 +207,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:27
      * @since 1.0
      */
-    public static Boolean equal(@This Integer source, Integer condition) {
+    public static Boolean customEqual(@This Integer source, Integer condition) {
         isNullException(source);
         return source == condition ? true : false;
     }
@@ -227,7 +228,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:27
      * @since 1.0
      */
-    public static Boolean equal(@This Integer source, Integer condition, Boolean errorBack) {
+    public static Boolean customEqual(@This Integer source, Integer condition, Boolean errorBack) {
         try {
             return source == condition ? true : false;
         } catch (Exception ex) {
@@ -251,7 +252,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:28
      * @since 1.0
      */
-    public static Integer compareTo(@This Integer source, Integer condition) {
+    public static Integer customCompareTo(@This Integer source, Integer condition) {
         isNullException(source);
         isNullException(condition);
         return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
@@ -269,7 +270,7 @@ public class IntegerExtension {
      * @mdate 2022/8/8 15:47
      * @since 1.0
      */
-    public static Integer abs(@This Integer source) {
+    public static Integer customAbs(@This Integer source) {
         isNullException(source);
         return source > 0 ? source : -source;
     }
@@ -286,7 +287,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:28
      * @since 1.0
      */
-    public static Integer length(@This Integer source) {
+    public static Integer customLength(@This Integer source) {
         isNullException(source);
         for (int i = 0; ; i++)
             if (source <= sizeTable[i])
@@ -306,11 +307,80 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:28
      * @since 1.0
      */
-    public static Integer length(@This Integer source, Integer errorBack) {
+    public static Integer customLength(@This Integer source, Integer errorBack) {
         try {
             for (int i = 0; ; i++)
                 if (source <= sizeTable[i])
                     return i + 1;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * 左补位0.传入补0个数
+     *
+     * @param source
+     * @param zeroNumber
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 14:18
+     * @version 1.0
+     * @mdate 2022/10/18 14:18
+     * @since 1.0
+     */
+    public static String customLeftFillZero(@This Integer source, int zeroNumber) {
+        String result = "";
+        //得到一个NumberFormat的实例
+        NumberFormat nf = NumberFormat.getInstance();
+        //设置是否使用分组
+        nf.setGroupingUsed(false);
+        //设置最大整数位数
+        nf.setMaximumIntegerDigits(source);
+        //设置最小整数位数
+        nf.setMinimumIntegerDigits(source);
+        result = nf.format(zeroNumber);
+        return result;
+    }
+
+    /**
+     * Sum Number Re integer
+     *
+     * @param source
+     * @param nums
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:51
+     * @version 1.0
+     * @mdate 2022/10/18 15:51
+     * @since 1.0
+     */
+    public static Integer customSumAll(@This Integer source, Integer... nums) {
+        for (Integer item : nums) {
+            source = source + item;
+        }
+        return source;
+    }
+
+    /**
+     * Sum Number Re integer Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @param nums
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:50
+     * @version 1.0
+     * @mdate 2022/10/18 15:50
+     * @since 1.0
+     */
+    public static Integer customSumAll(@This Integer source, Integer errorBack, Integer... nums) {
+        try {
+            return source.customSumAll(nums);
         } catch (Exception ex) {
             return errorBack;
         }
@@ -331,7 +401,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:28
      * @since 1.0
      */
-    public static Byte toByte(@This Integer source) {
+    public static Byte customToByte(@This Integer source) {
         isNullException(source);
         return (byte) source.intValue();
     }
@@ -349,7 +419,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:28
      * @since 1.0
      */
-    public static Byte toByte(@This Integer source, Byte errorBack) {
+    public static Byte customToByte(@This Integer source, Byte errorBack) {
         try {
             return (byte) source.intValue();
         } catch (Exception ex) {
@@ -369,7 +439,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:28
      * @since 1.0
      */
-    public static Double toDouble(@This Integer source) {
+    public static Double customToDouble(@This Integer source) {
         isNullException(source);
         return source.doubleValue();
     }
@@ -387,7 +457,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:29
      * @since 1.0
      */
-    public static Double toDouble(@This Integer source, Double errorBack) {
+    public static Double customToDouble(@This Integer source, Double errorBack) {
         try {
             return source.doubleValue();
         } catch (Exception ex) {
@@ -407,7 +477,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:29
      * @since 1.0
      */
-    public static Float toFloat(@This Integer source) {
+    public static Float customToFloat(@This Integer source) {
         isNullException(source);
         return source.floatValue();
     }
@@ -425,7 +495,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:29
      * @since 1.0
      */
-    public static Float toFloat(@This Integer source, Float errorBack) {
+    public static Float customToFloat(@This Integer source, Float errorBack) {
         try {
             return source.floatValue();
         } catch (Exception ex) {
@@ -446,7 +516,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:29
      * @since 1.0
      */
-    public static Long toLong(@This Integer source) {
+    public static Long customToLong(@This Integer source) {
         isNullException(source);
         return source.longValue();
     }
@@ -464,7 +534,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:29
      * @since 1.0
      */
-    public static Long toLong(@This Integer source, Long errorBack) {
+    public static Long customToLong(@This Integer source, Long errorBack) {
         try {
             return source.longValue();
         } catch (Exception ex) {
@@ -485,7 +555,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:30
      * @since 1.0
      */
-    public static Short toShort(@This Integer source) {
+    public static Short customToShort(@This Integer source) {
         isNullException(source);
         isMax(source, "Short");
         return source.shortValue();
@@ -504,7 +574,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:30
      * @since 1.0
      */
-    public static Short toShort(@This Integer source, Short errorBack) {
+    public static Short customToShort(@This Integer source, Short errorBack) {
         try {
             return source.shortValue();
         } catch (Exception ex) {
@@ -525,7 +595,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:30
      * @since 1.0
      */
-    public static String toString(@This Integer source) {
+    public static String customToString(@This Integer source) {
         isNullException(source);
         return source.toString();
     }
@@ -543,7 +613,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:30
      * @since 1.0
      */
-    public static String toString(@This Integer source, String errorBack) {
+    public static String customToString(@This Integer source, String errorBack) {
         try {
             return source.toString();
         } catch (Exception ex) {
@@ -564,7 +634,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:30
      * @since 1.0
      */
-    public static BigDecimal toBigDecimal(@This Integer source) {
+    public static BigDecimal customToBigDecimal(@This Integer source) {
         isNullException(source);
         return new BigDecimal(source.toString());
     }
@@ -582,7 +652,7 @@ public class IntegerExtension {
      * @mdate 2022/8/5 13:30
      * @since 1.0
      */
-    public static BigDecimal toBigDecimal(@This Integer source, BigDecimal errorBack) {
+    public static BigDecimal customToBigDecimal(@This Integer source, BigDecimal errorBack) {
         try {
             return new BigDecimal(source.toString());
         } catch (Exception ex) {

@@ -1,4 +1,4 @@
-package extensions.java.lang.Double;
+package extensions.java.lang.Float;
 
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
@@ -6,22 +6,21 @@ import manifold.ext.rt.api.This;
 import java.math.BigDecimal;
 
 /**
- * Double Extension
+ * Float Extension
  * Copyright: Copyright (C) 2022 DLANGEL, Inc. All rights reserved.
  * Company: Henny
  *
  * @author Henny
- * @since 2022/8/8 16:17
+ * @since 2022/8/10 10:18
  */
 @Extension
-public class DoubleExtension {
+public class FloatExtension {
+
     final static short maxShort = 32767;
 
     final static int maxInteger = 0x7fffffff;
 
     final static long maxLong = 0x7fffffffffffffffL;
-
-    final static float maxFloat = 0x1.fffffeP+127f;
 
     /**
      * Null Exception Throw
@@ -35,7 +34,7 @@ public class DoubleExtension {
      * @mdate 2022/8/5 13:25
      * @since 1.0
      */
-    private static void isNullException(Double source) {
+    private static void isNullException(Float source) {
         if (source.customIsNull()) {
             //TODO 增加异常返回
 
@@ -54,7 +53,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 19:46
      * @since 1.0
      */
-    private static void isInteger(Double source) {
+    private static void isInteger(Float source) {
         double eps = 1e-10;
         boolean isInteger = source - Math.floor(source) < eps;
         if (!isInteger) {
@@ -75,7 +74,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 19:45
      * @since 1.0
      */
-    private static void isMax(Double source, String max) {
+    private static void isMax(Float source, String max) {
         boolean flag = false;
         switch (max) {
             case "Short": {
@@ -94,13 +93,6 @@ public class DoubleExtension {
             }
             case "Long": {
                 if (source > maxLong) {
-                    //TODO 超长提醒
-                    flag = true;
-                }
-                break;
-            }
-            case "Float": {
-                if (source > maxFloat) {
                     //TODO 超长提醒
                     flag = true;
                 }
@@ -125,7 +117,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 13:46
      * @since 1.0
      */
-    private static void compareDecimalsLengthToEnter(Double source, Integer decimalsLength) {
+    private static void compareDecimalsLengthToEnter(Float source, Integer decimalsLength) {
         Integer sourceDecimalsLength = source.customDecimalsLength();
         if (decimalsLength > sourceDecimalsLength) {
             //TODO 提示截取位数不够
@@ -147,7 +139,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 13:30
      * @since 1.0
      */
-    public static Boolean customIsNull(@This Double source) {
+    public static Boolean customIsNull(@This Float source) {
         return source == null;
     }
 
@@ -164,7 +156,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 13:30
      * @since 1.0
      */
-    public static Boolean customIsNotNull(@This Double source) {
+    public static Boolean customIsNotNull(@This Float source) {
         return !source.customIsNull();
     }
 
@@ -182,7 +174,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 13:30
      * @since 1.0
      */
-    public static Double customIsNotNull(@This Double source, Double errorBack) {
+    public static Double customIsNotNull(@This Float source, Double errorBack) {
         return source.customIsNotNull() ? source : errorBack;
     }
 
@@ -198,7 +190,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Boolean customIsZero(@This Double source) {
+    public static Boolean customIsZero(@This Float source) {
         return source.customIsNull() ? false : source == 0 ? true : false;
     }
 
@@ -214,7 +206,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Boolean customIsNotZero(@This Double source) {
+    public static Boolean customIsNotZero(@This Float source) {
         return !source.customIsZero();
     }
 
@@ -231,7 +223,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Double customIsNotZero(@This Double source, Double errorBack) {
+    public static Double customIsNotZero(@This Float source, Double errorBack) {
         return !source.customIsZero() ? source : errorBack;
     }
 
@@ -250,7 +242,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 15:47
      * @since 1.0
      */
-    public static Integer customIsSign(@This Double source) {
+    public static Integer customIsSign(@This Float source) {
         isNullException(source);
         return source > 0 ? 1 : source == 0 ? 0 : -1;
     }
@@ -271,12 +263,12 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:15
      * @since 1.0
      */
-    public static Boolean customEqual(@This Double source, Double condition) {
+    public static Boolean customEqual(@This Float source, Float condition) {
         isNullException(source);
         return source == condition ? true : false;
     }
 
-    //TODO 比较需不需要区分类型
+    //TODO 比较需不需要区分类型F
 
     /**
      * source Equal condition If Identical Re true Else Re false Exception Re errorBack
@@ -292,7 +284,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:15
      * @since 1.0
      */
-    public static Boolean customEqual(@This Double source, Double condition, Boolean errorBack) {
+    public static Boolean customEqual(@This Float source, Float condition, Boolean errorBack) {
         try {
             return source == condition ? true : false;
         } catch (Exception ex) {
@@ -316,7 +308,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:15
      * @since 1.0
      */
-    public static Integer customCompareTo(@This Double source, Double condition) {
+    public static Integer customCompareTo(@This Float source, Float condition) {
         isNullException(source);
         isNullException(condition);
         return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
@@ -334,7 +326,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:16
      * @since 1.0
      */
-    public static Double customAbs(@This Double source) {
+    public static Float customAbs(@This Float source) {
         isNullException(source);
         return source > 0 ? source : -source;
     }
@@ -352,7 +344,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:25
      * @since 1.0
      */
-    public static Integer customDecimalsLength(@This Double source) {
+    public static Integer customDecimalsLength(@This Float source) {
         isNullException(source);
         String[] doubleArray = source.toString().split("\\.");
         switch (doubleArray.length) {
@@ -383,7 +375,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:26
      * @since 1.0
      */
-    public static Integer customDecimalsLength(@This Double source, Integer errorBack) {
+    public static Integer customDecimalsLength(@This Float source, Integer errorBack) {
         try {
             String[] doubleArray = source.toString().split("\\.");
             return doubleArray[1].length();
@@ -405,7 +397,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:26
      * @since 1.0
      */
-    public static Integer customIntegerLength(@This Double source) {
+    public static Integer customIntegerLength(@This Float source) {
         isNullException(source);
         String[] doubleArray = source.toString().split("\\.");
         switch (doubleArray.length) {
@@ -436,7 +428,7 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:27
      * @since 1.0
      */
-    public static Integer customIntegerLength(@This Double source, Integer errorBack) {
+    public static Integer customIntegerLength(@This Float source, Integer errorBack) {
         try {
             String[] doubleArray = source.toString().split("\\.");
             return doubleArray[0].length();
@@ -461,10 +453,10 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundHalfUp(@This Double source, Integer decimalsLength) {
+    public static Float customRoundHalfUp(@This Float source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_HALF_UP).doubleValue();
+        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_HALF_UP).floatValue();
     }
 
     /**
@@ -483,9 +475,9 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundHalfUp(@This Double source, Integer decimalsLength, Double errorBack) {
+    public static Float customRoundHalfUp(@This Float source, Integer decimalsLength, Float errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_UP).floatValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -507,10 +499,10 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundHalfDown(@This Double source, Integer decimalsLength) {
+    public static Float customRoundHalfDown(@This Float source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_HALF_DOWN).doubleValue();
+        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_HALF_DOWN).floatValue();
     }
 
     /**
@@ -529,9 +521,9 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundHalfDown(@This Double source, Integer decimalsLength, Double errorBack) {
+    public static Float customRoundHalfDown(@This Float source, Integer decimalsLength, Float errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_DOWN).floatValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -553,10 +545,10 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundDown(@This Double source, Integer decimalsLength) {
+    public static Float customRoundDown(@This Float source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_DOWN).doubleValue();
+        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_DOWN).floatValue();
     }
 
     /**
@@ -575,9 +567,9 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundDown(@This Double source, Integer decimalsLength, Double errorBack) {
+    public static Float customRoundDown(@This Float source, Integer decimalsLength, Float errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_DOWN).floatValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -599,10 +591,10 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundUp(@This Double source, Integer decimalsLength) {
+    public static Float customRoundUp(@This Float source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_UP).doubleValue();
+        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_UP).floatValue();
     }
 
     /**
@@ -621,9 +613,9 @@ public class DoubleExtension {
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
-    public static Double customRoundUp(@This Double source, Integer decimalsLength, Double errorBack) {
+    public static Float customRoundUp(@This Float source, Integer decimalsLength, Float errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
+            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_UP).floatValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -641,47 +633,47 @@ public class DoubleExtension {
      * @mdate 2022/8/9 13:41
      * @since 1.0
      */
-    public static String customNousedF_E(@This Double source) {
+    public static String customNousedF_E(@This Float source) {
         java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
         nf.setGroupingUsed(false);
         return nf.format(source);
     }
 
     /**
-     * Sum Number Re double
+     * Sum Number Re float
      *
      * @param source
      * @param nums
-     * @return java.lang.Double
+     * @return java.lang.Float
      * @throws
      * @author Henny
-     * @cdate 2022/10/18 15:48
+     * @cdate 2022/10/18 15:49
      * @version 1.0
-     * @mdate 2022/10/18 15:48
+     * @mdate 2022/10/18 15:49
      * @since 1.0
      */
-    public static Double customSumAll(@This Double source, Double... nums) {
-        for (Double item : nums) {
+    public static Float customSumAll(@This Float source, Float... nums) {
+        for (Float item : nums) {
             source = source + item;
         }
         return source;
     }
 
     /**
-     * Sum Number Re double Exception Re errorBack
+     * Sum Number Re float Exception Re errorBack
      *
      * @param source
      * @param errorBack
      * @param nums
-     * @return java.lang.Double
+     * @return java.lang.Float
      * @throws
      * @author Henny
-     * @cdate 2022/10/18 15:47
+     * @cdate 2022/10/18 15:50
      * @version 1.0
-     * @mdate 2022/10/18 15:47
+     * @mdate 2022/10/18 15:50
      * @since 1.0
      */
-    public static Double customSumAll(@This Double source, Double errorBack, Double... nums) {
+    public static Float customSumAll(@This Float source, Float errorBack, Float... nums) {
         try {
             return source.customSumAll(nums);
         } catch (Exception ex) {
@@ -694,24 +686,24 @@ public class DoubleExtension {
     //region   转换型
 
     /**
-     * Double To Byte Re byte
+     * Float To Byte Re byte
      *
      * @param source
      * @return java.lang.Byte
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:05
+     * @cdate 2022/8/10 10:23
      * @version 1.0
-     * @mdate 2022/8/8 15:05
+     * @mdate 2022/8/10 10:23
      * @since 1.0
      */
-    public static Byte customToByte(@This Double source) {
+    public static Byte customToByte(@This Float source) {
         isNullException(source);
         return (byte) source.intValue();
     }
 
     /**
-     * Double To Byte Re byte Exception Re errorBack
+     * Float To Byte Re byte Exception Re errorBack
      *
      * @param source
      * @param errorBack
@@ -723,7 +715,7 @@ public class DoubleExtension {
      * @mdate 2022/8/8 15:05
      * @since 1.0
      */
-    public static Byte customToByte(@This Double source, Byte errorBack) {
+    public static Byte customToByte(@This Float source, Byte errorBack) {
         try {
             return (byte) source.intValue();
         } catch (Exception ex) {
@@ -732,39 +724,38 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Float Re float
+     * Float To Double Re double
      *
      * @param source
-     * @return java.lang.Float
+     * @return java.lang.Double
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:28
+     * @cdate 2022/8/10 10:24
      * @version 1.0
-     * @mdate 2022/8/8 15:28
+     * @mdate 2022/8/10 10:24
      * @since 1.0
      */
-    public static Float customToFloat(@This Double source) {
+    public static Double customToDouble(@This Float source) {
         isNullException(source);
-        isMax(source, "Float");
-        return source.floatValue();
+        return source.doubleValue();
     }
 
     /**
-     * Double To Float Re float Exception Re errorBack
+     * Float To Double Re double Exception Re errorBack
      *
      * @param source
      * @param errorBack
-     * @return java.lang.Float
+     * @return java.lang.Double
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:28
+     * @cdate 2022/8/10 10:24
      * @version 1.0
-     * @mdate 2022/8/8 15:28
+     * @mdate 2022/8/10 10:24
      * @since 1.0
      */
-    public static Float customToFloat(@This Double source, Float errorBack) {
+    public static Double customToDouble(@This Float source, Double errorBack) {
         try {
-            return source.floatValue();
+            return source.doubleValue();
         } catch (Exception ex) {
             ex.printStackTrace();
             return errorBack;
@@ -772,18 +763,18 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Integer Re integer
+     * Float To Integer Re integer
      *
      * @param source
      * @return java.lang.Integer
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:32
+     * @cdate 2022/8/10 10:24
      * @version 1.0
-     * @mdate 2022/8/8 15:32
+     * @mdate 2022/8/10 10:24
      * @since 1.0
      */
-    public static Integer customToInteger(@This Double source) {
+    public static Integer customToInteger(@This Float source) {
         isNullException(source);
         isInteger(source);
         isMax(source, "Integer");
@@ -791,19 +782,19 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Integer Re integer Exception Re errorBack
+     * Float To Integer Re integer Exception Re errorBack
      *
      * @param source
      * @param errorBack
      * @return java.lang.Integer
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:32
+     * @cdate 2022/8/10 10:24
      * @version 1.0
-     * @mdate 2022/8/8 15:32
+     * @mdate 2022/8/10 10:24
      * @since 1.0
      */
-    public static Integer customToInteger(@This Double source, Integer errorBack) {
+    public static Integer customToInteger(@This Float source, Integer errorBack) {
         try {
             return source.intValue();
         } catch (Exception ex) {
@@ -813,18 +804,18 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Long Re long
+     * Float To Long Re long
      *
      * @param source
-     * @return java.lang.Double
+     * @return java.lang.Long
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:10
+     * @cdate 2022/8/10 10:24
      * @version 1.0
-     * @mdate 2022/8/8 15:10
+     * @mdate 2022/8/10 10:24
      * @since 1.0
      */
-    public static Long customToLong(@This Double source) {
+    public static Long customToLong(@This Float source) {
         isNullException(source);
         isInteger(source);
         isMax(source, "Long");
@@ -832,19 +823,19 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Double Re double Exception Re errorBack
+     * Float To Double Re double Exception Re errorBack
      *
      * @param source
      * @param errorBack
-     * @return java.lang.Double
+     * @return java.lang.Long
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:28
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:28
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static Long customToLong(@This Double source, Long errorBack) {
+    public static Long customToLong(@This Float source, Long errorBack) {
         try {
             return source.longValue();
         } catch (Exception ex) {
@@ -853,18 +844,18 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Short Re short
+     * Float To Short Re short
      *
      * @param source
      * @return java.lang.Short
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:33
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:33
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static Short customToShort(@This Double source) {
+    public static Short customToShort(@This Float source) {
         isNullException(source);
         isInteger(source);
         isMax(source, "Short");
@@ -872,19 +863,19 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To Short Re short Exception Re errorBack
+     * Float To Short Re short Exception Re errorBack
      *
      * @param source
      * @param errorBack
      * @return java.lang.Short
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:33
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:33
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static Short customToShort(@This Double source, Short errorBack) {
+    public static Short customToShort(@This Float source, Short errorBack) {
         try {
             return source.shortValue();
         } catch (Exception ex) {
@@ -894,36 +885,36 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To String Re string
+     * Float To String Re string
      *
      * @param source
      * @return java.lang.String
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:35
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:35
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static String customToString(@This Double source) {
+    public static String customToString(@This Float source) {
         isNullException(source);
         return source.toString();
     }
 
     /**
-     * Double To String Re string Exception Re errorBack
+     * Float To String Re string Exception Re errorBack
      *
      * @param source
      * @param errorBack
      * @return java.lang.String
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:35
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:35
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static String customToString(@This Double source, String errorBack) {
+    public static String customToString(@This Float source, String errorBack) {
         try {
             return source.toString();
         } catch (Exception ex) {
@@ -933,36 +924,36 @@ public class DoubleExtension {
     }
 
     /**
-     * Double To BigDecimal Re bigDecimal
+     * Float To BigDecimal Re bigDecimal
      *
      * @param source
      * @return java.math.BigDecimal
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:36
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:36
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static BigDecimal customToBigDecimal(@This Double source) {
+    public static BigDecimal customToBigDecimal(@This Float source) {
         isNullException(source);
         return new BigDecimal(source.toString());
     }
 
     /**
-     * Double To BigDecimal Re bigDecimal Exception Re errorBack
+     * Float To BigDecimal Re bigDecimal Exception Re errorBack
      *
      * @param source
      * @param errorBack
      * @return java.math.BigDecimal
      * @throws
      * @author Henny
-     * @cdate 2022/8/8 15:36
+     * @cdate 2022/8/10 10:25
      * @version 1.0
-     * @mdate 2022/8/8 15:36
+     * @mdate 2022/8/10 10:25
      * @since 1.0
      */
-    public static BigDecimal customToBigDecimal(@This Double source, BigDecimal errorBack) {
+    public static BigDecimal customToBigDecimal(@This Float source, BigDecimal errorBack) {
         try {
             return new BigDecimal(source.toString());
         } catch (Exception ex) {

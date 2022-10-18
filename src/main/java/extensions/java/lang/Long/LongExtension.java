@@ -4,6 +4,7 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -36,7 +37,7 @@ public class LongExtension {
      * @since 1.0
      */
     private static void isNullException(Long source) {
-        if (source.isNull()) {
+        if (source.customIsNull()) {
             //TODO 增加异常返回
             System.out.println(source + "是空的");
         }
@@ -92,7 +93,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:30
      * @since 1.0
      */
-    public static Boolean isNull(@This Long source) {
+    public static Boolean customIsNull(@This Long source) {
         return source == null;
     }
 
@@ -109,8 +110,8 @@ public class LongExtension {
      * @mdate 2022/8/8 13:30
      * @since 1.0
      */
-    public static Boolean isNotNull(@This Long source) {
-        return !source.isNull();
+    public static Boolean customIsNotNull(@This Long source) {
+        return !source.customIsNull();
     }
 
     /**
@@ -127,8 +128,8 @@ public class LongExtension {
      * @mdate 2022/8/8 13:30
      * @since 1.0
      */
-    public static Long isNotNull(@This Long source, Long errorBack) {
-        return source.isNotNull() ? source : errorBack;
+    public static Long customIsNotNull(@This Long source, Long errorBack) {
+        return source.customIsNotNull() ? source : errorBack;
     }
 
     /**
@@ -143,8 +144,8 @@ public class LongExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Boolean isZero(@This Long source) {
-        return source.isNull() ? false : source == 0 ? true : false;
+    public static Boolean customIsZero(@This Long source) {
+        return source.customIsNull() ? false : source == 0 ? true : false;
     }
 
     /**
@@ -159,8 +160,8 @@ public class LongExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Boolean isNotZero(@This Long source) {
-        return !source.isZero();
+    public static Boolean customIsNotZero(@This Long source) {
+        return !source.customIsZero();
     }
 
     /**
@@ -176,8 +177,8 @@ public class LongExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Long isNotZero(@This Long source, Integer errorBack) {
-        return !source.isZero() ? source : errorBack;
+    public static Long customIsNotZero(@This Long source, Integer errorBack) {
+        return !source.customIsZero() ? source : errorBack;
     }
 
     /**
@@ -195,7 +196,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:47
      * @since 1.0
      */
-    public static Integer isSign(@This Long source) {
+    public static Integer customIsSign(@This Long source) {
         isNullException(source);
         return source > 0 ? 1 : source == 0 ? 0 : -1;
     }
@@ -218,7 +219,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:36
      * @since 1.0
      */
-    public static Boolean equal(@This Long source, Long condition) {
+    public static Boolean customEqual(@This Long source, Long condition) {
         isNullException(source);
         return source == condition ? true : false;
     }
@@ -237,7 +238,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:36
      * @since 1.0
      */
-    public static Boolean equal(@This Long source, Long condition, Boolean errorBack) {
+    public static Boolean customEqual(@This Long source, Long condition, Boolean errorBack) {
         try {
             return source == condition ? true : false;
         } catch (Exception ex) {
@@ -261,7 +262,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:37
      * @since 1.0
      */
-    public static Integer compareTo(@This Long source, Long condition) {
+    public static Integer customCompareTo(@This Long source, Long condition) {
         isNullException(source);
         isNullException(condition);
         return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
@@ -279,7 +280,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:52
      * @since 1.0
      */
-    public static Long abs(@This Long source) {
+    public static Long customAbs(@This Long source) {
         isNullException(source);
         return source > 0 ? source : -source;
     }
@@ -296,7 +297,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:38
      * @since 1.0
      */
-    public static Integer length(@This Long source) {
+    public static Integer customLength(@This Long source) {
         long p = 10;
         for (int i = 1; i < 19; i++) {
             if (source < p)
@@ -319,7 +320,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:38
      * @since 1.0
      */
-    public static Integer length(@This Long source, Integer errorBack) {
+    public static Integer customLength(@This Long source, Integer errorBack) {
         try {
             long p = 10;
             for (int i = 1; i < 19; i++) {
@@ -346,9 +347,9 @@ public class LongExtension {
      * @mdate 2022/8/9 14:43
      * @since 1.0
      */
-    public static String toDateFormat(@This Long source, String formatStr) {
+    public static String customToDateFormat(@This Long source, String formatStr) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatStr);
-        return simpleDateFormat.format(source.toDate());
+        return simpleDateFormat.format(source.customToDate());
     }
 
     /**
@@ -365,14 +366,57 @@ public class LongExtension {
      * @mdate 2022/8/9 14:46
      * @since 1.0
      */
-    public static String toDateFormat(@This Long source, String formatStr, String errorBack) {
+    public static String customToDateFormat(@This Long source, String formatStr, String errorBack) {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(formatStr);
-            return simpleDateFormat.format(source.toDate());
+            return simpleDateFormat.format(source.customToDate());
         } catch (Exception ex) {
             return errorBack;
         }
     }
+
+    /**
+     * Sum Number Re long
+     *
+     * @param source
+     * @param nums
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:51
+     * @version 1.0
+     * @mdate 2022/10/18 15:51
+     * @since 1.0
+     */
+    public static Long customSumAll(@This Long source, Long... nums) {
+        for (Long item : nums) {
+            source = source + item;
+        }
+        return source;
+    }
+
+    /**
+     * Sum Number Re long Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @param nums
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:51
+     * @version 1.0
+     * @mdate 2022/10/18 15:51
+     * @since 1.0
+     */
+    public static Long customSumAll(@This Long source, Long errorBack, Long... nums) {
+        try {
+            return source.customSumAll(nums);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
     //endregion
 
     //region   转换型
@@ -389,7 +433,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:05
      * @since 1.0
      */
-    public static Byte toByte(@This Long source) {
+    public static Byte customToByte(@This Long source) {
         isNullException(source);
         return (byte) source.intValue();
     }
@@ -407,7 +451,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:05
      * @since 1.0
      */
-    public static Byte toByte(@This Long source, Byte errorBack) {
+    public static Byte customToByte(@This Long source, Byte errorBack) {
         try {
             return (byte) source.intValue();
         } catch (Exception ex) {
@@ -427,7 +471,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:10
      * @since 1.0
      */
-    public static Double toDouble(@This Long source) {
+    public static Double customToDouble(@This Long source) {
         isNullException(source);
         return source.doubleValue();
     }
@@ -445,7 +489,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:28
      * @since 1.0
      */
-    public static Double toDouble(@This Long source, Double errorBack) {
+    public static Double customToDouble(@This Long source, Double errorBack) {
         try {
             return source.doubleValue();
         } catch (Exception ex) {
@@ -465,7 +509,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:28
      * @since 1.0
      */
-    public static Float toFloat(@This Long source) {
+    public static Float customToFloat(@This Long source) {
         isNullException(source);
         return source.floatValue();
     }
@@ -483,7 +527,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:28
      * @since 1.0
      */
-    public static Float toFloat(@This Long source, Float errorBack) {
+    public static Float customToFloat(@This Long source, Float errorBack) {
         try {
             return source.floatValue();
         } catch (Exception ex) {
@@ -504,7 +548,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:32
      * @since 1.0
      */
-    public static Integer toInteger(@This Long source) {
+    public static Integer customToInteger(@This Long source) {
         isNullException(source);
         isMax(source, "Integer");
         return source.intValue();
@@ -523,7 +567,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:32
      * @since 1.0
      */
-    public static Integer toInteger(@This Long source, Integer errorBack) {
+    public static Integer customToInteger(@This Long source, Integer errorBack) {
         try {
             return source.intValue();
         } catch (Exception ex) {
@@ -544,7 +588,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:33
      * @since 1.0
      */
-    public static Short toShort(@This Long source) {
+    public static Short customToShort(@This Long source) {
         isNullException(source);
         isMax(source, "Short");
         return source.shortValue();
@@ -563,7 +607,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:33
      * @since 1.0
      */
-    public static Short toShort(@This Long source, Short errorBack) {
+    public static Short customToShort(@This Long source, Short errorBack) {
         try {
             return source.shortValue();
         } catch (Exception ex) {
@@ -584,7 +628,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:35
      * @since 1.0
      */
-    public static String toString(@This Long source) {
+    public static String customToString(@This Long source) {
         isNullException(source);
         return source.toString();
     }
@@ -602,7 +646,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:35
      * @since 1.0
      */
-    public static String toString(@This Long source, String errorBack) {
+    public static String customToString(@This Long source, String errorBack) {
         try {
             return source.toString();
         } catch (Exception ex) {
@@ -623,7 +667,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:36
      * @since 1.0
      */
-    public static BigDecimal toBigDecimal(@This Long source) {
+    public static BigDecimal customToBigDecimal(@This Long source) {
         isNullException(source);
         return new BigDecimal(source.toString());
     }
@@ -641,7 +685,7 @@ public class LongExtension {
      * @mdate 2022/8/8 15:36
      * @since 1.0
      */
-    public static BigDecimal toBigDecimal(@This Long source, BigDecimal errorBack) {
+    public static BigDecimal customToBigDecimal(@This Long source, BigDecimal errorBack) {
         try {
             return new BigDecimal(source.toString());
         } catch (Exception ex) {
@@ -661,7 +705,7 @@ public class LongExtension {
      * @mdate 2022/8/9 14:47
      * @since 1.0
      */
-    public static Date toDate(@This Long source) {
+    public static Date customToDate(@This Long source) {
         return new Date(source);
     }
 
@@ -678,7 +722,7 @@ public class LongExtension {
      * @mdate 2022/8/9 14:48
      * @since 1.0
      */
-    public static Date toDate(@This Long source, Date errorBack) {
+    public static Date customToDate(@This Long source, Date errorBack) {
         try {
             return new Date(source);
         } catch (Exception ex) {
