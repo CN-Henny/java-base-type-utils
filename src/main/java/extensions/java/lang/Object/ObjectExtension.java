@@ -6,6 +6,7 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -34,7 +35,7 @@ public class ObjectExtension {
      * @mdate 2022/10/18 16:08
      * @since 1.0
      */
-    public static Map<String, Object> getModifyContent(@This Object source, Object target) {
+    public static Map<String, Object> systemCustomGetModifyContent(@This Object source, Object target) {
         Map<String, Object> modifies = new HashMap<>(16);
          /*
           process null problem, if all null means equal
@@ -67,6 +68,7 @@ public class ObjectExtension {
         });
         return modifies;
     }
+
     //endregion
 
     //region   转换型

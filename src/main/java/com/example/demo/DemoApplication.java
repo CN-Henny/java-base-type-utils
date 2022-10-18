@@ -3,9 +3,7 @@ package com.example.demo;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class DemoApplication {
 
@@ -27,7 +25,14 @@ System.out.println(a.customRoundHalfUp(2));
         //Date c = new Date();
 //a.toInteger();
         //a.toString().toBigDecimal();
-
+        Map<String,String> arr = new HashMap<>();
+arr.addaaa("1","1").addaaa("2","2");
+        String aewew = "";
+        String[] strings = new String[] {"a", "b", "c"};
+        ArrayList<UserData> arrayList = new ArrayList<>();
+        List<Integer> ids = new ArrayList<>();
+        strings.toaaaList();
+        arrayList.customAdd(1);
     }
 
 }
