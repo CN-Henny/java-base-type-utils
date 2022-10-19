@@ -211,8 +211,8 @@ Boolean result
 
 ###### 入参
 
-1. Double condition       和之相比较的数
-2. Boolean errorBack    自定义返回值
+==1. Double condition       和之相比较的数
+2. Boolean errorBack    自定义返回值 #ff0000==
 
 ###### 返回值
 Boolean result
