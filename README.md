@@ -12,6 +12,8 @@ a.customIsNull();
 
 # 方法描述
 
+[DoubleExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Double/README.md)
+
 
 
 
