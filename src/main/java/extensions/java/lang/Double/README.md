@@ -451,32 +451,8 @@ String result
 ###### 可能的异常
 无
 
+#### 
+
 ### 转换型
 
-#### 转Byte
-
-#### 转Float
-
-#### 转Integer
-
-#### 转Long
-
-#### 转Short
-
-#### 转String
-
-#### 转BigDecimal
-
-#### 转Byte（传默认）
-
-#### 转Float（传默认）
-
-#### 转Integer（传默认）
-
-#### 转Long（传默认）
-
-#### 转Short（传默认）
-
-#### 转String（传默认）
-
-#### 转BigDecimal（传默认）
+暂略
