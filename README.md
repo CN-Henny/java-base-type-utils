@@ -12,25 +12,25 @@ a.customIsNull();
 
 # 方法描述
 
-[DoubleExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Double/README.md)
+[DoubleExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/DoubleExtension/README.md)
 
-[FloatExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Float/README.md)
+[FloatExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/FloatExtension/README.md)
 
-[IntegerExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Integer/README.md)
+[IntegerExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/IntegerExtension/README.md)
 
-[LongExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Long/README.md)
+[LongExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/LongExtension/README.md)
 
-[ObjectExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Object/README.md)
+[ObjectExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/ObjectExtension/README.md)
 
-[ShortExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Short/README.md)
+[ShortExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/ShortExtension/README.md)
 
-[StringExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/String/README.md)
+[StringExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/StringExtension/README.md)
 
-[BooleanExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Boolean/README.md)
+[BooleanExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/BooleanExtension/README.md)
 
-[ByteExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Byte/README.md)
+[ByteExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/ByteExtension/README.md)
 
-[CharacterExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/src/main/java/extensions/java/lang/Character/README.md)
+[CharacterExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/CharacterExtension/README.md)
 
 
 # 微信请联系   _Hennys
