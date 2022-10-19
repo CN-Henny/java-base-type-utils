@@ -20,11 +20,11 @@ Double类型扩展函数
 
 #### 是否为空-customIsNull()
 
-##### customIsNotNull(Double  source)
+##### customIsNotNull()
 
 ###### 入参
 
-1. Double  source 判断的参数
+无
 
 ###### 返回值
 Boolean result
@@ -43,7 +43,7 @@ Boolean result
 
 ###### 入参
 
-1. Double  source 判断的参数
+无
 
 ###### 返回值
 Boolean result
@@ -56,12 +56,11 @@ Boolean result
 ###### 可能的异常
 无
 
-##### customIsNotNull(Double  source, Double errorBack)
+##### customIsNotNull(Double errorBack)
 
 ###### 入参
 
-1. Double  source         判断的参数
-2. Double  errorBack    自定义返回值
+1. Double  errorBack    自定义返回值
 
 ###### 返回值
 Double result
@@ -72,15 +71,15 @@ Double result
 判断一个Double是否为null并返回Double或自定义
 
 ###### 可能的异常
-无
+如果出现异常则返回errorBack
 
 #### 是否为0-customIsZero()
 
-##### customIsZero(Double source)
+##### customIsZero()
 
 ###### 入参
 
-1. Double  source         判断的参数
+无
 
 ###### 返回值
 Boolean result
@@ -95,11 +94,11 @@ Boolean result
 
 #### 是否不为0-customIsNotZero()
 
-##### customIsNotZero(Double source)
+##### customIsNotZero()
 
 ###### 入参
 
-1. Double  source         判断的参数
+无
 
 ###### 返回值
 Boolean result
@@ -112,12 +111,11 @@ Boolean result
 ###### 可能的异常
 无
 
-##### customIsNotNull(Double  source, Double errorBack)
+##### customIsNotNull(Double errorBack)
 
 ###### 入参
 
-1. Double  source         判断的参数
-2. Double  errorBack    自定义返回值
+1. Double  errorBack    自定义返回值
 
 ###### 返回值
 Double result
@@ -128,15 +126,15 @@ Double result
 判断一个Double是否为null并返回Double或自定义
 
 ###### 可能的异常
-无
+如果出现异常则返回errorBack
 
 #### 判断正负数-customIsSign()
 
-##### customIsSign(Double source)
+##### customIsSign()
 
 ###### 入参
 
-1. Double  source         判断的参数
+无
 
 ###### 返回值
 Integer result
@@ -152,9 +150,81 @@ Integer result
 
 ### 功能型
 
-#### 比较是否相等
+#### 比较是否相等-customEqual()
 
-#### 比较大小
+##### customEqual(Double condition)
+
+###### 入参
+
+1. Double condition       和之相比较的数
+
+###### 返回值
+Booleanresult
+如果 source等于condition则返回true
+如果 source不等于condition则返回false
+
+###### 实现功能
+比较亮哥数是否相等
+
+###### 可能的异常
+无
+
+##### customEqual(Double condition, Boolean errorBack)
+
+###### 入参
+
+1. Double condition       和之相比较的数
+2. Boolean errorBack    自定义返回值
+
+###### 返回值
+Boolean result
+如果 source等于condition则返回true
+如果 source不等于condition则返回false
+
+###### 实现功能
+比较两个数是否相等
+
+###### 可能的异常
+如果出现异常则返回errorBack
+
+#### 比较大小-customCompareTo()
+
+##### customCompareTo(Double condition)
+
+###### 入参
+
+1. Double condition       和之相比较的数
+
+###### 返回值
+Boolean result
+如果 source大于condition则返回1
+如果 source等于condition则返回0
+如果 source小于condition则返回-1
+
+###### 实现功能
+两个数比较大小
+
+###### 可能的异常
+无
+
+##### customCompareTo(Double condition, Boolean errorBack)
+
+###### 入参
+
+1. Double condition       和之相比较的数
+2. Boolean errorBack    自定义返回值
+
+###### 返回值
+Boolean result
+如果 source大于condition则返回1
+如果 source等于condition则返回0
+如果 source小于condition则返回-1
+
+###### 实现功能
+两个数比较大小
+
+###### 可能的异常
+如果出现异常则返回errorBack
 
 #### 取绝对值
 

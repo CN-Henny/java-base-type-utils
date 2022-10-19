@@ -326,6 +326,28 @@ public class DoubleExtension {
     }
 
     /**
+     * source Compare To condition Exception Re errorBack
+     *
+     * @param source
+     * @param condition
+     * @param errorBack
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/19 18:29
+     * @version 1.0
+     * @mdate 2022/10/19 18:29
+     * @since 1.0
+     */
+    public static Integer customCompareTo(@This Double source, Double condition, Integer errorBack) {
+        try {
+            return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
      * source ABS
      *
      * @param source
