@@ -473,8 +473,8 @@ public class DoubleExtension {
     /**
      * According To decimalsLength Rounding Re double
      * Contain Five
-     * eg: decimalsLength=0 1.5->2
      * eg: decimalsLength=1 1.55->1.6
+     * eg: decimalsLength=2 1.555->1.56
      *
      * @param source
      * @param decimalsLength
@@ -495,8 +495,8 @@ public class DoubleExtension {
     /**
      * According To decimalsLength Rounding Re double Exception Re errorBack
      * Contain Five
-     * eg: decimalsLength=0 1.5->2
      * eg: decimalsLength=1 1.55->1.6
+     * eg: decimalsLength=2 1.555->1.56
      *
      * @param source
      * @param decimalsLength
@@ -519,8 +519,8 @@ public class DoubleExtension {
     /**
      * According To decimalsLength Rounding Re double
      * Not Contain Five
-     * eg: decimalsLength=0 1.5->1
      * eg: decimalsLength=1 1.55->1.5
+     * eg: decimalsLength=2 1.555->1.55
      *
      * @param source
      * @param decimalsLength
@@ -541,8 +541,8 @@ public class DoubleExtension {
     /**
      * According To decimalsLength Rounding Re double Exception Re errorBack
      * Not Contain Five
-     * eg: decimalsLength=0 1.5->1
      * eg: decimalsLength=1 1.55->1.5
+     * eg: decimalsLength=2 1.555->1.55
      *
      * @param source
      * @param decimalsLength
