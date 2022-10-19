@@ -9,7 +9,8 @@ import java.util.List;
 @Extension
 public class ListExtension {
 
-    public static @Self List<Object> customAdd(@This List<Object> a, Object key) {
-        return a;
+    public static @Self List<Object> customAdd(@This List<Object> source, Object key) {
+        source.add(key);
+        return source;
     }
 }

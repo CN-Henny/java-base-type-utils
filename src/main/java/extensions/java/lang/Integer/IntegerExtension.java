@@ -1,5 +1,6 @@
 package extensions.java.lang.Integer;
 
+import com.fasterxml.jackson.databind.exc.InvalidNullException;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
@@ -38,7 +39,7 @@ public class IntegerExtension {
     private static void isNullException(Integer source) {
         if (source.customIsNull()) {
             //TODO 增加异常返回
-
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
         }
     }
 
@@ -68,6 +69,7 @@ public class IntegerExtension {
         }
         if (flag) {
             System.out.println("超出长度");
+            throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is too long");
         }
     }
 

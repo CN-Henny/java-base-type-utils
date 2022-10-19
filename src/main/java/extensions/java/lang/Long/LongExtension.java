@@ -39,7 +39,7 @@ public class LongExtension {
     private static void isNullException(Long source) {
         if (source.customIsNull()) {
             //TODO 增加异常返回
-            System.out.println(source + "是空的");
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
         }
     }
 
@@ -76,6 +76,7 @@ public class LongExtension {
         }
         if (flag) {
             System.out.println("超出长度");
+            throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is too long");
         }
     }
 

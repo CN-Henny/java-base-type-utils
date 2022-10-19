@@ -38,7 +38,7 @@ public class DoubleExtension {
     private static void isNullException(Double source) {
         if (source.customIsNull()) {
             //TODO 增加异常返回
-
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
         }
     }
 
@@ -59,6 +59,7 @@ public class DoubleExtension {
         boolean isInteger = source - Math.floor(source) < eps;
         if (!isInteger) {
             System.out.println("有小数位。将丢失小数后内容");
+            throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is a float");
         }
     }
 
@@ -109,6 +110,7 @@ public class DoubleExtension {
         }
         if (flag) {
             System.out.println("超出长度");
+            throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is too long");
         }
     }
 
@@ -130,6 +132,7 @@ public class DoubleExtension {
         if (decimalsLength > sourceDecimalsLength) {
             //TODO 提示截取位数不够
             System.out.println("源数据小数位不够");
+            throw new NumberFormatException("com.dlanqi:base-type-utils Error : source decimals is too short");
         }
     }
 

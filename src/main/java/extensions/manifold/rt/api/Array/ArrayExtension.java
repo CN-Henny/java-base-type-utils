@@ -12,7 +12,7 @@ import java.util.List;
 @Extension
 public class ArrayExtension {
 
-    public static List<@Self(true) Object> toaaaList(@This Object array) {
+    public static List<@Self(true) Object> customToList(@This Object array) {
         if (!array.getClass().getComponentType().isPrimitive()) {
             return Arrays.asList((Object[])((Object[])array));
         } else {

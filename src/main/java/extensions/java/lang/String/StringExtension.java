@@ -53,7 +53,7 @@ public class StringExtension {
     private static void isNullException(String source) {
         if (source.customIsNull()) {
             //TODO 增加异常返回
-            System.out.println(source + "是空的");
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
         }
     }
 
@@ -75,7 +75,7 @@ public class StringExtension {
         for (Character charValue : chars) {
             if (!Character.isDigit(charValue)) {
                 //TODO 增加异常返回
-                System.out.println(charValue + "不是数字");
+                throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is not Integer");
             }
         }
     }
@@ -100,15 +100,17 @@ public class StringExtension {
                 if (!pattern.matcher(source.replace(".", "")).matches()) {
                     //TODO 增加异常返回
                     System.out.println(source + "不是小数");
+                    throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is not float");
                 }
             } else {
                 //TODO 增加异常返回
                 System.out.println(source + "包含多个小数点");
+                throw new NumberFormatException("com.dlanqi:base-type-utils Error : source contain more point");
             }
         } else {
             if (!pattern.matcher(source).matches()) {
                 //TODO 增加异常返回
-                System.out.println(source + "不是小数也不是整数");
+                throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is not Integer and float");
             }
         }
     }
@@ -161,6 +163,7 @@ public class StringExtension {
         }
         if (flag) {
             System.out.println("超出长度");
+            throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is too long");
         }
     }
 
