@@ -11,6 +11,7 @@ import manifold.ext.rt.api.This;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.*;
 import java.time.format.DateTimeFormatter;
@@ -37,6 +38,10 @@ public class StringExtension {
     final static long maxLong = 0x7fffffffffffffffL;
 
     final static float maxFloat = 0x1.fffffeP+127f;
+
+    public final static int FormatDate = 1;
+
+    public final static int FormatTime = 2;
 
     /**
      * Null Exception Throw
@@ -1136,6 +1141,54 @@ public class StringExtension {
     public static BigDecimal customToBigDecimal(@This String source, BigDecimal errorBack) {
         try {
             return new BigDecimal(source);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * String To Date Re date
+     *
+     * @param source
+     * @param formatType
+     * @return java.util.Date
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/20 9:58
+     * @version 1.0
+     * @mdate 2022/10/20 9:58
+     * @since 1.0
+     */
+    public static Date customToDate(@This String source, int formatType) throws Exception {
+        switch (formatType) {
+            case 1:
+                SimpleDateFormat simpleDateFormatDate = new SimpleDateFormat("yyyy-MM-dd");
+                return simpleDateFormatDate.parse(source);
+            case 2:
+                SimpleDateFormat simpleDateFormatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                return simpleDateFormatTime.parse(source);
+            default:
+                throw new Exception("com.dlanqi:base-type-utils Error : formatType is null or Non conformance");
+        }
+    }
+
+    /**
+     * String To Date Re date Exception Re errorBack
+     *
+     * @param source
+     * @param formatType
+     * @param errorBack
+     * @return java.util.Date
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/20 9:58
+     * @version 1.0
+     * @mdate 2022/10/20 9:58
+     * @since 1.0
+     */
+    public static Date customToDate(@This String source, int formatType, Date errorBack) {
+        try {
+            return source.customToDate(formatType);
         } catch (Exception ex) {
             return errorBack;
         }
