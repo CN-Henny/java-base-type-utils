@@ -49,7 +49,7 @@ public class DemoApplication {
         //a.toInteger();
         //a.toString().toBigDecimal();
         Map<String, String> arr = new HashMap<>();
-        arr.addaaa("1", "1").addaaa("2", "2");
+        arr.add("1", "1").add("2", "2");
         String aewew = "";
         String[] strings = new String[]{"a", "b", "c"};
         ArrayList<UserData> arrayList = new ArrayList<>();
