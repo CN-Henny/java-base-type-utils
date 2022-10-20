@@ -30,7 +30,8 @@ public class BigDecimalExtension {
     private static BigDecimal zeroDecimal = new BigDecimal("0");
 
     private static void initPara() {
-
+        BigDecimalExtension.scala = 12;
+        BigDecimalExtension.roundingMode = BigDecimal.ROUND_CEILING;
     }
 
     private static void initPara(int scala) {
@@ -63,7 +64,7 @@ public class BigDecimalExtension {
     private static void isZeroException(BigDecimal source) {
         if (source.customIsZero()) {
             //TODO 增加异常返回
-            throw new ArithmeticException("com.dlanqi:base-type-utils Warning : source is zero ");
+            throw new ArithmeticException("com.dlanqi:base-type-utils Error : source is zero ");
         }
     }
 
