@@ -346,47 +346,6 @@ public class IntegerExtension {
         return result;
     }
 
-    /**
-     * Sum Number Re integer
-     *
-     * @param source
-     * @param nums
-     * @return java.lang.Integer
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:51
-     * @version 1.0
-     * @mdate 2022/10/18 15:51
-     * @since 1.0
-     */
-    public static Integer customSumAll(@This Integer source, Integer... nums) {
-        for (Integer item : nums) {
-            source = source + item;
-        }
-        return source;
-    }
-
-    /**
-     * Sum Number Re integer Exception Re errorBack
-     *
-     * @param source
-     * @param errorBack
-     * @param nums
-     * @return java.lang.Integer
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:50
-     * @version 1.0
-     * @mdate 2022/10/18 15:50
-     * @since 1.0
-     */
-    public static Integer customSumAll(@This Integer source, Integer errorBack, Integer... nums) {
-        try {
-            return source.customSumAll(nums);
-        } catch (Exception ex) {
-            return errorBack;
-        }
-    }
     //endregion
 
     //region 转换型
@@ -661,5 +620,51 @@ public class IntegerExtension {
             return errorBack;
         }
     }
+    //endregion
+
+    //region   计算型
+
+    /**
+     * Sum Number Re integer
+     *
+     * @param source
+     * @param nums
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:51
+     * @version 1.0
+     * @mdate 2022/10/18 15:51
+     * @since 1.0
+     */
+    public static Integer customSumAll(@This Integer source, Integer... nums) {
+        for (Integer item : nums) {
+            source = source + item;
+        }
+        return source;
+    }
+
+    /**
+     * Sum Number Re integer Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @param nums
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:50
+     * @version 1.0
+     * @mdate 2022/10/18 15:50
+     * @since 1.0
+     */
+    public static Integer customSumAll(@This Integer source, Integer errorBack, Integer... nums) {
+        try {
+            return source.customSumAll(nums);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
     //endregion
 }

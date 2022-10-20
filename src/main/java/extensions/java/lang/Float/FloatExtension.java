@@ -642,48 +642,6 @@ public class FloatExtension {
         return nf.format(source);
     }
 
-    /**
-     * Sum Number Re float
-     *
-     * @param source
-     * @param nums
-     * @return java.lang.Float
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:49
-     * @version 1.0
-     * @mdate 2022/10/18 15:49
-     * @since 1.0
-     */
-    public static Float customSumAll(@This Float source, Float... nums) {
-        for (Float item : nums) {
-            source = source + item;
-        }
-        return source;
-    }
-
-    /**
-     * Sum Number Re float Exception Re errorBack
-     *
-     * @param source
-     * @param errorBack
-     * @param nums
-     * @return java.lang.Float
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:50
-     * @version 1.0
-     * @mdate 2022/10/18 15:50
-     * @since 1.0
-     */
-    public static Float customSumAll(@This Float source, Float errorBack, Float... nums) {
-        try {
-            return source.customSumAll(nums);
-        } catch (Exception ex) {
-            return errorBack;
-        }
-    }
-
     //endregion
 
     //region   转换型
@@ -963,5 +921,51 @@ public class FloatExtension {
             return errorBack;
         }
     }
+    //endregion
+
+    //region  计算型
+
+    /**
+     * Sum Number Re float
+     *
+     * @param source
+     * @param nums
+     * @return java.lang.Float
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:49
+     * @version 1.0
+     * @mdate 2022/10/18 15:49
+     * @since 1.0
+     */
+    public static Float customSumAll(@This Float source, Float... nums) {
+        for (Float item : nums) {
+            source = source + item;
+        }
+        return source;
+    }
+
+    /**
+     * Sum Number Re float Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @param nums
+     * @return java.lang.Float
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:50
+     * @version 1.0
+     * @mdate 2022/10/18 15:50
+     * @since 1.0
+     */
+    public static Float customSumAll(@This Float source, Float errorBack, Float... nums) {
+        try {
+            return source.customSumAll(nums);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
     //endregion
 }
