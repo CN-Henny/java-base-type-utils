@@ -2,6 +2,7 @@ package com.example.demo;
 
 
 import com.alibaba.fastjson.JSONObject;
+import org.apache.catalina.User;
 
 import java.io.File;
 import java.math.BigDecimal;
@@ -11,8 +12,37 @@ import java.util.*;
 public class DemoApplication {
 
     public static void main(String[] args) {
+        List<String> s1 = new ArrayList<>();
+        //stringLambdaExtension.ok(e->e.toString());
 
-        Integer aasd = null ;
+
+        UserData rreeq1 = new UserData();
+
+        List<UserData> uuu = new ArrayList<>();
+        UserData u11 = new UserData();
+        u11.setUserName("1");
+        uuu.add(u11);
+        uuu.toLambda(e->e.getUserName() == "1" && e.getUserName()!= "1");
+
+
+        List<String> text = new ArrayList<>();
+        List<UserData> user = new ArrayList<>();
+        UserData u1 = new UserData();
+        u1.setUserName("1");
+        user.add(u1);
+        UserData u2 = new UserData();
+        u2.setUserName("2");
+        user.add(u2);
+        user.forEach(item -> {
+            String a = item.getUserName();
+            text.add(a.toString());
+        });
+        String rreeq = null;
+        //rreeq.toLambda(item -> {
+        //    System.out.println("ssdsdsd");
+        //});
+
+        Integer aasd = null;
         aasd.customIsNull();
         System.out.println("1");
         aasd.customIsNotNull();
@@ -25,11 +55,14 @@ public class DemoApplication {
         BigDecimal cc = new BigDecimal("0.0000000000000000000000000");
         BigDecimal ccc = new BigDecimal("2.12345678912340000000000000000");
         List<BigDecimal> cccccc = new ArrayList<>();
+        cccccc.forEach(item -> {
+
+        });
         cccccc.customAdd(cc).customAdd(ccc);
-        BigDecimal q1 = c.customSumAll(cc,ccc);
+        BigDecimal q1 = c.customSumAll(cc, ccc);
         //BigDecimal q4 = c.customDivideAll(3,BigDecimal.ROUND_HALF_DOWN,cc,ccc);
         BigDecimal q2 = c.customSumAll(cccccc);
-        BigDecimal q3 = c.customSumAll(4,BigDecimal.ROUND_HALF_UP,cccccc);
+        BigDecimal q3 = c.customSumAll(4, BigDecimal.ROUND_HALF_UP, cccccc);
         List<BigDecimal> bigDecimals = new ArrayList<>();
         UserData d = new UserData();
         //a.systemCustomGetModifyContent();
