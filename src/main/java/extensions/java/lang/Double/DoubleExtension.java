@@ -5,6 +5,8 @@ import manifold.ext.rt.api.This;
 import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Double Extension
@@ -957,47 +959,15 @@ public class DoubleExtension {
 
     //region  计算型
 
-    /**
-     * Sum Number Re double
-     *
-     * @param source
-     * @param nums
-     * @return java.lang.Double
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:48
-     * @version 1.0
-     * @mdate 2022/10/18 15:48
-     * @since 1.0
-     */
-    public static Double customSumAll(@This Double source, Double... nums) {
-        for (Double item : nums) {
-            source = source + item;
-        }
-        return source;
+    //region  加法
+
+    public static List<BigDecimal> customSumAll(Double... nums) {
+        nums.customToList().toBigDecimalList(e->e.customToBigDecimal());
+        return null;
     }
 
-    /**
-     * Sum Number Re double Exception Re errorBack
-     *
-     * @param source
-     * @param errorBack
-     * @param nums
-     * @return java.lang.Double
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:47
-     * @version 1.0
-     * @mdate 2022/10/18 15:47
-     * @since 1.0
-     */
-    public static Double customSumAll(@This Double source, Double errorBack, Double... nums) {
-        try {
-            return source.customSumAll(nums);
-        } catch (Exception ex) {
-            return errorBack;
-        }
-    }
+
+    //endregion
 
     //endregion
 }
