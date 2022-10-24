@@ -32,7 +32,7 @@ a.customIsNull();
 
 [CharacterExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/CharacterExtension/README.md)
 
-[CharacterExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/IterableExtension/README.md)
+[IterableExtension](https://github.com/CN-Henny/java-base-type-utils/blob/main/doc/IterableExtension/README.md)
 
 
 ## 微信请联系   _Hennys
