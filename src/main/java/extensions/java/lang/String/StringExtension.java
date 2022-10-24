@@ -1195,11 +1195,13 @@ public class StringExtension {
     }
     //endregion
 
-    public static String and(@This String source,String a) {
-        return source+"#"+a;
+    public static String and(@This String source, String target) {
+
+        return source.customIsNotNull("") + "#" + target.customIsNotNull("");
 
     }
-    public static String or(@This String source,String a) {
-        return source+"@"+a;
+
+    public static String or(@This String source, String target) {
+        return source.customIsNotNull("") + "@" + target.customIsNotNull("");
     }
 }

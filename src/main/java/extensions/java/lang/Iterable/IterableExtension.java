@@ -38,12 +38,14 @@ public class IterableExtension {
 
     public static <T> List<T> customToLambdaquchong(@This Iterable<T> thiz, ToStringInterfaceExtension<? super T> after) {
         List<String> al = new ArrayList<>();
-        LinkedHashSet<T> set = new LinkedHashSet<>((Collection) thiz);
-
+        //LinkedHashSet<T> set = new LinkedHashSet<>((Collection) thiz);
+        List<T> set = new ArrayList<>((Collection) thiz);
         for (T element : thiz) {
             String a = after.action(element);
             al.add(a);
         }
+        //筛选去重
+
         return null;
     }
 

@@ -33,9 +33,8 @@ public class DemoApplication {
         u1111.setSix("1");
         uuu.add(u1111);
         uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
-
+        u11.customConvert(UserData.class);
         TreeSet<UserData> treeSet = new TreeSet<>(Comparator.comparing(UserData::getUserName));
-
         //List<UserData> uuuu = uuu.customToLambdaquchong(e->e.getUserName());
         List<UserData> uuuuu = uuu.customToLambdaquchong(e -> e.getUserName().and(e.getSix().and(e.getPassWord())));
         List<UserData> uuuuuu = uuu.customToLambdaquchong(e -> e.getUserName().or(e.getUserName().or(e.getUserName())));

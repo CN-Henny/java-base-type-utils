@@ -1,14 +1,14 @@
 package extensions.java.lang.Object;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import manifold.ext.rt.api.Extension;
+import manifold.ext.rt.api.Self;
 import manifold.ext.rt.api.This;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @Extension
 public class ObjectExtension {
@@ -72,5 +72,17 @@ public class ObjectExtension {
     //endregion
 
     //region   转换型
+
+    public static <T> T customConvert(@This Object source, Class<T> clazz) {
+        if (source == null) {
+            return null;
+        }
+        //把源对象类型强制转换为目标对象
+        T target = JSON.parseObject(JSON.toJSONString(source), clazz);
+        //把源对象属性赋值给目标对象
+        BeanUtil.copyProperties(source, target);
+        return target;
+    }
+
     //endregion
 }
