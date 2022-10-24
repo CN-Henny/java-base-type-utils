@@ -962,7 +962,7 @@ public class DoubleExtension {
     //region  加法
 
     public static List<BigDecimal> customSumAll(Double... nums) {
-        nums.customToList().toBigDecimalList(e->e.customToBigDecimal());
+        nums.customToList().customToBigDecimalList(e->e.customToBigDecimal());
         return null;
     }
 

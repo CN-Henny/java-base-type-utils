@@ -4,13 +4,13 @@
 
     <groupId>com.dlanqi</groupId>
     <artifactId>base-type-utils</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.1</version>
 
     <name>My Java Extension App</name>
 
     <properties>
         <!-- set latest manifold version here -->
-        <manifold.version>2022.1.18</manifold.version>
+        <manifold.version>2022.1.19</manifold.version>
         <maven.test.skip>true</maven.test.skip>
         <maven.javadoc.skip>true</maven.javadoc.skip>
         <maven.compiler.source>8</maven.compiler.source>
@@ -29,6 +29,11 @@
         <dependency>
             <groupId>systems.manifold</groupId>
             <artifactId>manifold-ext-rt</artifactId>
+            <version>${manifold.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>systems.manifold</groupId>
+            <artifactId>manifold-collections</artifactId>
             <version>${manifold.version}</version>
         </dependency>
         <dependency>

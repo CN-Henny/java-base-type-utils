@@ -22,8 +22,9 @@ public class DemoApplication {
         UserData u11 = new UserData();
         u11.setUserName("1");
         uuu.add(u11);
-        List<Long> tryhtrbgf = uuu.toLongList(e->e.getUserName().customToLong());
+        //List<Long> tryhtrbgf = uuu.toLongList(e -> e.getUserName().customToLong());
         //uuu.toLambda(e->e.getUserName() == "1" && e.getUserName()!= "1");
+        //uuu=uuu.toLambda(e -> e.getUserName() == "123");
 
 
         List<String> text = new ArrayList<>();
