@@ -5,21 +5,49 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Extension
 public class IterableExtension {
-    public static <T> List<T> customToLambda(@This Iterable<T> thiz, LambdaIterableInterfaceExtension<? super T> after) {
+
+
+    //region 功能型
+
+    /**
+     * 按条件提取list
+     *
+     * @param thiz
+     * @param after
+     * @return java.util.List<T>
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/24 11:00
+     * @version 1.0
+     * @mdate 2022/10/24 11:00
+     * @since 1.0
+     */
+    public static <T> List<T> customToLambdaSelect(@This Iterable<T> thiz, LambdaIterableInterfaceExtension<? super T> after) {
         List<T> objectList = new ArrayList<>();
         for (T element : thiz) {
-            if(after.action(element)){
+            if (after.action(element)) {
                 objectList.add(element);
             }
         }
         return objectList;
     }
+
+    public static <T> List<T> customToLambdaquchong(@This Iterable<T> thiz, ToStringInterfaceExtension<? super T> after) {
+        List<String> al = new ArrayList<>();
+        LinkedHashSet<T> set = new LinkedHashSet<>((Collection) thiz);
+
+        for (T element : thiz) {
+            String a = after.action(element);
+            al.add(a);
+        }
+        return null;
+    }
+
+    //endregion
 
     //region 转换型
 

@@ -13,19 +13,35 @@ public class DemoApplication {
 
     public static void main(String[] args) {
         List<String> s1 = new ArrayList<>();
+        s1.customAdd("1").customAdd("4").customAdd("3");
         //stringLambdaExtension.ok(e->e.toString());
-
+        s1.customToBigDecimalList(e -> e.customToBigDecimal());
 
         UserData rreeq1 = new UserData();
 
         List<UserData> uuu = new ArrayList<>();
         UserData u11 = new UserData();
         u11.setUserName("1");
+        u11.setSix("1");
         uuu.add(u11);
+        UserData u111 = new UserData();
+        u111.setUserName("1");
+        u111.setSix("1");
+        uuu.add(u111);
+        UserData u1111 = new UserData();
+        u1111.setUserName("2");
+        u1111.setSix("1");
+        uuu.add(u1111);
+        uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
+
+        TreeSet<UserData> treeSet = new TreeSet<>(Comparator.comparing(UserData::getUserName));
+
+        //List<UserData> uuuu = uuu.customToLambdaquchong(e->e.getUserName());
+        List<UserData> uuuuu = uuu.customToLambdaquchong(e -> e.getUserName().and(e.getSix().and(e.getPassWord())));
+        List<UserData> uuuuuu = uuu.customToLambdaquchong(e -> e.getUserName().or(e.getUserName().or(e.getUserName())));
+        //uuu.customToLambdaquchong(e->e.getUserName());
         //List<Long> tryhtrbgf = uuu.toLongList(e -> e.getUserName().customToLong());
         //uuu.toLambda(e->e.getUserName() == "1" && e.getUserName()!= "1");
-        //uuu=uuu.toLambda(e -> e.getUserName() == "123");
-
 
         List<String> text = new ArrayList<>();
         List<UserData> user = new ArrayList<>();
