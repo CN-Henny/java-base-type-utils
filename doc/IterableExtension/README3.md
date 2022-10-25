@@ -1,25 +1,25 @@
-### 转换型-Lambda表达式方式
+ 转换型-Lambda表达式方式
 
 入参全部采用Lambda表达式形式代入
 
-#### List提取字段(单个字段)并转换成BigDecimal-customToBigDecimalList()
+# List提取字段(单个字段)并转换成BigDecimal-customToBigDecimalList()
 
-##### customToBigDecimalList(匿名函数)
+## customToBigDecimalList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<BigDecimal> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<String> eg = new ArrayList<>();
@@ -40,24 +40,24 @@ u.add(u2);
 List<BigDecimal> result = u.customToBigDecimalList(e->e.getUserName().customToBigDecimal());
 ```
 
-#### List提取字段(单个字段)并转换成Long-customToLongList()
+# List提取字段(单个字段)并转换成Long-customToLongList()
 
-##### customToLongList(匿名函数)
+## customToLongList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<Long> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<String> eg = new ArrayList<>();
@@ -78,24 +78,24 @@ u.add(u2);
 List<Long> result = u.customToLongList(e->e.getUserName().customToLong());
 ```
 
-#### List提取字段(单个字段)并转换成String-customToStringList()
+# List提取字段(单个字段)并转换成String-customToStringList()
 
-##### customToStringList(匿名函数)
+## customToStringList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<String> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<String> eg = new ArrayList<>();
@@ -116,24 +116,24 @@ u.add(u2);
 List<String> result = u.customToStringList(e->e.getUserName().customToString());
 ```
 
-#### List提取字段(单个字段)并转换成Double-customToDoubleList()
+# List提取字段(单个字段)并转换成Double-customToDoubleList()
 
-##### customToDoubleList(匿名函数)
+## customToDoubleList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<Double> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<Double> eg = new ArrayList<>();
@@ -154,24 +154,24 @@ u.add(u2);
 List<Double> result = u.customToDoubleList(e->e.getUserName().customToDouble());
 ```
 
-#### List提取字段(单个字段)并转换成Float-customToFloatList()
+# List提取字段(单个字段)并转换成Float-customToFloatList()
 
-##### customToFloatList(匿名函数)
+## customToFloatList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<Float> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<Float> eg = new ArrayList<>();
@@ -192,24 +192,24 @@ u.add(u2);
 List<Float> result = u.customToFloatList(e->e.getUserName().customToFloat());
 ```
 
-#### List提取字段(单个字段)并转换成Integer-customToIntegerList()
+# List提取字段(单个字段)并转换成Integer-customToIntegerList()
 
-##### customToIntegerList(匿名函数)
+## customToIntegerList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<Integer> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<Integer> eg = new ArrayList<>();
@@ -230,24 +230,24 @@ u.add(u2);
 List<Integer> result = u.customToIntegerList(e->e.getUserName().customToInteger());
 ```
 
-#### List提取字段(单个字段)并转换成Date-customToDateList()
+# List提取字段(单个字段)并转换成Date-customToDateList()
 
-##### customToDateList(匿名函数)
+## customToDateList(匿名函数)
 
-###### 入参
+### 入参
 
 Lambda表达式形式
 
-###### 返回值
+### 返回值
 List\<Date> result
 
-###### 实现功能
+### 实现功能
 List提取字段(单个字段)并转换成List
 
-###### 可能的异常
+### 可能的异常
 无
 
-###### 使用示例
+### 使用示例
 1. 基础类型转换
 ```
 List<Date> eg = new ArrayList<>();
