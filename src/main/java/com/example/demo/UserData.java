@@ -8,5 +8,12 @@ public class UserData {
     public String passWord;
     public String six;
 
+    public String ceshi(){
+        return "ceshi";
+    }public String ceshi1(){
+        return "ceshi1";
+    }
+
+
 }
 

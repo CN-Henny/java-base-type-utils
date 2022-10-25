@@ -262,18 +262,19 @@ public class StringExtension {
     /**
      * If source Is Not Empty Re true Else Re false
      * Null Range : Null , ""
+     * 20221025修改引用错误
      *
      * @param source
      * @return java.lang.Boolean
      * @throws
      * @author Henny
      * @cdate 2022/8/5 14:57
-     * @version 1.0
-     * @mdate 2022/8/5 14:57
+     * @version 1.0.1
+     * @mdate 2022/10/25 11:57
      * @since 1.0
      */
     public static Boolean customIsNotEmpty(@This String source) {
-        return !source.isEmpty();
+        return !source.customIsNull();
     }
 
     /**

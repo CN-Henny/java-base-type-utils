@@ -1,5 +1,4 @@
 package extensions.java.util.List;
-
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import manifold.ext.rt.api.Extension;
@@ -43,7 +42,7 @@ public class ListExtension {
      * @mdate 2022/10/24 21:00
      * @since 1.0
      */
-    public static <T> @Self List<T> customConvertList(@This List<?> source, Class<T> clazz) {
+    public static <E,T>  List<T> customConvertList(@This List<E> source, Class<T> clazz) {
         List<T> list = new ArrayList<>();
         if (source.isEmpty()) {
             return list;

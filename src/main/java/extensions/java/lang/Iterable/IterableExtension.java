@@ -214,4 +214,14 @@ public class IterableExtension {
     }
 
     //endregion
+
+
+    public static <T,R> List<T> testsstts(@This Iterable<T> thiz, test<? super T,R> after) {
+        List<T> objectList = new ArrayList<>();
+        for (T element : thiz) {
+            R a = after.apply(element);
+            //System.out.println(a);
+        }
+        return objectList;
+    }
 }

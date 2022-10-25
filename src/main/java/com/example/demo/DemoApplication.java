@@ -8,15 +8,17 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class DemoApplication {
 
     public static void main(String[] args) {
         List<String> s1 = new ArrayList<>();
-        s1.customAdd("1").customAdd("4").customAdd("3");
+        //s1.customAdd("1").customAdd("4").customAdd("3");
         //stringLambdaExtension.ok(e->e.toString());
-        s1.customToBigDecimalList(e -> e.customToBigDecimal());
+        //s1.customToBigDecimalList(e -> e.customToBigDecimal());
 
+        TreeSet<UserData> ta = new TreeSet<>(Comparator.comparing(o -> o.ceshi() + "#" + o.ceshi1()));
         UserData rreeq1 = new UserData();
 
         List<UserData> uuu = new ArrayList<>();
@@ -24,6 +26,7 @@ public class DemoApplication {
         u11.setUserName("1");
         u11.setSix("1");
         uuu.add(u11);
+        ta.add(u11);
         UserData u111 = new UserData();
         u111.setUserName("1");
         u111.setSix("1");
@@ -32,12 +35,13 @@ public class DemoApplication {
         u1111.setUserName("2");
         u1111.setSix("1");
         uuu.add(u1111);
-        uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
-        u11.customConvert(UserData.class);
-        TreeSet<UserData> treeSet = new TreeSet<>(Comparator.comparing(UserData::getUserName));
-        //List<UserData> uuuu = uuu.customToLambdaquchong(e->e.getUserName());
-        List<UserData> uuuuu = uuu.customToLambdaquchong(e -> e.getUserName().and(e.getSix().and(e.getPassWord())));
-        List<UserData> uuuuuu = uuu.customToLambdaquchong(e -> e.getUserName().or(e.getUserName().or(e.getUserName())));
+        uuu.testsstts(UserData::ceshi);
+        //uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
+        //u11.customConvert(UserData.class);
+        //TreeSet<UserData> treeSet = new TreeSet<>(Comparator.comparing(UserData::getUserName));
+        ////List<UserData> uuuu = uuu.customToLambdaquchong(e->e.getUserName());
+        //List<UserData> uuuuu = uuu.customToLambdaquchong(e -> e.getUserName().and(e.getSix().and(e.getPassWord())));
+        //List<UserData> uuuuuu = uuu.customToLambdaquchong(e -> e.getUserName().or(e.getUserName().or(e.getUserName())));
         //uuu.customToLambdaquchong(e->e.getUserName());
         //List<Long> tryhtrbgf = uuu.toLongList(e -> e.getUserName().customToLong());
         //uuu.toLambda(e->e.getUserName() == "1" && e.getUserName()!= "1");
@@ -75,7 +79,7 @@ public class DemoApplication {
         cccccc.forEach(item -> {
 
         });
-        cccccc.customAdd(cc).customAdd(ccc);
+        //cccccc.customAdd(cc).customAdd(ccc);
         BigDecimal q1 = c.customSumAll(cc, ccc);
         //BigDecimal q4 = c.customDivideAll(3,BigDecimal.ROUND_HALF_DOWN,cc,ccc);
         BigDecimal q2 = c.customSumAll(cccccc);
@@ -105,7 +109,7 @@ public class DemoApplication {
         ArrayList<UserData> arrayList = new ArrayList<>();
         List<Integer> ids = new ArrayList<>();
         //strings.toList();
-        ids.customAdd(1).customAdd(2).customAdd(3);
+        //ids.customAdd(1).customAdd(2).customAdd(3);
         //ids.add(1).add(2);
         //File asdasd = new File();
         //asdasd.file();
