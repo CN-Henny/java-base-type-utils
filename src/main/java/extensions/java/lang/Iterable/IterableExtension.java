@@ -215,13 +215,27 @@ public class IterableExtension {
 
     //endregion
 
-
-    public static <T,R> List<T> testsstts(@This Iterable<T> thiz, test<? super T,R> after) {
+    /**
+     * 测试
+     *
+     * @param thiz
+     * @param after
+     * @return java.util.List<T>
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/26 9:44
+     * @version 1.0
+     * @mdate 2022/10/26 9:44
+     * @since 1.0
+     */
+    public static <T, R> List<T> testsstts(@This Iterable<T> thiz, test<? super T, R> after) {
         List<T> objectList = new ArrayList<>();
         for (T element : thiz) {
             R a = after.apply(element);
-            //System.out.println(a);
+            System.out.println(a);
         }
         return objectList;
     }
+
+
 }

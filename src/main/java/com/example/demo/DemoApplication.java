@@ -1,14 +1,19 @@
 package com.example.demo;
 
 
+import com.Utils.ColumnUtil;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.catalina.User;
+import org.springframework.beans.BeanWrapper;
+import org.springframework.beans.BeanWrapperImpl;
 
+import java.beans.FeatureDescriptor;
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class DemoApplication {
 
@@ -21,6 +26,7 @@ public class DemoApplication {
         TreeSet<UserData> ta = new TreeSet<>(Comparator.comparing(o -> o.ceshi() + "#" + o.ceshi1()));
         UserData rreeq1 = new UserData();
 
+
         List<UserData> uuu = new ArrayList<>();
         UserData u11 = new UserData();
         u11.setUserName("1");
@@ -31,11 +37,32 @@ public class DemoApplication {
         u111.setUserName("1");
         u111.setSix("1");
         uuu.add(u111);
+
+        final BeanWrapper wrappedSource = new BeanWrapperImpl(u11);
+        String[] nullPropertyNames = Stream.of(wrappedSource.getPropertyDescriptors())
+                .map(FeatureDescriptor::getName)
+                .filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == null)
+                .toArray(String[]::new);
+
+
+        Stream<String> reyrygha  = Stream.of(wrappedSource.getPropertyDescriptors())
+                .map(FeatureDescriptor::getName);
+
+
+        //BeanUtils.copyProperties(source, target, nullPropertyNames);
+
+
+
+
+
+        System.out.println(ColumnUtil.getFieldName(UserData::getUserName));
+
         UserData u1111 = new UserData();
         u1111.setUserName("2");
         u1111.setSix("1");
         uuu.add(u1111);
         uuu.testsstts(UserData::ceshi);
+        uuu.customToBigDecimalList(e->e.getUserName().customToBigDecimal());
         //uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
         //u11.customConvert(UserData.class);
         //TreeSet<UserData> treeSet = new TreeSet<>(Comparator.comparing(UserData::getUserName));
