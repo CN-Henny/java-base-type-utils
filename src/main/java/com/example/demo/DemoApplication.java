@@ -3,15 +3,19 @@ package com.example.demo;
 
 import com.Utils.ColumnUtil;
 import com.alibaba.fastjson.JSONObject;
+import extensions.java.lang.Object.ObjectExtension;
 import org.apache.catalina.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 
 import java.beans.FeatureDescriptor;
+import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,30 +33,51 @@ public class DemoApplication {
 
         List<UserData> uuu = new ArrayList<>();
         UserData u11 = new UserData();
-        u11.setUserName("1");
-        u11.setSix("1");
+        u11.setUserName("huangjingwei");
+        u11.setSix("");
         uuu.add(u11);
         ta.add(u11);
         UserData u111 = new UserData();
         u111.setUserName("1");
-        u111.setSix("1");
+        u111.setSix("2");
         uuu.add(u111);
+        List<String> filterStr = new ArrayList<>();
+        filterStr.add("SYSTEM");
+        filterStr.add("1");
+
+        u11.customCopyPropertiesTo(u111);
+        u11.customCopyPropertiesTo(u111, ObjectExtension.CopyIgnoreEmpty);
 
         final BeanWrapper wrappedSource = new BeanWrapperImpl(u11);
-        String[] nullPropertyNames = Stream.of(wrappedSource.getPropertyDescriptors())
-                .map(FeatureDescriptor::getName)
-                .filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == null)
-                .toArray(String[]::new);
+        Supplier<Stream<String>> as = () -> Stream.of(wrappedSource.getPropertyDescriptors()).map(FeatureDescriptor::getName);
+        Supplier<Stream<String>> finalAs = as;
+        as = () -> finalAs.get().filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == "huangjingwei");
+        as = () -> finalAs.get().filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == "1");
+        String[] htrgrdfd = as.get().toArray(String[]::new);
 
+        //BeanUtils.copyProperties(u111, u11);
 
-        Stream<String> reyrygha  = Stream.of(wrappedSource.getPropertyDescriptors())
+        //nullPropertyNames.forEach((item,v)->{
+        //    final BeanWrapper beanWrapper1 = new BeanWrapperImpl(u111);
+        //    String[] allname = Stream.of(wrappedSource.getPropertyDescriptors())
+        //            .map(FeatureDescriptor::getName)
+        //            .toArray(String[]::new);
+        //    allname.forEach((a,b)->{
+        //        if(nullPropertyNames[item] == allname[a])
+        //        {
+        //            wrappedSource.setPropertyValue(allname[a],beanWrapper1.getPropertyValue(nullPropertyNames[item]));
+        //        }
+        //    });
+        //});
+
+        Stream<String> reyrygha = Stream.of(wrappedSource.getPropertyDescriptors())
                 .map(FeatureDescriptor::getName);
 
 
         //BeanUtils.copyProperties(source, target, nullPropertyNames);
 
 
-
+        String auuj = uuu.customGetFieldName(UserData::getUserName);
 
 
         System.out.println(ColumnUtil.getFieldName(UserData::getUserName));
@@ -62,7 +87,7 @@ public class DemoApplication {
         u1111.setSix("1");
         uuu.add(u1111);
         uuu.testsstts(UserData::ceshi);
-        uuu.customToBigDecimalList(e->e.getUserName().customToBigDecimal());
+        //uuu.customToBigDecimalList(e -> e.getUserName().customToBigDecimal());
         //uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
         //u11.customConvert(UserData.class);
         //TreeSet<UserData> treeSet = new TreeSet<>(Comparator.comparing(UserData::getUserName));
