@@ -101,9 +101,8 @@ public class ObjectExtension {
         List<String> resultList = new ArrayList<>();
         final BeanWrapper wrappedSource = new BeanWrapperImpl(source);
         Supplier<Stream<String>> sss = () -> Stream.of(wrappedSource.getPropertyDescriptors()).map(FeatureDescriptor::getName);
-
         filterStr.forEach(item -> {
-            List<String> filterList = sss.get().filter(propertyName -> wrappedSource.getPropertyValue(propertyName) == item && !resultList.contains(propertyName)).collect(Collectors.toList());
+            List<String> filterList = sss.get().filter(propertyName -> wrappedSource.getPropertyValue(propertyName) != null &&wrappedSource.getPropertyValue(propertyName).toString().equals(item) && !resultList.contains(propertyName)).collect(Collectors.toList());
             if (type < 5) {
                 resultList.addAll(filterList);
             } else {
