@@ -102,15 +102,20 @@ public class ObjectExtension {
         final BeanWrapper wrappedSource = new BeanWrapperImpl(source);
         Supplier<Stream<String>> sss = () -> Stream.of(wrappedSource.getPropertyDescriptors()).map(FeatureDescriptor::getName);
         filterStr.forEach(item -> {
-            List<String> filterList = sss.get().filter(propertyName -> wrappedSource.getPropertyValue(propertyName) != null &&wrappedSource.getPropertyValue(propertyName).toString().equals(item) && !resultList.contains(propertyName)).collect(Collectors.toList());
-            if (type < 5) {
-                resultList.addAll(filterList);
-            } else {
-                List<String> reduce1 = sss.get().filter(e -> !filterList.contains(e)).collect(Collectors.toList());
-                resultList.addAll(reduce1);
-            }
+            List<String> filterList = sss.get()
+                    .filter(propertyName -> ((wrappedSource.getPropertyValue(propertyName) != null
+                            && wrappedSource.getPropertyValue(propertyName).toString().equals(item))
+                            || wrappedSource.getPropertyValue(propertyName) == item)
+                            && !resultList.contains(propertyName))
+                    .collect(Collectors.toList());
+            resultList.addAll(filterList);
         });
-        return resultList.toArray(new String[resultList.size()]);
+        if (type < 5) {
+            return resultList.toArray(new String[resultList.size()]);
+        } else {
+            List<String> reduce1 = sss.get().filter(e -> !resultList.contains(e)).collect(Collectors.toList());
+            return reduce1.toArray(new String[resultList.size()]);
+        }
     }
 
     //region   判断型
@@ -238,6 +243,23 @@ public class ObjectExtension {
      * @mdate 2022/10/28 14:13
      * @since 1.0
      */
+    public static <T> void customCopyPropertiesTo(@This Object thiz, Object target, ColumnUtil.SFunction<T,?> fn) {
+        thiz.customCopyPropertiesTo(target, ObjectExtension.Copy);
+    }
+
+    /**
+     * 拷贝实体
+     *
+     * @param thiz
+     * @param target
+     * @return void
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/28 14:13
+     * @version 1.0
+     * @mdate 2022/10/28 14:13
+     * @since 1.0
+     */
     public static <T> void customCopyPropertiesTo(@This Object thiz, Object target) {
         thiz.customCopyPropertiesTo(target, ObjectExtension.Copy);
     }
@@ -277,27 +299,17 @@ public class ObjectExtension {
      */
     public static <T> void customCopyPropertiesTo(@This Object thiz, Object target, int specialType, List<String> specialStrList) {
         switch (specialType) {
-            case CopyIgnoreNull: {
-                specialStrList.add(null);
-                break;
-            }
-            case CopyIgnoreEmpty: {
-                specialStrList.add("");
-                break;
-            }
-            case CopyIgnoreEmptyOrNull: {
-                specialStrList.add(null);
-                specialStrList.add("");
-                break;
-            }
+            case CopyIgnoreNull:
             case CopyContainsNull: {
                 specialStrList.add(null);
                 break;
             }
+            case CopyIgnoreEmpty:
             case CopyContainsEmpty: {
                 specialStrList.add("");
                 break;
             }
+            case CopyIgnoreEmptyOrNull:
             case CopyContainsEmptyOrNull: {
                 specialStrList.add(null);
                 specialStrList.add("");

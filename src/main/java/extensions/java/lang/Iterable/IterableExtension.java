@@ -91,9 +91,18 @@ public class IterableExtension {
      */
     public static <T> List<Long> customToLongList(@This Iterable<T> thiz, ToLongInterfaceExtension<? super T> after) {
         List<Long> longs = new ArrayList<>();
+        if(thiz == null){
+            return longs;
+        }
         for (T element : thiz) {
-            after.action(element);
             longs.add(after.action(element));
+        }
+        return longs;
+    }
+    public static <T> List<Long> customMoreLeveToLongList(@This Iterable<T> thiz, ToListLongInterfaceExtension<? super T> after) {
+        List<Long> longs = new ArrayList<>();
+        for (T element : thiz) {
+            longs.addAll(after.action(element));
         }
         return longs;
     }

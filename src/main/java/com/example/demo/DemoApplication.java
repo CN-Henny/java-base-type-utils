@@ -30,23 +30,45 @@ public class DemoApplication {
         TreeSet<UserData> ta = new TreeSet<>(Comparator.comparing(o -> o.ceshi() + "#" + o.ceshi1()));
         UserData rreeq1 = new UserData();
 
+        List<UserDDDD> userDDDDS = new ArrayList<>();
+        UserDDDD userDDDD = new UserDDDD();
+        userDDDD.setUserId(123L);
 
+        List<UserAAA> userAAAS = new ArrayList<>();
+        UserAAA userAAA = new UserAAA();
+        userAAA.setUserId(1L);
+        userAAAS.add(userAAA);
+        userDDDD.setUaer1(userAAAS);
+        userDDDDS.add(userDDDD);
+        userDDDDS.add(userDDDD);
+        String adfgfd = new String("111");
+        String adfgafd = "111";
         List<UserData> uuu = new ArrayList<>();
         UserData u11 = new UserData();
-        u11.setUserName("huangjingwei");
-        u11.setSix("");
+        u11.setUserName("1");
+        //u11.setSix("11");
+        u11.setPassWord("111");
+        u11.setUaer(userDDDDS);
         uuu.add(u11);
         ta.add(u11);
         UserData u111 = new UserData();
-        u111.setUserName("1");
-        u111.setSix("2");
+        u111.setUserName("2");
+        u111.setSix("22");
+        u111.setPassWord("222");
+        u111.setUaer(userDDDDS);
         uuu.add(u111);
         List<String> filterStr = new ArrayList<>();
-        filterStr.add("SYSTEM");
         filterStr.add("1");
+        //filterStr.add("111");
+        if("qqqq" == u11.getUserName())
+        {
+            String trhdgf = "1";
+        }
 
+        List<Long> atttt = uuu.customMoreLeveToLongList(e->e.getUaer().customMoreLeveToLongList(f->f.getUaer1().customToLongList(g->g.getUserId())));
+
+        //u11.customCopyPropertiesTo(u111);
         u11.customCopyPropertiesTo(u111);
-        u11.customCopyPropertiesTo(u111, ObjectExtension.CopyIgnoreEmpty);
 
         final BeanWrapper wrappedSource = new BeanWrapperImpl(u11);
         Supplier<Stream<String>> as = () -> Stream.of(wrappedSource.getPropertyDescriptors()).map(FeatureDescriptor::getName);

@@ -29,6 +29,11 @@ public class ListExtension {
         return source;
     }
 
+    public static @Self List<Object> customAddAll(@This List<Object> source, List<Object> key) {
+        source.addAll(key);
+        return source;
+    }
+
     /**
      * List类型转换
      *
