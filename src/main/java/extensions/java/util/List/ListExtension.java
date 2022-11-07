@@ -1,4 +1,5 @@
 package extensions.java.util.List;
+
 import cn.hutool.core.bean.BeanUtil;
 import com.alibaba.fastjson.JSON;
 import manifold.ext.rt.api.Extension;
@@ -7,6 +8,7 @@ import manifold.ext.rt.api.This;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Extension
 public class ListExtension {
@@ -35,6 +37,23 @@ public class ListExtension {
     }
 
     /**
+     * List用特定字符拼接
+     *
+     * @param source
+     * @param key
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/7 19:39
+     * @version 1.0
+     * @mdate 2022/11/7 19:39
+     * @since 1.0
+     */
+    public static String customJoin(@This List<Object> source, String key) {
+        return source.stream().map(String::valueOf).collect(Collectors.joining(key));
+    }
+
+    /**
      * List类型转换
      *
      * @param source
@@ -47,7 +66,7 @@ public class ListExtension {
      * @mdate 2022/10/24 21:00
      * @since 1.0
      */
-    public static <E,T>  List<T> customConvertList(@This List<E> source, Class<T> clazz) {
+    public static <E, T> List<T> customConvertList(@This List<E> source, Class<T> clazz) {
         List<T> list = new ArrayList<>();
         if (source.isEmpty()) {
             return list;
