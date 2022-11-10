@@ -176,6 +176,43 @@ public class BigDecimalExtension {
     //region   功能型
 
     /**
+     * 四舍五入
+     *
+     * @param source
+     * @param scala
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/8 10:51
+     * @version 1.0
+     * @mdate 2022/11/8 10:51
+     * @since 1.0
+     */
+    public static BigDecimal customRoundHalfUp(@This BigDecimal source, int scala) {
+        initPara(scala);
+        return of(source);
+    }
+
+    /**
+     * 四舍五入
+     *
+     * @param source
+     * @param scala
+     * @param roundingMode
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/10 10:50
+     * @version 1.0
+     * @mdate 2022/11/10 10:50
+     * @since 1.0
+     */
+    public static BigDecimal customRoundHalfUp(@This BigDecimal source, int scala, int roundingMode) {
+        initPara(scala, roundingMode);
+        return of(source);
+    }
+
+    /**
      * 取消科学计数法
      *
      * @param source
@@ -217,7 +254,7 @@ public class BigDecimalExtension {
      * @since 1.0
      */
     private static BigDecimal customSum(BigDecimal source, BigDecimal... nums) {
-        return customSum(source, nums.customToList());
+        return customSum(source, (BigDecimal) nums.customToList());
     }
 
     /**
