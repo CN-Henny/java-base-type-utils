@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -144,7 +145,7 @@ public class DoubleExtension {
     /**
      * If source Is Null Re true Else Re false
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -161,7 +162,7 @@ public class DoubleExtension {
      * If source Is Not Null Re true Else Re false
      * Null Range : Null
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -178,8 +179,8 @@ public class DoubleExtension {
      * If source Is Not Null Re source Else Re errorBack
      * Null Range : Null
      *
-     * @param source
-     * @param errorBack
+     * @param source    源数据
+     * @param errorBack 错误返回
      * @return java.lang.Long
      * @throws
      * @author Henny
@@ -195,7 +196,7 @@ public class DoubleExtension {
     /**
      * If source Is Zero Re true Else Re false
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -211,7 +212,7 @@ public class DoubleExtension {
     /**
      * If source Is Not Zero Re true Else Re false
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -227,8 +228,8 @@ public class DoubleExtension {
     /**
      * If source Is Not Zero Re source Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source    源数据
+     * @param errorBack 错误返回
      * @return java.lang.Long
      * @throws
      * @author Henny
@@ -247,7 +248,7 @@ public class DoubleExtension {
      * If source>0 Re 1
      * If source<0 Re -1
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
@@ -260,6 +261,27 @@ public class DoubleExtension {
         isNullException(source);
         return source > 0 ? 1 : source == 0 ? 0 : -1;
     }
+
+    /**
+     * 判断正负数如果异常则返回errorback
+     *
+     * @param source    源数据
+     * @param errorBack 错误返回
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/14 17:54
+     * @version 1.0
+     * @mdate 2022/11/14 17:54
+     * @since 1.0
+     */
+    public static Integer customIsSign(@This Double source, Integer errorBack) {
+        try {
+            return source > 0 ? 1 : source == 0 ? 0 : -1;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
     //endregion
 
     //region 功能型
@@ -267,19 +289,19 @@ public class DoubleExtension {
     /**
      * source Equal condition If Identical Re true Else Re false
      *
-     * @param source
-     * @param condition
+     * @param source    源数据
+     * @param condition 比较数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:15
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:15
      * @since 1.0
      */
     public static Boolean customEqual(@This Double source, Double condition) {
         isNullException(source);
-        return source == condition ? true : false;
+        return source.equals(condition);
     }
 
     //TODO 比较需不需要区分类型
@@ -287,20 +309,20 @@ public class DoubleExtension {
     /**
      * source Equal condition If Identical Re true Else Re false Exception Re errorBack
      *
-     * @param source
-     * @param condition
-     * @param errorBack
+     * @param source    源数据
+     * @param condition 比较数据
+     * @param errorBack 错误返回
      * @return java.lang.Boolean
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:15
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:15
      * @since 1.0
      */
     public static Boolean customEqual(@This Double source, Double condition, Boolean errorBack) {
         try {
-            return source == condition ? true : false;
+            return source.equals(condition);
         } catch (Exception ex) {
             return errorBack;
         }
@@ -312,39 +334,39 @@ public class DoubleExtension {
      * If source>condition Re 1
      * If source<condition Re -1
      *
-     * @param source
-     * @param condition
+     * @param source    源数据
+     * @param condition 比较数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:15
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:15
      * @since 1.0
      */
     public static Integer customCompareTo(@This Double source, Double condition) {
         isNullException(source);
         isNullException(condition);
-        return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
+        return source.compareTo(condition);
     }
 
     /**
      * source Compare To condition Exception Re errorBack
      *
-     * @param source
-     * @param condition
-     * @param errorBack
+     * @param source    源数据
+     * @param condition 比较数据
+     * @param errorBack 错误返回
      * @return java.lang.Integer
      * @throws
      * @author Henny
      * @cdate 2022/10/19 18:29
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/10/19 18:29
      * @since 1.0
      */
     public static Integer customCompareTo(@This Double source, Double condition, Integer errorBack) {
         try {
-            return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
+            return source.compareTo(condition);
         } catch (Exception ex) {
             return errorBack;
         }
@@ -353,7 +375,7 @@ public class DoubleExtension {
     /**
      * source ABS
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Double
      * @throws
      * @author Henny
@@ -371,12 +393,12 @@ public class DoubleExtension {
      * Double Decimals Length Re length
      * eg: 100.01001  Re 5
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:25
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:25
      * @since 1.0
      */
@@ -392,7 +414,7 @@ public class DoubleExtension {
             }
             default: {
                 //TODO 异常
-                return null;
+                throw new NullPointerException("com.dlanqi:base-type-utils Error : Un Know Exception 有可能传入的值不时Double");
             }
         }
     }
@@ -401,8 +423,8 @@ public class DoubleExtension {
      * Double Decimals Length Re length Exception Re errorBack
      * eg: 100.01001  Re 5
      *
-     * @param source
-     * @param errorBack
+     * @param source    源数据
+     * @param errorBack 错误返回
      * @return java.lang.Integer
      * @throws
      * @author Henny
@@ -424,12 +446,12 @@ public class DoubleExtension {
      * Double Integer Length Re length
      * eg: 100.01001  Re 3
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:26
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:26
      * @since 1.0
      */
@@ -437,15 +459,13 @@ public class DoubleExtension {
         isNullException(source);
         String[] doubleArray = source.toString().split("\\.");
         switch (doubleArray.length) {
-            case 1: {
-                return 0;
-            }
+            case 1:
             case 2: {
                 return doubleArray[0].length();
             }
             default: {
                 //TODO 异常
-                return null;
+                throw new NullPointerException("com.dlanqi:base-type-utils Error : Un Know Exception 有可能传入的值不时Double");
             }
         }
     }
@@ -454,8 +474,8 @@ public class DoubleExtension {
      * Double Integer Length Re length Exception Re errorBack
      * eg: 100.01001  Re 3
      *
-     * @param source
-     * @param errorBack
+     * @param source    源数据
+     * @param errorBack 错误返回
      * @return java.lang.Integer
      * @throws
      * @author Henny
@@ -479,20 +499,20 @@ public class DoubleExtension {
      * eg: decimalsLength=1 1.55->1.6
      * eg: decimalsLength=2 1.555->1.56
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundHalfUp(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_HALF_UP).doubleValue();
+        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     /**
@@ -501,19 +521,20 @@ public class DoubleExtension {
      * eg: decimalsLength=1 1.55->1.6
      * eg: decimalsLength=2 1.555->1.56
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
+     * @param errorBack      错误返回
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundHalfUp(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -525,20 +546,20 @@ public class DoubleExtension {
      * eg: decimalsLength=1 1.55->1.5
      * eg: decimalsLength=2 1.555->1.55
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundHalfDown(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_HALF_DOWN).doubleValue();
+        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
     }
 
     /**
@@ -547,19 +568,20 @@ public class DoubleExtension {
      * eg: decimalsLength=1 1.55->1.5
      * eg: decimalsLength=2 1.555->1.55
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
+     * @param errorBack      错误返回
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundHalfDown(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
+            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -571,20 +593,20 @@ public class DoubleExtension {
      * eg: decimalsLength=0 1.5->1
      * eg: decimalsLength=1 1.55->1.5   1.56->1.5
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundDown(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_DOWN).doubleValue();
+        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
     /**
@@ -593,19 +615,20 @@ public class DoubleExtension {
      * eg: decimalsLength=0 1.5->1      1.9->1
      * eg: decimalsLength=1 1.55->1.5   1.56->1.5
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
+     * @param errorBack      错误返回
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundDown(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
+            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -617,20 +640,20 @@ public class DoubleExtension {
      * eg: decimalsLength=0 1.5->2      1.1->2
      * eg: decimalsLength=1 1.55->1.6   1.51->1.6
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundUp(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).setScale(decimalsLength.customIsNotNull(0), BigDecimal.ROUND_UP).doubleValue();
+        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
     }
 
     /**
@@ -639,19 +662,20 @@ public class DoubleExtension {
      * eg: decimalsLength=0 1.5->1      1.1->2
      * eg: decimalsLength=1 1.55->1.5   1.56->1.5
      *
-     * @param source
-     * @param decimalsLength
+     * @param source         源数据
+     * @param decimalsLength 截取位数
+     * @param errorBack      错误返回
      * @return java.lang.Double
      * @throws
      * @author Henny
      * @cdate 2022/8/9 10:44
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 10:44
      * @since 1.0
      */
     public static Double customRoundUp(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).setScale(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
+            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -665,11 +689,12 @@ public class DoubleExtension {
      * @throws
      * @author Henny
      * @cdate 2022/8/9 13:41
-     * @version 1.0
+     * @version 1.1
      * @mdate 2022/8/9 13:41
      * @since 1.0
      */
     public static String customNousedF_E(@This Double source) {
+        isNullException(source);
         java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
         nf.setGroupingUsed(false);
         return nf.format(source);
@@ -962,7 +987,7 @@ public class DoubleExtension {
     //region  加法
 
     public static List<BigDecimal> customSumAll(Double... nums) {
-        nums.customToList().customToBigDecimalList(e->e.customToBigDecimal());
+        nums.customToList().customToBigDecimalList(e -> e.customToBigDecimal());
         return null;
     }
 
