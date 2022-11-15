@@ -27,6 +27,11 @@ public class DemoApplication {
         //stringLambdaExtension.ok(e->e.toString());
         //s1.customToBigDecimalList(e -> e.customToBigDecimal());
 
+        Double d1 = 11321313.126412321321312356;
+        Integer decimalsLength = 2;
+        Double errorBack = 1.1;
+        String result = d1.customRoundUp(decimalsLength,errorBack).customNousedF_E();
+
         TreeSet<UserData> ta = new TreeSet<>(Comparator.comparing(o -> o.ceshi() + "#" + o.ceshi1()));
         UserData rreeq1 = new UserData();
 
