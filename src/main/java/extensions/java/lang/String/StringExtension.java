@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
+import org.springframework.web.servlet.tags.EditorAwareTag;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
@@ -256,7 +257,7 @@ public class StringExtension {
      * @since 1.0
      */
     public static Boolean customIsEmpty(@This String source) {
-        return source.customIsNull() ? true : source.equals("") ? true : false;
+        return source.customIsNull() || (source.equals(""));
     }
 
     /**
@@ -315,7 +316,7 @@ public class StringExtension {
             return true;
         }
         for (int i = 0; i < strLen; i++) {
-            if (Character.isWhitespace(source.charAt(i)) == false) {
+            if (!Character.isWhitespace(source.charAt(i))) {
                 return false;
             }
         }
@@ -381,6 +382,33 @@ public class StringExtension {
     }
 
     /**
+     * If source Is Integer Re true Else Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/6 15:53
+     * @version 1.1
+     * @mdate 2022/11/16 10:53
+     * @since 1.0
+     */
+    public static Boolean customIsInteger(@This String source, Boolean errorBack) {
+        try {
+            Character[] chars = source.customToCharacterArray();
+            for (Character charValue : chars) {
+                if (!Character.isDigit(charValue)) {
+                    return false;
+                }
+            }
+            return true;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
      * If source Is Integer Re source Else Re errorBack
      *
      * @param source
@@ -388,13 +416,17 @@ public class StringExtension {
      * @return java.lang.String
      * @throws
      * @author Henny
-     * @cdate 2022/8/6 15:53
-     * @version 1.0
-     * @mdate 2022/8/6 15:53
+     * @cdate 2022/11/16 11:11
+     * @version 1.1
+     * @mdate 2022/11/16 11:11
      * @since 1.0
      */
     public static String customIsInteger(@This String source, String errorBack) {
-        return source.customIsNotInteger() ? source : errorBack;
+        if (source.customIsInteger(false)) {
+            return source;
+        } else {
+            return errorBack;
+        }
     }
 
     /**
@@ -440,7 +472,7 @@ public class StringExtension {
     }
 
     /**
-     * If source Is Float Re source Else Re errorBack
+     * If source Is Float Re true Else Re errorBack
      *
      * @param source
      * @param errorBack
@@ -452,8 +484,42 @@ public class StringExtension {
      * @mdate 2022/8/6 15:53
      * @since 1.0
      */
+    public static Boolean customIsFloat(@This String source, Boolean errorBack) {
+        try {
+            Pattern pattern = Pattern.compile("[0-9]*");
+            if (source.indexOf(".") > 0) {//判断是否有小数点
+                if (source.indexOf(".") == source.lastIndexOf(".") && source.split("\\.").length == 2) { //判断是否只有一个小数点
+                    return pattern.matcher(source.replace(".", "")).matches();
+                } else {
+                    return false;
+                }
+            } else {
+                return pattern.matcher(source).matches();
+            }
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
+    /**
+     * If source Is Float Re source Else Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/16 12:37
+     * @version 1.0
+     * @mdate 2022/11/16 12:37
+     * @since 1.0
+     */
     public static String customIsFloat(@This String source, String errorBack) {
-        return source.customIsNotFloat() ? source : errorBack;
+        if (source.customIsFloat(false)) {
+            return source;
+        } else {
+            return errorBack;
+        }
     }
 
     /**
@@ -566,15 +632,15 @@ public class StringExtension {
      * 获取富文本字数
      *
      * @param html
-     * @return int
+     * @return java.lang.Integer
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/17 20:26
-     * @version 1.0
-     * @mdate 2022/10/17 20:26
+     * @version 1.1
+     * @mdate 2022/11/16 13:24
      * @since 1.0
      */
-    public static int customGetTextAreaWordCount(@This String html) {
+    public static Integer customGetTextAreaWordCount(@This String html) {
         isNullException(html);
         String resultNoTag = html.customRemoveHtmlTag();
         return resultNoTag.length();
@@ -586,7 +652,7 @@ public class StringExtension {
      * @param inputString
      * @return java.lang.String
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/17 20:18
      * @version 1.0
      * @mdate 2022/10/17 20:18
@@ -620,7 +686,7 @@ public class StringExtension {
      * @param args
      * @return java.lang.String
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/17 20:19
      * @version 1.0
      * @mdate 2022/10/17 20:19
@@ -645,7 +711,7 @@ public class StringExtension {
      * @param paramMap
      * @return java.lang.String
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/18 14:02
      * @version 1.0
      * @mdate 2022/10/18 14:02
@@ -670,7 +736,7 @@ public class StringExtension {
      * @param phone
      * @return java.lang.String
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/18 15:11
      * @version 1.0
      * @mdate 2022/10/18 15:11
@@ -687,7 +753,7 @@ public class StringExtension {
      * @param endTime
      * @return java.util.List<java.lang.String>
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/18 17:07
      * @version 1.0
      * @mdate 2022/10/18 17:07
@@ -714,18 +780,19 @@ public class StringExtension {
     /**
      * 给定时间段和星期几，计算该时间段内共有多少个给定的星期几
      *
-     * @param start 开始时间,格式yyyy-MM-dd
-     * @param end   结束时间，格式yyyy-MM-dd
-     * @param a     星期几，从星期一到星期天，分别用数字1-7表示
-     * @return long  星期几统计数
+     * @param start   开始时间,格式yyyy-MM-dd
+     * @param endTime 结束时间，格式yyyy-MM-dd
+     * @param week    星期几，从星期一到星期天，分别用数字1-7表示
+     * @return java.lang.Long  星期几统计数
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/18 17:17
-     * @version 1.0
-     * @mdate 2022/10/18 17:17
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/16 14:07
      * @since 1.0
      */
-    public static long customGetWeekNumberByDateRange(@This String start, String end, int a) {
+    public static Long customGetWeekNumberByDateRange(@This String start, String endTime, Integer week) {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         //计数
         long sunDay = 0;
@@ -733,7 +800,7 @@ public class StringExtension {
             Calendar startDate = Calendar.getInstance();
             startDate.setTime(format.parse(start));
             Calendar endDate = Calendar.getInstance();
-            endDate.setTime(format.parse(end));
+            endDate.setTime(format.parse(endTime));
             //开始日期是星期几 结束日期是星期几
             int sw = startDate.get(Calendar.DAY_OF_WEEK) - 1;
             int ew = endDate.get(Calendar.DAY_OF_WEEK) - 1;
@@ -744,11 +811,11 @@ public class StringExtension {
             //总的星期几统计数
             sunDay = Math.round(Math.ceil(((days + sw + (7 - ew)) / 7.0)));
             //给定的星期几小于起始日期的星期几，需要减少一天
-            if (a < sw) {
+            if (week < sw) {
                 sunDay--;
             }
             //给定的星期几大于结束日期的星期几，需要减少一天
-            if (a > ew) {
+            if (week > ew) {
                 sunDay--;
             }
         } catch (Exception se) {
@@ -764,13 +831,13 @@ public class StringExtension {
      * @param endDate
      * @return java.util.List<java.lang.String>
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/18 17:20
      * @version 1.0
      * @mdate 2022/10/18 17:20
      * @since 1.0
      */
-    public static List<String> getWeekListOfDateRange(@This String startDate, String endDate) {
+    public static List<String> customGetWeekListOfDateRange(@This String startDate, String endDate) {
         List<String> dateList = new ArrayList<>();
         long betweenDay = DateUtil.betweenDay(DateUtil.parse(startDate), DateUtil.parse(endDate), true);
         for (int i = 0; i <= betweenDay; i++) {
@@ -788,13 +855,13 @@ public class StringExtension {
      * @param week
      * @return java.util.List<java.lang.String>
      * @throws
-     * @author Henny
+     * @author Rex
      * @cdate 2022/10/18 17:22
      * @version 1.0
      * @mdate 2022/10/18 17:22
      * @since 1.0
      */
-    public static List<String> getDateListOfDateRangeByWeek(@This String start, String end, int week) {
+    public static List<String> customGetDateListOfDateRangeByWeek(@This String start, String end, int week) {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         List<String> list = new ArrayList<>();
         //字符串转LocalDate

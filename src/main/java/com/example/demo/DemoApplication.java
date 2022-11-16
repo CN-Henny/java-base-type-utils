@@ -3,6 +3,7 @@ package com.example.demo;
 
 import com.Utils.ColumnUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.dlanqi.utils.CustomNumberUtils;
 import extensions.java.lang.Object.ObjectExtension;
 import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
@@ -26,11 +27,26 @@ public class DemoApplication {
         //s1.customAdd("1").customAdd("4").customAdd("3");
         //stringLambdaExtension.ok(e->e.toString());
         //s1.customToBigDecimalList(e -> e.customToBigDecimal());
+        String atyy = "   ";
+        Boolean rgfer = atyy.customIsBlank();
+        Boolean gredf = atyy.customIsEmpty();
+
+        long ms1 = System.currentTimeMillis();
+
+        CustomNumberUtils.obj2Long(atyy);
+        long ms2 = System.currentTimeMillis();
+        atyy.customToLong();
+        long ms3 = System.currentTimeMillis();
+
+
+        System.out.println(ms2 - ms1);
+        System.out.println(ms3 - ms2);
+
 
         Double d1 = 11321313.126412321321312356;
         Integer decimalsLength = 2;
         Double errorBack = 1.1;
-        String result = d1.customRoundUp(decimalsLength,errorBack).customNousedF_E();
+        String result = d1.customRoundUp(decimalsLength, errorBack).customNousedF_E();
 
         TreeSet<UserData> ta = new TreeSet<>(Comparator.comparing(o -> o.ceshi() + "#" + o.ceshi1()));
         UserData rreeq1 = new UserData();
@@ -65,12 +81,11 @@ public class DemoApplication {
         List<String> filterStr = new ArrayList<>();
         filterStr.add("1");
         //filterStr.add("111");
-        if("qqqq" == u11.getUserName())
-        {
+        if ("qqqq" == u11.getUserName()) {
             String trhdgf = "1";
         }
 
-        List<Long> atttt = uuu.customMoreLeveToLongList(e->e.getUaer().customMoreLeveToLongList(f->f.getUaer1().customToLongList(g->g.getUserId())));
+        List<Long> atttt = uuu.customMoreLeveToLongList(e -> e.getUaer().customMoreLeveToLongList(f -> f.getUaer1().customToLongList(g -> g.getUserId())));
 
         //u11.customCopyPropertiesTo(u111);
         u11.customCopyPropertiesTo(u111);
