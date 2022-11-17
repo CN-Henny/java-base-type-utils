@@ -24,7 +24,10 @@ java-base-type-utils
 ├──── dlanqi.utils -- 工具类
 ├──── Interface -- 部分函数式接口
 ├── extensions -- 扩展函数主包
-├──── java -- 基础函数包
+├──── java.lang -- 基础函数包
+├──── java.io.File -- 文件类型函数包
+├──── java.util -- list等特殊相关函数包
+├──── java.Array -- 数组相关函数包
 ```
 
 ## 引入方式

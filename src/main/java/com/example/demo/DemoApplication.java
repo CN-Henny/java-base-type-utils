@@ -23,6 +23,12 @@ import java.util.stream.Stream;
 public class DemoApplication {
 
     public static void main(String[] args) {
+
+        //String a = "1,2,3";
+        //List<Long> ger = a.customSplit(",",Long.class);
+
+
+
         List<String> s1 = new ArrayList<>();
         //s1.customAdd("1").customAdd("4").customAdd("3");
         //stringLambdaExtension.ok(e->e.toString());
@@ -87,6 +93,7 @@ public class DemoApplication {
 
         List<Long> atttt = uuu.customMoreLeveToLongList(e -> e.getUaer().customMoreLeveToLongList(f -> f.getUaer1().customToLongList(g -> g.getUserId())));
 
+
         //u11.customCopyPropertiesTo(u111);
         u11.customCopyPropertiesTo(u111);
 
@@ -128,7 +135,6 @@ public class DemoApplication {
         u1111.setUserName("2");
         u1111.setSix("1");
         uuu.add(u1111);
-        uuu.testsstts(UserData::ceshi);
         //uuu.customToBigDecimalList(e -> e.getUserName().customToBigDecimal());
         //uuu.customToLambdaSelect(e -> e.getUserName() == "1" && e.getSix() == "2");
         //u11.customConvert(UserData.class);

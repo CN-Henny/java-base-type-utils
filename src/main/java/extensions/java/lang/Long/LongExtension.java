@@ -27,7 +27,7 @@ public class LongExtension {
     /**
      * Null Exception Throw
      *
-     * @param source
+     * @param source 源数据
      * @return void
      * @throws
      * @author Henny
@@ -46,8 +46,8 @@ public class LongExtension {
     /**
      * 判断转换是否超出最大值
      *
-     * @param source
-     * @param max
+     * @param source 源数据
+     * @param max    最大值字符串
      * @return void
      * @throws
      * @author Henny
@@ -85,7 +85,7 @@ public class LongExtension {
     /**
      * If source Is Null Re true Else Re false
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -102,7 +102,7 @@ public class LongExtension {
      * If source Is Not Null Re true Else Re false
      * Null Range : Null
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -119,8 +119,8 @@ public class LongExtension {
      * If source Is Not Null Re source Else Re errorBack
      * Null Range : Null
      *
-     * @param source
-     * @param errorBack
+     * @param source    源数据
+     * @param errorBack 错误返回
      * @return java.lang.Long
      * @throws
      * @author Henny
@@ -178,7 +178,7 @@ public class LongExtension {
      * @mdate 2022/8/8 13:34
      * @since 1.0
      */
-    public static Long customIsNotZero(@This Long source, Integer errorBack) {
+    public static Long customIsNotZero(@This Long source, Long errorBack) {
         return !source.customIsZero() ? source : errorBack;
     }
 
@@ -201,47 +201,68 @@ public class LongExtension {
         isNullException(source);
         return source > 0 ? 1 : source == 0 ? 0 : -1;
     }
+
+    /**
+     * 判断正负数如果异常则返回errorback
+     *
+     * @param source    源数据
+     * @param errorBack 错误返回
+     * @return java.lang.Integer
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/14 17:54
+     * @version 1.0
+     * @mdate 2022/11/14 17:54
+     * @since 1.0
+     */
+    public static Integer customIsSign(@This Long source, Integer errorBack) {
+        try {
+            return source > 0 ? 1 : source == 0 ? 0 : -1;
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
     //endregion
 
     //region 功能型
 
-    //TODO 比较需不需要区分类型
-
     /**
      * source Equal condition If Identical Re true Else Re false
      *
-     * @param source
-     * @param condition
+     * @param source    源数据
+     * @param condition 比较数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
      * @cdate 2022/8/8 13:36
-     * @version 1.0
-     * @mdate 2022/8/8 13:36
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/16 15:38
      * @since 1.0
      */
     public static Boolean customEqual(@This Long source, Long condition) {
         isNullException(source);
-        return source == condition ? true : false;
+        return source.equals(condition);
     }
 
     /**
      * source Equal condition If Identical Re true Else Re false Exception Re errorBack
      *
-     * @param source
-     * @param condition
-     * @param errorBack
+     * @param source    源数据
+     * @param condition 比较数据
+     * @param errorBack 错误返回
      * @return java.lang.Boolean
      * @throws
      * @author Henny
      * @cdate 2022/8/8 13:36
-     * @version 1.0
-     * @mdate 2022/8/8 13:36
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/16 15:37
      * @since 1.0
      */
     public static Boolean customEqual(@This Long source, Long condition, Boolean errorBack) {
         try {
-            return source == condition ? true : false;
+            return source.equals(condition);
         } catch (Exception ex) {
             return errorBack;
         }
@@ -253,26 +274,35 @@ public class LongExtension {
      * If source>condition Re 1
      * If source<condition Re -1
      *
-     * @param source
-     * @param condition
+     * @param source    源数据
+     * @param condition 比较数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
      * @cdate 2022/8/8 13:37
-     * @version 1.0
-     * @mdate 2022/8/8 13:37
+     * @version 1.1
+     * @user Henny
+     * @mdate 2022/11/16 15:39
      * @since 1.0
      */
     public static Integer customCompareTo(@This Long source, Long condition) {
         isNullException(source);
         isNullException(condition);
-        return (source < condition) ? -1 : ((source == condition) ? 0 : 1);
+        return (source < condition) ? -1 : ((source.equals(condition)) ? 0 : 1);
+    }
+
+    public static Integer customCompareTo(@This Long source, Long condition, Integer errorBack) {
+        try {
+            return (source < condition) ? -1 : ((source.equals(condition)) ? 0 : 1);
+        } catch (Exception ex) {
+            return errorBack;
+        }
     }
 
     /**
      * source ABS
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Long
      * @throws
      * @author Henny
@@ -376,46 +406,41 @@ public class LongExtension {
         }
     }
 
+
+
     /**
-     * Sum Number Re long
+     * 获取一个数如果为空则返回errorBack不为空则返回source
      *
-     * @param source
-     * @param nums
+     * @param source    源数据
+     * @param errorBack 错误返回
      * @return java.lang.Long
      * @throws
      * @author Henny
-     * @cdate 2022/10/18 15:51
+     * @cdate 2022/11/16 17:56
      * @version 1.0
-     * @mdate 2022/10/18 15:51
+     * @muser Henny
+     * @mdate 2022/11/16 17:56
      * @since 1.0
      */
-    public static Long customSumAll(@This Long source, Long... nums) {
-        for (Long item : nums) {
-            source = source + item;
-        }
-        return source;
+    public static Long customGetValue(@This Long source, Long errorBack) {
+        return source.customIsNull() ? errorBack : source;
     }
 
     /**
-     * Sum Number Re long Exception Re errorBack
+     * 获取一个数如果为空则返回0不为空则返回source
      *
-     * @param source
-     * @param errorBack
-     * @param nums
+     * @param source 源数据
      * @return java.lang.Long
      * @throws
      * @author Henny
-     * @cdate 2022/10/18 15:51
+     * @cdate 2022/11/17 13:59
      * @version 1.0
-     * @mdate 2022/10/18 15:51
+     * @muser Henny
+     * @mdate 2022/11/17 13:59
      * @since 1.0
      */
-    public static Long customSumAll(@This Long source, Long errorBack, Long... nums) {
-        try {
-            return source.customSumAll(nums);
-        } catch (Exception ex) {
-            return errorBack;
-        }
+    public static Long customGetValue(@This Long source) {
+        return source.customIsNull() ? 0L : source;
     }
 
     //endregion
@@ -730,5 +755,51 @@ public class LongExtension {
             return errorBack;
         }
     }
+    //endregion
+
+    //region 计算型
+
+    /**
+     * Sum Number Re long
+     *
+     * @param source
+     * @param nums
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:51
+     * @version 1.0
+     * @mdate 2022/10/18 15:51
+     * @since 1.0
+     */
+    public static Long customSumAll(@This Long source, Long... nums) {
+        for (Long item : nums) {
+            source = source + item;
+        }
+        return source;
+    }
+
+    /**
+     * Sum Number Re long Exception Re errorBack
+     *
+     * @param source
+     * @param errorBack
+     * @param nums
+     * @return java.lang.Long
+     * @throws
+     * @author Henny
+     * @cdate 2022/10/18 15:51
+     * @version 1.0
+     * @mdate 2022/10/18 15:51
+     * @since 1.0
+     */
+    public static Long customSumAll(@This Long source, Long errorBack, Long... nums) {
+        try {
+            return source.customSumAll(nums);
+        } catch (Exception ex) {
+            return errorBack;
+        }
+    }
+
     //endregion
 }

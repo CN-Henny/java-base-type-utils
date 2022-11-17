@@ -36,15 +36,12 @@ public class IterableExtension {
         return objectList;
     }
 
-    public static <T> List<T> customToLambdaquchong(@This Iterable<T> thiz, ToStringInterfaceExtension<? super T> after) {
-        List<String> al = new ArrayList<>();
-        //LinkedHashSet<T> set = new LinkedHashSet<>((Collection) thiz);
-        List<T> set = new ArrayList<>((Collection) thiz);
+    public static <T, R> List<T> customToLambdaDistinct(@This Iterable<T> thiz, LambdaGetValueInterface<? super T, R> after) {
+        List<T> objectList = new ArrayList<>();
         for (T element : thiz) {
-            String a = after.action(element);
-            al.add(a);
+            R a = after.apply(element);
+            System.out.println(a);
         }
-        //筛选去重
 
         return null;
     }
@@ -91,18 +88,11 @@ public class IterableExtension {
      */
     public static <T> List<Long> customToLongList(@This Iterable<T> thiz, ToLongInterfaceExtension<? super T> after) {
         List<Long> longs = new ArrayList<>();
-        if(thiz == null){
+        if (thiz == null) {
             return longs;
         }
         for (T element : thiz) {
             longs.add(after.action(element));
-        }
-        return longs;
-    }
-    public static <T> List<Long> customMoreLeveToLongList(@This Iterable<T> thiz, ToListLongInterfaceExtension<? super T> after) {
-        List<Long> longs = new ArrayList<>();
-        for (T element : thiz) {
-            longs.addAll(after.action(element));
         }
         return longs;
     }
@@ -222,29 +212,66 @@ public class IterableExtension {
         return dates;
     }
 
-    //endregion
+    //region 内部多级方法
 
-    /**
-     * 测试
-     *
-     * @param thiz
-     * @param after
-     * @return java.util.List<T>
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/26 9:44
-     * @version 1.0
-     * @mdate 2022/10/26 9:44
-     * @since 1.0
-     */
-    public static <T, R> List<T> testsstts(@This Iterable<T> thiz, test<? super T, R> after) {
-        List<T> objectList = new ArrayList<>();
+    public static <T> List<BigDecimal> customMoreLeveToBigDecimalList(@This Iterable<T> thiz, ToListBigDecimalInterfaceExtension<? super T> after) {
+        List<BigDecimal> bigDecimals = new ArrayList<>();
         for (T element : thiz) {
-            R a = after.apply(element);
-            System.out.println(a);
+            bigDecimals.addAll(after.action(element));
         }
-        return objectList;
+        return bigDecimals;
     }
 
+    public static <T> List<Long> customMoreLeveToLongList(@This Iterable<T> thiz, ToListLongInterfaceExtension<? super T> after) {
+        List<Long> longs = new ArrayList<>();
+        for (T element : thiz) {
+            longs.addAll(after.action(element));
+        }
+        return longs;
+    }
+
+    public static <T> List<String> customMoreLeveToStringList(@This Iterable<T> thiz, ToListStringInterfaceExtension<? super T> after) {
+        List<String> strings = new ArrayList<>();
+        for (T element : thiz) {
+            strings.addAll(after.action(element));
+        }
+        return strings;
+    }
+
+    public static <T> List<Double> customMoreLeveToDoubleList(@This Iterable<T> thiz, ToListDoubleInterfaceExtension<? super T> after) {
+        List<Double> doubles = new ArrayList<>();
+        for (T element : thiz) {
+            doubles.addAll(after.action(element));
+        }
+        return doubles;
+    }
+
+    public static <T> List<Float> customMoreLeveToFloatList(@This Iterable<T> thiz, ToListFloatInterfaceExtension<? super T> after) {
+        List<Float> floats = new ArrayList<>();
+        for (T element : thiz) {
+            floats.addAll(after.action(element));
+        }
+        return floats;
+    }
+
+    public static <T> List<Integer> customMoreLeveToIntegerList(@This Iterable<T> thiz, ToListIntegerInterfaceExtension<? super T> after) {
+        List<Integer> integers = new ArrayList<>();
+        for (T element : thiz) {
+            integers.addAll(after.action(element));
+        }
+        return integers;
+    }
+
+    public static <T> List<Date> customMoreLeveToDateList(@This Iterable<T> thiz, ToListDateInterfaceExtension<? super T> after) {
+        List<Date> dates = new ArrayList<>();
+        for (T element : thiz) {
+            dates.addAll(after.action(element));
+        }
+        return dates;
+    }
+
+    //endregion
+
+    //endregion
 
 }

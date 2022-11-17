@@ -47,7 +47,7 @@ public class StringExtension {
     /**
      * Null Exception Throw
      *
-     * @param source
+     * @param source 源数据
      * @return void
      * @throws
      * @author Henny
@@ -67,7 +67,7 @@ public class StringExtension {
      * Integer Exception
      * Is Not Integer Re False
      *
-     * @param source
+     * @param source 源数据
      * @return void
      * @throws
      * @author Henny
@@ -90,7 +90,7 @@ public class StringExtension {
      * Float Exception
      * Is Not Integer And Is Not Float Re False
      *
-     * @param source
+     * @param source 源数据
      * @return void
      * @throws
      * @author Henny
@@ -124,8 +124,8 @@ public class StringExtension {
     /**
      * 判断转换是否超出最大值
      *
-     * @param source
-     * @param max
+     * @param source 源数据
+     * @param max    最大值
      * @return void
      * @throws
      * @author Henny
@@ -173,6 +173,19 @@ public class StringExtension {
         }
     }
 
+    /**
+     * 替换字符源方法
+     *
+     * @param templateContent 文本
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/16 15:11
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/16 15:11
+     * @since 1.0
+     */
     private static String replaceChSym(String templateContent) {
         isNullException(templateContent);
         templateContent = templateContent.replaceAll("《", "&#x300A;");
@@ -195,7 +208,7 @@ public class StringExtension {
      * If source Is Null Re true Else Re false
      * Null Range : Null
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -212,7 +225,7 @@ public class StringExtension {
      * If source Is Not Null Re true Else Re false
      * Null Range : Null
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -229,8 +242,8 @@ public class StringExtension {
      * If source Is Not Null Re source Else Re errorBack
      * Null Range : Null
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -247,7 +260,7 @@ public class StringExtension {
      * If source Is Empty Re true Else Re false
      * Null Range : Null , ""
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -266,7 +279,7 @@ public class StringExtension {
      * 20221025修改引用错误
      * 20221026改错接口了掉到了IsNull上
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -283,8 +296,8 @@ public class StringExtension {
      * If source Is Not Empty Re true Else Re false
      * Null Range : Null , ""
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -301,7 +314,7 @@ public class StringExtension {
      * If source Is Blank Re true Else Re false
      * Null Range : Null , "" , WhiteChar
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -327,7 +340,7 @@ public class StringExtension {
      * If source Is Not Blank Re true Else Re false
      * Null Range : Null , "" , WhiteChar
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -344,8 +357,8 @@ public class StringExtension {
      * If source Is Not Blank Re true Else Re false
      * Null Range : Null , "" , WhiteChar
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -361,7 +374,7 @@ public class StringExtension {
     /**
      * If source Is Integer Re true Else Re fasle
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -384,8 +397,8 @@ public class StringExtension {
     /**
      * If source Is Integer Re true Else Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -411,8 +424,8 @@ public class StringExtension {
     /**
      * If source Is Integer Re source Else Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -432,7 +445,7 @@ public class StringExtension {
     /**
      * If source Is Not Integer Re true Else Re fasle
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -448,7 +461,7 @@ public class StringExtension {
     /**
      * If source Is Float Re true Else Re fasle
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -474,8 +487,8 @@ public class StringExtension {
     /**
      * If source Is Float Re true Else Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -504,8 +517,8 @@ public class StringExtension {
     /**
      * If source Is Float Re source Else Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -525,7 +538,7 @@ public class StringExtension {
     /**
      * If source Is Not Float Re true Else Re fasle
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Boolean
      * @throws
      * @author Henny
@@ -544,7 +557,7 @@ public class StringExtension {
      * If content is JSONArray Re 2
      * If content is Not JSON Re 0
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
@@ -574,8 +587,8 @@ public class StringExtension {
     /**
      * If source Is JSON Re true Else Re fasle
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -598,7 +611,7 @@ public class StringExtension {
     /**
      * 替换富文本中的特殊符号以便在XNL中使用
      *
-     * @param html
+     * @param html 源数据
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -631,7 +644,7 @@ public class StringExtension {
     /**
      * 获取富文本字数
      *
-     * @param html
+     * @param html 源数据
      * @return java.lang.Integer
      * @throws
      * @author Rex
@@ -649,7 +662,7 @@ public class StringExtension {
     /**
      * 删除Html标签
      *
-     * @param inputString
+     * @param inputString 源数据
      * @return java.lang.String
      * @throws
      * @author Rex
@@ -682,8 +695,8 @@ public class StringExtension {
     /**
      * 按照正则获取字符串
      *
-     * @param htmlStr
-     * @param args
+     * @param htmlStr 源数据
+     * @param args 正则
      * @return java.lang.String
      * @throws
      * @author Rex
@@ -707,8 +720,8 @@ public class StringExtension {
     /**
      * 替换占位符
      *
-     * @param templateContent
-     * @param paramMap
+     * @param templateContent 源数据
+     * @param paramMap 替换集合
      * @return java.lang.String
      * @throws
      * @author Rex
@@ -733,7 +746,7 @@ public class StringExtension {
     /**
      * 手机号打码
      *
-     * @param phone
+     * @param phone 源数据
      * @return java.lang.String
      * @throws
      * @author Rex
@@ -749,8 +762,8 @@ public class StringExtension {
     /**
      * 获取日期间隔月份集合
      *
-     * @param startTime
-     * @param endTime
+     * @param startTime 开始时间
+     * @param endTime 结束时间
      * @return java.util.List<java.lang.String>
      * @throws
      * @author Rex
@@ -827,8 +840,8 @@ public class StringExtension {
     /**
      * 获取时间段内的日期集合
      *
-     * @param startDate
-     * @param endDate
+     * @param startDate 开始时间
+     * @param endDate 结束时间
      * @return java.util.List<java.lang.String>
      * @throws
      * @author Rex
@@ -850,9 +863,9 @@ public class StringExtension {
     /**
      * 获取日期范围内指定星期的日期
      *
-     * @param start
-     * @param end
-     * @param week
+     * @param start 开始时间
+     * @param end 结束时间
+     * @param week 星期几
      * @return java.util.List<java.lang.String>
      * @throws
      * @author Rex
@@ -888,6 +901,13 @@ public class StringExtension {
         return list;
     }
 
+    public static <T> List<T> customSplit(@This String source,String sign,Class<T> t){
+        List<T> list = new ArrayList<>();
+        List<String> sourceList = source.split(sign).toList();
+
+        return list;
+    }
+
     //endregion
 
     //region 转换型
@@ -895,7 +915,7 @@ public class StringExtension {
     /**
      * String To Byte[] Re byte[]
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Byte[]
      * @throws
      * @author Henny
@@ -917,8 +937,8 @@ public class StringExtension {
     /**
      * String To Byte[] Re byte[] Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Byte[]
      * @throws
      * @author Henny
@@ -932,7 +952,7 @@ public class StringExtension {
             byte[] byteArray = source.getBytes();
             Byte[] byteObjects = new Byte[byteArray.length];
             for (int i = 0; i < byteArray.length; i++) {
-                byteObjects[i] = Byte.valueOf(byteArray[i]);
+                byteObjects[i] = byteArray[i];
             }
             return byteObjects;
         } catch (Exception ex) {
@@ -943,7 +963,7 @@ public class StringExtension {
     /**
      * String To Character[] Re character[]
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Character[]
      * @throws
      * @author Henny
@@ -960,8 +980,8 @@ public class StringExtension {
     /**
      * String To Character[] Re character[] Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Character[]
      * @throws
      * @author Henny
@@ -981,7 +1001,7 @@ public class StringExtension {
     /**
      * String To Double Re double
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Double
      * @throws
      * @author Henny
@@ -999,8 +1019,8 @@ public class StringExtension {
     /**
      * String To Double Re double Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Double
      * @throws
      * @author Henny
@@ -1020,7 +1040,7 @@ public class StringExtension {
     /**
      * String To Float Re float
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Float
      * @throws
      * @author Henny
@@ -1039,8 +1059,8 @@ public class StringExtension {
     /**
      * String To Float Re float Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Float
      * @throws
      * @author Henny
@@ -1060,7 +1080,7 @@ public class StringExtension {
     /**
      * String To Integer Re integer
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Integer
      * @throws
      * @author Henny
@@ -1079,8 +1099,8 @@ public class StringExtension {
     /**
      * String To Integer Re integer Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Integer
      * @throws
      * @author Henny
@@ -1100,7 +1120,7 @@ public class StringExtension {
     /**
      * String To Long Re long
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Long
      * @throws
      * @author Henny
@@ -1119,8 +1139,8 @@ public class StringExtension {
     /**
      * String To Long Re long Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Long
      * @throws
      * @author Henny
@@ -1140,7 +1160,7 @@ public class StringExtension {
     /**
      * String To Short Re short
      *
-     * @param source
+     * @param source 源数据
      * @return java.lang.Short
      * @throws
      * @author Henny
@@ -1159,8 +1179,8 @@ public class StringExtension {
     /**
      * String To Short Re short Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.lang.Short
      * @throws
      * @author Henny
@@ -1180,7 +1200,7 @@ public class StringExtension {
     /**
      * String To BigDecimal Re bigDecimal
      *
-     * @param source
+     * @param source 源数据
      * @return java.math.BigDecimal
      * @throws
      * @author Henny
@@ -1197,8 +1217,8 @@ public class StringExtension {
     /**
      * String To BigDecimal Re bigDecimal Exception Re errorBack
      *
-     * @param source
-     * @param errorBack
+     * @param source 源数据
+     * @param errorBack 错误返回
      * @return java.math.BigDecimal
      * @throws
      * @author Henny
@@ -1218,8 +1238,8 @@ public class StringExtension {
     /**
      * String To Date Re date
      *
-     * @param source
-     * @param formatType
+     * @param source 源数据
+     * @param formatType 格式化类型
      * @return java.util.Date
      * @throws
      * @author Henny
@@ -1244,9 +1264,9 @@ public class StringExtension {
     /**
      * String To Date Re date Exception Re errorBack
      *
-     * @param source
-     * @param formatType
-     * @param errorBack
+     * @param source 源数据
+     * @param formatType 格式化类型
+     * @param errorBack 错误返回
      * @return java.util.Date
      * @throws
      * @author Henny
