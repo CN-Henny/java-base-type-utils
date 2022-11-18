@@ -4,6 +4,7 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -247,12 +248,13 @@ public class BigDecimalExtension {
      * @throws
      * @author Henny
      * @cdate 2022/10/19 14:15
-     * @version 1.0
-     * @mdate 2022/10/19 14:15
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/17 16:40
      * @since 1.0
      */
     private static BigDecimal customSum(BigDecimal source, BigDecimal... nums) {
-        return customSum(source, (BigDecimal) nums.customToList());
+        return customSum(source, Arrays.asList(nums));
     }
 
     /**
@@ -291,12 +293,13 @@ public class BigDecimalExtension {
      * @throws
      * @author Henny
      * @cdate 2022/10/19 14:15
-     * @version 1.0
-     * @mdate 2022/10/19 14:15
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/17 16:40
      * @since 1.0
      */
     private static BigDecimal customSubtract(BigDecimal source, BigDecimal... nums) {
-        return customSubtract(source, nums.customToList());
+        return customSubtract(source, Arrays.asList(nums));
     }
 
     /**
@@ -335,12 +338,13 @@ public class BigDecimalExtension {
      * @throws
      * @author Henny
      * @cdate 2022/10/19 14:15
-     * @version 1.0
-     * @mdate 2022/10/19 14:15
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/17 16:40
      * @since 1.0
      */
     private static BigDecimal customMultiply(BigDecimal source, BigDecimal... nums) {
-        return customMultiply(source, nums.customToList());
+        return customMultiply(source, Arrays.asList(nums));
     }
 
     /**
@@ -379,12 +383,13 @@ public class BigDecimalExtension {
      * @throws
      * @author Henny
      * @cdate 2022/10/19 14:15
-     * @version 1.0
-     * @mdate 2022/10/19 14:15
+     * @version 1.1
+     * @muser Henny
+     * @mdate 2022/11/17 16:41
      * @since 1.0
      */
     private static BigDecimal customDivide(BigDecimal source, BigDecimal... nums) {
-        return customDivide(source, nums.customToList());
+        return customDivide(source, Arrays.asList(nums));
     }
 
     /**

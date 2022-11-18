@@ -135,7 +135,7 @@ public class StringExtension {
      * @since 1.0
      */
     private static void isMax(String source, String max) {
-        Double maxNum = Double.parseDouble(source);
+        double maxNum = Double.parseDouble(source);
         boolean flag = false;
         switch (max) {
             case "Short": {
@@ -242,7 +242,7 @@ public class StringExtension {
      * If source Is Not Null Re source Else Re errorBack
      * Null Range : Null
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -296,7 +296,7 @@ public class StringExtension {
      * If source Is Not Empty Re true Else Re false
      * Null Range : Null , ""
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -357,7 +357,7 @@ public class StringExtension {
      * If source Is Not Blank Re true Else Re false
      * Null Range : Null , "" , WhiteChar
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -397,7 +397,7 @@ public class StringExtension {
     /**
      * If source Is Integer Re true Else Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Boolean
      * @throws
@@ -424,7 +424,7 @@ public class StringExtension {
     /**
      * If source Is Integer Re source Else Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -487,7 +487,7 @@ public class StringExtension {
     /**
      * If source Is Float Re true Else Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -517,7 +517,7 @@ public class StringExtension {
     /**
      * If source Is Float Re source Else Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -587,7 +587,7 @@ public class StringExtension {
     /**
      * If source Is JSON Re true Else Re fasle
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.String
      * @throws
@@ -696,7 +696,7 @@ public class StringExtension {
      * 按照正则获取字符串
      *
      * @param htmlStr 源数据
-     * @param args 正则
+     * @param args    正则
      * @return java.lang.String
      * @throws
      * @author Rex
@@ -721,7 +721,7 @@ public class StringExtension {
      * 替换占位符
      *
      * @param templateContent 源数据
-     * @param paramMap 替换集合
+     * @param paramMap        替换集合
      * @return java.lang.String
      * @throws
      * @author Rex
@@ -763,7 +763,7 @@ public class StringExtension {
      * 获取日期间隔月份集合
      *
      * @param startTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      * @return java.util.List<java.lang.String>
      * @throws
      * @author Rex
@@ -841,7 +841,7 @@ public class StringExtension {
      * 获取时间段内的日期集合
      *
      * @param startDate 开始时间
-     * @param endDate 结束时间
+     * @param endDate   结束时间
      * @return java.util.List<java.lang.String>
      * @throws
      * @author Rex
@@ -864,8 +864,8 @@ public class StringExtension {
      * 获取日期范围内指定星期的日期
      *
      * @param start 开始时间
-     * @param end 结束时间
-     * @param week 星期几
+     * @param end   结束时间
+     * @param week  星期几
      * @return java.util.List<java.lang.String>
      * @throws
      * @author Rex
@@ -901,10 +901,28 @@ public class StringExtension {
         return list;
     }
 
-    public static <T> List<T> customSplit(@This String source,String sign,Class<T> t){
+    /**
+     * 根据字符拆分字符串并转成List
+     *
+     * @param source 源数据
+     * @param sign 符号
+     * @param t 类型 Class.class
+     * @return java.util.List<T>
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/17 15:59
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/17 15:59
+     * @since 1.0
+     */
+    public static <T> List<T> customStrToList(@This String source, String sign, Class<T> t) {
+        isNullException(source);
         List<T> list = new ArrayList<>();
-        List<String> sourceList = source.split(sign).toList();
-
+        String[] sourceArray = source.split(sign);
+        for (String s : sourceArray) {
+            list.add(t.cast(s));
+        }
         return list;
     }
 
@@ -929,7 +947,7 @@ public class StringExtension {
         byte[] byteArray = source.getBytes();
         Byte[] byteObjects = new Byte[byteArray.length];
         for (int i = 0; i < byteArray.length; i++) {
-            byteObjects[i] = Byte.valueOf(byteArray[i]);
+            byteObjects[i] = byteArray[i];
         }
         return byteObjects;
     }
@@ -937,7 +955,7 @@ public class StringExtension {
     /**
      * String To Byte[] Re byte[] Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Byte[]
      * @throws
@@ -980,7 +998,7 @@ public class StringExtension {
     /**
      * String To Character[] Re character[] Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Character[]
      * @throws
@@ -1019,7 +1037,7 @@ public class StringExtension {
     /**
      * String To Double Re double Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Double
      * @throws
@@ -1059,7 +1077,7 @@ public class StringExtension {
     /**
      * String To Float Re float Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Float
      * @throws
@@ -1099,7 +1117,7 @@ public class StringExtension {
     /**
      * String To Integer Re integer Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Integer
      * @throws
@@ -1139,7 +1157,7 @@ public class StringExtension {
     /**
      * String To Long Re long Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Long
      * @throws
@@ -1179,7 +1197,7 @@ public class StringExtension {
     /**
      * String To Short Re short Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.lang.Short
      * @throws
@@ -1217,7 +1235,7 @@ public class StringExtension {
     /**
      * String To BigDecimal Re bigDecimal Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source    源数据
      * @param errorBack 错误返回
      * @return java.math.BigDecimal
      * @throws
@@ -1238,7 +1256,7 @@ public class StringExtension {
     /**
      * String To Date Re date
      *
-     * @param source 源数据
+     * @param source     源数据
      * @param formatType 格式化类型
      * @return java.util.Date
      * @throws
@@ -1264,9 +1282,9 @@ public class StringExtension {
     /**
      * String To Date Re date Exception Re errorBack
      *
-     * @param source 源数据
+     * @param source     源数据
      * @param formatType 格式化类型
-     * @param errorBack 错误返回
+     * @param errorBack  错误返回
      * @return java.util.Date
      * @throws
      * @author Henny

@@ -243,23 +243,6 @@ public class ObjectExtension {
      * @mdate 2022/10/28 14:13
      * @since 1.0
      */
-    public static <T> void customCopyPropertiesTo(@This Object thiz, Object target, ColumnUtil.SFunction<T,?> fn) {
-        thiz.customCopyPropertiesTo(target, ObjectExtension.Copy);
-    }
-
-    /**
-     * 拷贝实体
-     *
-     * @param thiz
-     * @param target
-     * @return void
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/28 14:13
-     * @version 1.0
-     * @mdate 2022/10/28 14:13
-     * @since 1.0
-     */
     public static <T> void customCopyPropertiesTo(@This Object thiz, Object target) {
         thiz.customCopyPropertiesTo(target, ObjectExtension.Copy);
     }
@@ -279,7 +262,7 @@ public class ObjectExtension {
      * @since 1.0
      */
     public static <T> void customCopyPropertiesTo(@This Object thiz, Object target, int specialType) {
-        thiz.customCopyPropertiesTo(target, specialType, new ArrayList());
+        thiz.customCopyPropertiesTo(target, specialType, new ArrayList<>());
     }
 
     /**

@@ -91,7 +91,10 @@ public class DemoApplication {
             String trhdgf = "1";
         }
 
-        List<Long> atttt = uuu.customMoreLeveToLongList(e -> e.getUaer().customMoreLeveToLongList(f -> f.getUaer1().customToLongList(g -> g.getUserId())));
+        List<Long> atttt = uuu.customMoreLeveToLongList(e ->
+                e.getUaer().customMoreLeveToLongList(f ->
+                        f.getUaer1().customToLongList(g ->
+                                g.getUserId())));
 
 
         //u11.customCopyPropertiesTo(u111);
