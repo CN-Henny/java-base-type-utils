@@ -214,7 +214,7 @@ public class IterableExtension {
 
     //region 内部多级方法
 
-    public static <T> List<BigDecimal> customMoreLeveToBigDecimalList(@This Iterable<T> thiz, ToListBigDecimalInterfaceExtension<? super T> after) {
+    public static <T> List<BigDecimal> customMoreLevelToBigDecimalList(@This Iterable<T> thiz, ToListBigDecimalInterfaceExtension<? super T> after) {
         List<BigDecimal> bigDecimals = new ArrayList<>();
         for (T element : thiz) {
             bigDecimals.addAll(after.action(element));
@@ -222,7 +222,7 @@ public class IterableExtension {
         return bigDecimals;
     }
 
-    public static <T> List<Long> customMoreLeveToLongList(@This Iterable<T> thiz, ToListLongInterfaceExtension<? super T> after) {
+    public static <T> List<Long> customMoreLevelToLongList(@This Iterable<T> thiz, ToListLongInterfaceExtension<? super T> after) {
         List<Long> longs = new ArrayList<>();
         for (T element : thiz) {
             longs.addAll(after.action(element));
@@ -230,7 +230,7 @@ public class IterableExtension {
         return longs;
     }
 
-    public static <T> List<String> customMoreLeveToStringList(@This Iterable<T> thiz, ToListStringInterfaceExtension<? super T> after) {
+    public static <T> List<String> customMoreLevelToStringList(@This Iterable<T> thiz, ToListStringInterfaceExtension<? super T> after) {
         List<String> strings = new ArrayList<>();
         for (T element : thiz) {
             strings.addAll(after.action(element));
@@ -238,7 +238,7 @@ public class IterableExtension {
         return strings;
     }
 
-    public static <T> List<Double> customMoreLeveToDoubleList(@This Iterable<T> thiz, ToListDoubleInterfaceExtension<? super T> after) {
+    public static <T> List<Double> customMoreLevelToDoubleList(@This Iterable<T> thiz, ToListDoubleInterfaceExtension<? super T> after) {
         List<Double> doubles = new ArrayList<>();
         for (T element : thiz) {
             doubles.addAll(after.action(element));
@@ -246,7 +246,7 @@ public class IterableExtension {
         return doubles;
     }
 
-    public static <T> List<Float> customMoreLeveToFloatList(@This Iterable<T> thiz, ToListFloatInterfaceExtension<? super T> after) {
+    public static <T> List<Float> customMoreLevelToFloatList(@This Iterable<T> thiz, ToListFloatInterfaceExtension<? super T> after) {
         List<Float> floats = new ArrayList<>();
         for (T element : thiz) {
             floats.addAll(after.action(element));
@@ -254,7 +254,7 @@ public class IterableExtension {
         return floats;
     }
 
-    public static <T> List<Integer> customMoreLeveToIntegerList(@This Iterable<T> thiz, ToListIntegerInterfaceExtension<? super T> after) {
+    public static <T> List<Integer> customMoreLevelToIntegerList(@This Iterable<T> thiz, ToListIntegerInterfaceExtension<? super T> after) {
         List<Integer> integers = new ArrayList<>();
         for (T element : thiz) {
             integers.addAll(after.action(element));
@@ -262,7 +262,7 @@ public class IterableExtension {
         return integers;
     }
 
-    public static <T> List<Date> customMoreLeveToDateList(@This Iterable<T> thiz, ToListDateInterfaceExtension<? super T> after) {
+    public static <T> List<Date> customMoreLevelToDateList(@This Iterable<T> thiz, ToListDateInterfaceExtension<? super T> after) {
         List<Date> dates = new ArrayList<>();
         for (T element : thiz) {
             dates.addAll(after.action(element));

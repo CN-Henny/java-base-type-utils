@@ -91,8 +91,8 @@ public class DemoApplication {
             String trhdgf = "1";
         }
 
-        List<Long> atttt = uuu.customMoreLeveToLongList(e ->
-                e.getUaer().customMoreLeveToLongList(f ->
+        List<Long> atttt = uuu.customMoreLevelToLongList(e ->
+                e.getUaer().customMoreLevelToLongList(f ->
                         f.getUaer1().customToLongList(g ->
                                 g.getUserId())));
 
