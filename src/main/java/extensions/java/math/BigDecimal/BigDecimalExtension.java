@@ -1,5 +1,6 @@
 package extensions.java.math.BigDecimal;
 
+import manifold.ext.rt.api.ComparableUsing;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
@@ -227,6 +228,14 @@ public class BigDecimalExtension {
         java.text.NumberFormat nf = java.text.NumberFormat.getInstance();
         nf.setGroupingUsed(false);
         return nf.format(source);
+    }
+
+    public static BigDecimal customGetValue(@This BigDecimal source, BigDecimal errorBack) {
+        return source.customIsNull() ? errorBack : source;
+    }
+
+    public static BigDecimal customGetValue(@This BigDecimal source) {
+        return source.customIsNull() ? new BigDecimal(0) : source;
     }
 
     //endregion
@@ -743,3 +752,4 @@ public class BigDecimalExtension {
 
     //endregion
 }
+

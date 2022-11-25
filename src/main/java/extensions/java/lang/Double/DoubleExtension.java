@@ -700,6 +700,14 @@ public class DoubleExtension {
         return nf.format(source);
     }
 
+    public static Double customGetValue(@This Double source, Double errorBack) {
+        return source.customIsNull() ? errorBack : source;
+    }
+
+    public static Double customGetValue(@This Double source) {
+        return source.customIsNull() ? 0 : source;
+    }
+
     //endregion
 
     //region   转换型

@@ -39,14 +39,8 @@ public class DemoApplication {
 
         long ms1 = System.currentTimeMillis();
 
-        CustomNumberUtils.obj2Long(atyy);
-        long ms2 = System.currentTimeMillis();
-        atyy.customToLong();
-        long ms3 = System.currentTimeMillis();
 
 
-        System.out.println(ms2 - ms1);
-        System.out.println(ms3 - ms2);
 
 
         Double d1 = 11321313.126412321321312356;
@@ -91,11 +85,21 @@ public class DemoApplication {
             String trhdgf = "1";
         }
 
+
+
+        BigDecimal t1 = new BigDecimal(2);
+        BigDecimal t2 = new BigDecimal(4);
+        //BigDecimal t3 = t1+t2;
+
+        List<Integer>   y1 = new ArrayList<>();
+        List<Integer>   y2 = new ArrayList<>();
+        //Integer etrhdgf = y1 + y2;
+
+
         List<Long> atttt = uuu.customMoreLevelToLongList(e ->
                 e.getUaer().customMoreLevelToLongList(f ->
                         f.getUaer1().customToLongList(g ->
                                 g.getUserId())));
-
 
         //u11.customCopyPropertiesTo(u111);
         u11.customCopyPropertiesTo(u111);

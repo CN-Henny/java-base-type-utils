@@ -346,6 +346,14 @@ public class IntegerExtension {
         return result;
     }
 
+    public static Integer customGetValue(@This Integer source, Integer errorBack) {
+        return source.customIsNull() ? errorBack : source;
+    }
+
+    public static Integer customGetValue(@This Integer source) {
+        return source.customIsNull() ? 0 : source;
+    }
+
     //endregion
 
     //region 转换型

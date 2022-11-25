@@ -926,6 +926,39 @@ public class StringExtension {
         return list;
     }
 
+    /**
+      * 获取一个合法的String
+      * @param source
+    * @param errorBack
+      * @return java.lang.String
+      * @author Henny
+      * @cdate 2022/11/25 11:05
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/25 11:05
+      * @exception
+      */
+    public static String customGetValue(@This String source, String errorBack) {
+        return source.customIsNull() ? errorBack : source;
+    }
+
+    /**
+      * 获取一个合法的String
+      * @param source
+      * @return java.lang.String
+      * @author Henny
+      * @cdate 2022/11/25 11:05
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/25 11:05
+      * @exception
+      */
+    public static String customGetValue(@This String source) {
+        return source.customIsNull() ? "" : source;
+    }
+
     //endregion
 
     //region 转换型

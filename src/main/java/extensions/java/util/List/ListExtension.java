@@ -6,6 +6,7 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.Self;
 import manifold.ext.rt.api.This;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -79,5 +80,18 @@ public class ListExtension {
             list.add(target);
         }
         return list;
+    }
+
+
+    //public static <E, T> Integer plus(@This List<E> thiz, List<E> that) {
+    //    return 1;
+    //}
+
+    public static <E, T> List<E> customGetValue(@This List<E> source, List<E> errorBack) {
+        return source == null ? errorBack : source;
+    }
+
+    public static <E, T> List<E> customGetValue(@This List<E> source) {
+        return source == null ? new ArrayList<>() : source;
     }
 }

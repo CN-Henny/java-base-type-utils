@@ -642,6 +642,14 @@ public class FloatExtension {
         return nf.format(source);
     }
 
+    public static Float customGetValue(@This Float source, Float errorBack) {
+        return source.customIsNull() ? errorBack : source;
+    }
+
+    public static Float customGetValue(@This Float source) {
+        return source.customIsNull() ? 0 : source;
+    }
+
     //endregion
 
     //region   转换型
