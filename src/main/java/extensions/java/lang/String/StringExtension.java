@@ -63,6 +63,37 @@ public class StringExtension {
         }
     }
 
+    private static void isLenException(String source, Integer len) {
+        if (source.length() < len.customAbs()) {
+            //TODO 增加异常返回
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
+        }
+    }
+
+    private static void isLenException(String source, Integer start, Integer len) {
+        if (start.equals(start.customAbs())) {
+            if (len.equals(len.customAbs())) {
+                if (!(source.length() > start + len)) {
+                    throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
+                }
+            } else {
+                if (start - len.customAbs() < 0) {
+                    throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
+                }
+            }
+        } else {
+            if (len.equals(len.customAbs())) {
+                if (source.length() - start.customAbs() + len >= source.length()) {
+                    throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
+                }
+            } else {
+                if (source.length() - start.customAbs() - len.customAbs() < 0) {
+                    throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
+                }
+            }
+        }
+    }
+
     /**
      * Integer Exception
      * Is Not Integer Re False
@@ -905,8 +936,8 @@ public class StringExtension {
      * 根据字符拆分字符串并转成List
      *
      * @param source 源数据
-     * @param sign 符号
-     * @param t 类型 Class.class
+     * @param sign   符号
+     * @param t      类型 Class.class
      * @return java.util.List<T>
      * @throws
      * @author Henny
@@ -927,36 +958,98 @@ public class StringExtension {
     }
 
     /**
-      * 获取一个合法的String
-      * @param source
-    * @param errorBack
-      * @return java.lang.String
-      * @author Henny
-      * @cdate 2022/11/25 11:05
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/25 11:05
-      * @exception
-      */
+     * 获取一个合法的String
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 11:05
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 11:05
+     * @since 1.0
+     */
     public static String customGetValue(@This String source, String errorBack) {
         return source.customIsNull() ? errorBack : source;
     }
 
     /**
-      * 获取一个合法的String
-      * @param source
-      * @return java.lang.String
-      * @author Henny
-      * @cdate 2022/11/25 11:05
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/25 11:05
-      * @exception
-      */
+     * 获取一个合法的String
+     *
+     * @param source
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 11:05
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 11:05
+     * @since 1.0
+     */
     public static String customGetValue(@This String source) {
         return source.customIsNull() ? "" : source;
+    }
+
+    /**
+     * 截取字符串
+     *
+     * @param source
+     * @param len
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 16:48
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 16:48
+     * @since 1.0
+     */
+    public static String customSubStr(@This String source, Integer len) {
+        isNullException(source);
+        isLenException(source, len);
+        if (len.equals(len.customAbs())) {
+            return source.substring(0, len);
+        } else {
+            return source.substring(source.length() - len.customAbs());
+        }
+    }
+
+    /**
+     * 截取字符串
+     *
+     * @param source
+     * @param start
+     * @param len
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 16:48
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 16:48
+     * @since 1.0
+     */
+    public static String customSubStr(@This String source, Integer start, Integer len) {
+        isNullException(source);
+        isLenException(source, start, len);
+        if (len.equals(len.customAbs())) {
+            if (start.equals(start.customAbs())) {
+                return source.substring(start, start + len);
+            } else {
+                start--;
+                return source.substring(source.length() - start.customAbs(), source.length() - start.customAbs() + len.customAbs());
+            }
+        } else {
+            start++;
+            if (start.equals(start.customAbs())) {
+                return source.substring(start - len.customAbs(), start);
+            } else {
+                start--;
+                return source.substring(source.length() - start.customAbs() - len.customAbs(), source.length() - start.customAbs());
+            }
+        }
     }
 
     //endregion

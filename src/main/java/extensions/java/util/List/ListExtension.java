@@ -82,15 +82,39 @@ public class ListExtension {
         return list;
     }
 
-
     //public static <E, T> Integer plus(@This List<E> thiz, List<E> that) {
     //    return 1;
     //}
 
+    /**
+      * 始终获得一个非null的对象
+      * @param source
+    * @param errorBack
+      * @return java.util.List<E>
+      * @author Henny
+      * @cdate 2022/11/25 15:44
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/25 15:44
+      * @exception
+      */
     public static <E, T> List<E> customGetValue(@This List<E> source, List<E> errorBack) {
         return source == null ? errorBack : source;
     }
 
+    /**
+      * 始终获得一个非null的对象
+      * @param source
+      * @return java.util.List<E>
+      * @author Henny
+      * @cdate 2022/11/25 15:45
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/25 15:45
+      * @exception
+      */
     public static <E, T> List<E> customGetValue(@This List<E> source) {
         return source == null ? new ArrayList<>() : source;
     }

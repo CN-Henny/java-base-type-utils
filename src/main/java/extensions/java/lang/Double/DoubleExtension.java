@@ -700,10 +700,35 @@ public class DoubleExtension {
         return nf.format(source);
     }
 
+    /**
+      * 是中获取一个可用的对象
+      * @param source
+    * @param errorBack
+      * @return java.lang.Double
+      * @author Henny
+      * @cdate 2022/11/25 15:42
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/25 15:42
+      * @exception
+      */
     public static Double customGetValue(@This Double source, Double errorBack) {
         return source.customIsNull() ? errorBack : source;
     }
 
+    /**
+      * 始终获取一个可用的对象
+      * @param source
+      * @return java.lang.Double
+      * @author Henny
+      * @cdate 2022/11/25 15:42
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/25 15:42
+      * @exception
+      */
     public static Double customGetValue(@This Double source) {
         return source.customIsNull() ? 0 : source;
     }

@@ -35,11 +35,19 @@ public class DemoApplication {
 
     public static void main(String[] args) {
 
+        String thgg=  "123456789";
+        System.out.println(thgg.customSubStr(3,2));
+        System.out.println(thgg.customSubStr(3,-3));
+        System.out.println(thgg.customSubStr(-3,2));
+        System.out.println(thgg.customSubStr(-3,-2));
+        System.out.println(thgg.customSubStr(-2));
+        System.out.println(thgg.customSubStr(2));
+
         //String a = "1,2,3";
         //List<Long> ger = a.customSplit(",",Long.class);
 
 
-        List<String> s1 = new ArrayList<>();
+       List<String> s1 = new ArrayList<>();
         //s1.customAdd("1").customAdd("4").customAdd("3");
         //stringLambdaExtension.ok(e->e.toString());
         //s1.customToBigDecimalList(e -> e.customToBigDecimal());
