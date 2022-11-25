@@ -751,5 +751,9 @@ public class BigDecimalExtension {
     //endregion
 
     //endregion
+
+    //public static BigDecimal plus(@This BigDecimal thiz, BigDecimal that) {
+    //    return thiz.add(that);
+    //}
 }
 

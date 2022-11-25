@@ -1,24 +1,35 @@
 package com.example.demo;
 
 
+import cn.hutool.core.date.DateUnit;
 import com.Utils.ColumnUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.dlanqi.utils.CustomNumberUtils;
 import extensions.java.lang.Object.ObjectExtension;
+import manifold.science.measures.Length;
+import manifold.science.measures.LengthUnit;
 import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import science.measures.Date.CustomDate;
+import science.measures.Date.CustomDateUnit;
 
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.time.temporal.ChronoUnit.*;
+import static manifold.science.util.UnitConstants.kg;
+import static science.unit.CustomUnitConstants.s;
+import static science.unit.CustomUnitConstants.h;
 
 public class DemoApplication {
 
@@ -26,7 +37,6 @@ public class DemoApplication {
 
         //String a = "1,2,3";
         //List<Long> ger = a.customSplit(",",Long.class);
-
 
 
         List<String> s1 = new ArrayList<>();
@@ -38,9 +48,6 @@ public class DemoApplication {
         Boolean gredf = atyy.customIsEmpty();
 
         long ms1 = System.currentTimeMillis();
-
-
-
 
 
         Double d1 = 11321313.126412321321312356;
@@ -85,14 +92,22 @@ public class DemoApplication {
             String trhdgf = "1";
         }
 
+        List<BigDecimal> a111 = new ArrayList<>();
+        List<BigDecimal> a1111 = new ArrayList<>();
+        a111.add(new BigDecimal(1));
+        a111.add(new BigDecimal(4));
+        a1111.add(new BigDecimal(2));
 
+        CustomDate trgdfg = 1s + 2h;
+
+        System.out.println(trgdfg.get(HOURS));
 
         BigDecimal t1 = new BigDecimal(2);
         BigDecimal t2 = new BigDecimal(4);
         //BigDecimal t3 = t1+t2;
 
-        List<Integer>   y1 = new ArrayList<>();
-        List<Integer>   y2 = new ArrayList<>();
+        List<Integer> y1 = new ArrayList<>();
+        List<Integer> y2 = new ArrayList<>();
         //Integer etrhdgf = y1 + y2;
 
 
