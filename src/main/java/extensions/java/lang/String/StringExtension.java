@@ -1052,6 +1052,22 @@ public class StringExtension {
         }
     }
 
+    public static String customAppendStr(@This String source, String... appendList) {
+        isNullException(source);
+        return source.customAppendStr(Arrays.asList(appendList));
+    }
+
+    public static String customAppendStr(@This String source, List<String> appendList) {
+        isNullException(source);
+        StringBuilder stringBuilder = new StringBuilder(source);
+        appendList.forEach(item -> {
+            if (item.customIsNotNull()) {
+                stringBuilder.append(item);
+            }
+        });
+        return stringBuilder.toString();
+    }
+
     //endregion
 
     //region 转换型
