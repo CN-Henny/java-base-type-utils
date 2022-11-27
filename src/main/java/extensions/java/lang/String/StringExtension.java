@@ -1052,11 +1052,37 @@ public class StringExtension {
         }
     }
 
+    /**
+      * 字符串拼接
+      * @param source
+    * @param appendList
+      * @return java.lang.String
+      * @author Henny
+      * @cdate 2022/11/27 14:49
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/27 14:49
+      * @exception
+      */
     public static String customAppendStr(@This String source, String... appendList) {
         isNullException(source);
         return source.customAppendStr(Arrays.asList(appendList));
     }
 
+    /**
+      * 字符串拼接
+      * @param source
+    * @param appendList
+      * @return java.lang.String
+      * @author Henny
+      * @cdate 2022/11/27 14:49
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2022/11/27 14:49
+      * @exception
+      */
     public static String customAppendStr(@This String source, List<String> appendList) {
         isNullException(source);
         StringBuilder stringBuilder = new StringBuilder(source);
