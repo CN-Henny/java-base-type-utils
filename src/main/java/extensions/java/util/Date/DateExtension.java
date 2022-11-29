@@ -35,19 +35,19 @@ public class DateExtension {
     }
 
     /**
-     * 默认精度为12
+     * 默认为标准时间格式带毫秒
      */
     private static String pattern = "yyyy-MM-dd HH:mm:ss.fff";
 
     /**
-     * 默认舍入模式为 BigDecimal.ROUND_CEILING
+     * 默认时区为上海
      */
     private static CustomTimeZone timeZone = CustomTimeZone.Asia_Shanghai;
 
     //region   初始化
 
     private static void init() {
-        DateExtension.pattern = "yyyy-MM-dd HH:mm:ss.fff";
+        DateExtension.pattern = "yyyy-MM-dd HH:mm:ss.SSS";
         DateExtension.timeZone = CustomTimeZone.Asia_Shanghai;
     }
 
@@ -57,7 +57,7 @@ public class DateExtension {
     }
 
     private static void init(CustomTimeZone timeZone) {
-        DateExtension.pattern = "yyyy-MM-dd HH:mm:ss.fff";
+        DateExtension.pattern = "yyyy-MM-dd HH:mm:ss.SSS";
         DateExtension.timeZone = timeZone;
     }
 
@@ -74,7 +74,7 @@ public class DateExtension {
 
     private static SimpleDateFormat sdf(){
         SimpleDateFormat simpleDateFormat =  new SimpleDateFormat(pattern);
-        simpleDateFormat.setTimeZone(TimeZone.getTimeZone(timeZone.toString()));
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone(timeZone.customToString()));
         return simpleDateFormat;
     }
 
@@ -215,7 +215,7 @@ public class DateExtension {
 
     public static Date customSetTimeZone(@This Date source, CustomTimeZone customTimeZone) {
         init(customTimeZone);
-        return Date.from(ZonedDateTime.ofInstant(source.toInstant(), ZoneId.of(timeZone.customToString())).toInstant());
+        return source.customToLocalDateTime(customTimeZone).customToDate(CustomTimeZone.Asia_Shanghai);
     }
 
     public static String customFormat(@This Date source) {
@@ -224,6 +224,10 @@ public class DateExtension {
     }
     public static String customFormat(@This Date source,String pattern) {
         init(pattern);
+        return of(source);
+    }
+    public static String customFormat(@This Date source,CustomTimeZone customTimeZone) {
+        init(customTimeZone);
         return of(source);
     }
     public static String customFormat(@This Date source,String pattern, CustomTimeZone customTimeZone) {
@@ -262,7 +266,6 @@ public class DateExtension {
         isNullException(source);
         return source.getTime();
     }
-
 
     //endregion
 

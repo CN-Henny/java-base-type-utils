@@ -36,18 +36,25 @@ import static java.time.temporal.ChronoUnit.*;
 public class DemoApplication {
 
     public static void main(String[] args) {
-            System.out.println(CustomTimeZone.AfricaAbidjan);
+        Date date = new Date();
+            System.out.println(date.customFormat("yyyy-MM-dd HH.mm.ss",CustomTimeZone.Asia_Shanghai));
+            System.out.println(date.customSetTimeZone(CustomTimeZone.Asia_Shanghai));
+            System.out.println(date.customSetTimeZone(CustomTimeZone.Europe_London));
+            System.out.println(date.customSetTimeZone(CustomTimeZone.ECT));
+            System.out.println(date.customFormat("yyyy-MM-dd HH.mm.ss",CustomTimeZone.AfricaAbidjan));
+            System.out.println(date.customFormat("yyyy/MM/dd HH:mm:ss",CustomTimeZone.ECT));
+            LocalDateTime localDateTime = LocalDateTime.now();
+            System.out.println(localDateTime.customToDate(CustomTimeZone.Asia_Shanghai));
 
         SimpleDateFormat londonSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 伦敦
         londonSdf.setTimeZone(TimeZone.getTimeZone("-8"));  // 设置伦敦时区
 
-        Date date = new Date();
 System.out.println(londonSdf.format(date));
         londonSdf.setTimeZone(TimeZone.getTimeZone("8"));  // 设置伦敦时区
 System.out.println(londonSdf.format(date));
         System.out.println(date);
         LocalDate localDate = LocalDate.now();
-        LocalDateTime localDateTime = LocalDateTime.now();
+
         LocalTime localTime = LocalTime.now();
 
         String thgg = "123456789";
