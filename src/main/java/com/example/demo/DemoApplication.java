@@ -3,6 +3,7 @@ package com.example.demo;
 
 import cn.hutool.core.date.DateUnit;
 import com.Utils.ColumnUtil;
+import com.Utils.CustomTimeZone;
 import com.alibaba.fastjson.JSONObject;
 import com.dlanqi.utils.CustomNumberUtils;
 import extensions.java.lang.Object.ObjectExtension;
@@ -14,12 +15,16 @@ import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
 import science.measures.Date.CustomDate;
 import science.measures.Date.CustomDateUnit;
+import sun.util.calendar.ZoneInfo;
 
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Supplier;
@@ -27,19 +32,29 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.time.temporal.ChronoUnit.*;
-import static manifold.science.util.UnitConstants.kg;
-import static science.unit.CustomUnitConstants.s;
-import static science.unit.CustomUnitConstants.h;
 
 public class DemoApplication {
 
     public static void main(String[] args) {
+            System.out.println(CustomTimeZone.AfricaAbidjan);
 
-        String thgg=  "123456789";
-        System.out.println(thgg.customSubStr(3,2));
-        System.out.println(thgg.customSubStr(3,-3));
-        System.out.println(thgg.customSubStr(-3,2));
-        System.out.println(thgg.customSubStr(-3,-2));
+        SimpleDateFormat londonSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 伦敦
+        londonSdf.setTimeZone(TimeZone.getTimeZone("-8"));  // 设置伦敦时区
+
+        Date date = new Date();
+System.out.println(londonSdf.format(date));
+        londonSdf.setTimeZone(TimeZone.getTimeZone("8"));  // 设置伦敦时区
+System.out.println(londonSdf.format(date));
+        System.out.println(date);
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        LocalTime localTime = LocalTime.now();
+
+        String thgg = "123456789";
+        System.out.println(thgg.customSubStr(3, 2));
+        System.out.println(thgg.customSubStr(3, -2));
+        System.out.println(thgg.customSubStr(-3, 2));
+        System.out.println(thgg.customSubStr(-3, -2));
         System.out.println(thgg.customSubStr(-2));
         System.out.println(thgg.customSubStr(2));
 
@@ -47,7 +62,7 @@ public class DemoApplication {
         //List<Long> ger = a.customSplit(",",Long.class);
 
 
-       List<String> s1 = new ArrayList<>();
+        List<String> s1 = new ArrayList<>();
         //s1.customAdd("1").customAdd("4").customAdd("3");
         //stringLambdaExtension.ok(e->e.toString());
         //s1.customToBigDecimalList(e -> e.customToBigDecimal());
@@ -106,9 +121,6 @@ public class DemoApplication {
         a111.add(new BigDecimal(4));
         a1111.add(new BigDecimal(2));
 
-        CustomDate trgdfg = 1s + 2h;
-
-        System.out.println(trgdfg.get(HOURS));
 
         BigDecimal t1 = new BigDecimal(2);
         BigDecimal t2 = new BigDecimal(4);
