@@ -213,9 +213,15 @@ public class DateExtension {
         return month;
     }
 
+    //TODO 这块有问题。连带着LOCALDATETIME一起好像也有问题。时区总是不对
     public static Date customSetTimeZone(@This Date source, CustomTimeZone customTimeZone) {
         init(customTimeZone);
         return source.customToLocalDateTime(customTimeZone).customToDate(CustomTimeZone.Asia_Shanghai);
+    }
+
+    public static Date customGetValue(@This Date source) {
+        init();
+        return source.customIsNull() ? new Date() : source;
     }
 
     public static String customFormat(@This Date source) {

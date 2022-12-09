@@ -4,6 +4,7 @@ package com.example.demo;
 import cn.hutool.core.date.DateUnit;
 import com.Utils.ColumnUtil;
 import com.Utils.CustomTimeZone;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.dlanqi.utils.CustomNumberUtils;
 import extensions.java.lang.Object.ObjectExtension;
@@ -36,22 +37,25 @@ import static java.time.temporal.ChronoUnit.*;
 public class DemoApplication {
 
     public static void main(String[] args) {
+        JSONArray asdfasdds = new JSONArray();
+        JSONArray asdfds = null;
+        JSONArray sfsfs = asdfds.customGetValue();
         Date date = new Date();
-            System.out.println(date.customFormat("yyyy-MM-dd HH.mm.ss",CustomTimeZone.Asia_Shanghai));
-            System.out.println(date.customSetTimeZone(CustomTimeZone.Asia_Shanghai));
-            System.out.println(date.customSetTimeZone(CustomTimeZone.Europe_London));
-            System.out.println(date.customSetTimeZone(CustomTimeZone.ECT));
-            System.out.println(date.customFormat("yyyy-MM-dd HH.mm.ss",CustomTimeZone.AfricaAbidjan));
-            System.out.println(date.customFormat("yyyy/MM/dd HH:mm:ss",CustomTimeZone.ECT));
-            LocalDateTime localDateTime = LocalDateTime.now();
-            System.out.println(localDateTime.customToDate(CustomTimeZone.Asia_Shanghai));
+        System.out.println(date.customFormat("yyyy-MM-dd HH.mm.ss", CustomTimeZone.Asia_Shanghai));
+        System.out.println(date.customSetTimeZone(CustomTimeZone.Asia_Shanghai));
+        System.out.println(date.customSetTimeZone(CustomTimeZone.Europe_London));
+        System.out.println(date.customSetTimeZone(CustomTimeZone.ECT));
+        System.out.println(date.customFormat("yyyy-MM-dd HH.mm.ss", CustomTimeZone.AfricaAbidjan));
+        System.out.println(date.customFormat("yyyy/MM/dd HH:mm:ss", CustomTimeZone.ECT));
+        LocalDateTime localDateTime = LocalDateTime.now();
+        System.out.println(localDateTime.customToDate(CustomTimeZone.Asia_Shanghai));
 
         SimpleDateFormat londonSdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss"); // 伦敦
         londonSdf.setTimeZone(TimeZone.getTimeZone("-8"));  // 设置伦敦时区
 
-System.out.println(londonSdf.format(date));
+        System.out.println(londonSdf.format(date));
         londonSdf.setTimeZone(TimeZone.getTimeZone("8"));  // 设置伦敦时区
-System.out.println(londonSdf.format(date));
+        System.out.println(londonSdf.format(date));
         System.out.println(date);
         LocalDate localDate = LocalDate.now();
 
