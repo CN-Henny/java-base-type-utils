@@ -9,6 +9,8 @@ import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 import org.springframework.web.servlet.tags.EditorAwareTag;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -91,6 +93,26 @@ public class StringExtension {
                     throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
                 }
             }
+        }
+    }
+
+    private static <T> T isClassException(String source, Class<T> t) {
+        try {
+            List<Method> methods = t.getDeclaredMethods().toList().customToLambdaSelect(e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
+            return t.cast(methods[0].invoke(null, source));
+        } catch (Exception ex) {
+            //TODO 增加异常返回
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : Type Error  : " + source);
+        }
+    }
+
+    private static <T> T isClassWarning(String source, Class<T> t) {
+        try {
+            List<Method> methods = t.getDeclaredMethods().toList().customToLambdaSelect(e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
+            return t.cast(methods[0].invoke(null, source));
+        } catch (Exception ex) {
+            System.out.println("com.dlanqi:base-type-utils Error : Type Warning  : " + source);
+            return null;
         }
     }
 
@@ -944,15 +966,42 @@ public class StringExtension {
      * @cdate 2022/11/17 15:59
      * @version 1.0
      * @muser Henny
-     * @mdate 2022/11/17 15:59
-     * @since 1.0
+     * @mdate 2023/01/12 18:35
+     * @since 1.1
      */
     public static <T> List<T> customStrToList(@This String source, String sign, Class<T> t) {
+        return source.customStrToList(sign, t, false);
+    }
+
+    /**
+     * 根据字符拆分字符串并转成List
+     *
+     * @param source
+     * @param sign
+     * @param t
+     * @param isIgnore 是否忽略错误
+     * @return java.util.List<T>
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/12 18:36
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/12 18:36
+     * @since 1.0
+     */
+    public static <T> List<T> customStrToList(@This String source, String sign, Class<T> t, boolean isIgnore) {
         isNullException(source);
         List<T> list = new ArrayList<>();
         String[] sourceArray = source.split(sign);
         for (String s : sourceArray) {
-            list.add(t.cast(s));
+            if (!isIgnore) {
+                list.add(isClassException(s, t));
+            } else {
+                T str = isClassWarning(s, t);
+                if (str != null) {
+                    list.add(str);
+                }
+            }
         }
         return list;
     }
@@ -1053,36 +1102,38 @@ public class StringExtension {
     }
 
     /**
-      * 字符串拼接
-      * @param source
-    * @param appendList
-      * @return java.lang.String
-      * @author Henny
-      * @cdate 2022/11/27 14:49
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/27 14:49
-      * @exception
-      */
+     * 字符串拼接
+     *
+     * @param source
+     * @param appendList
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/27 14:49
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/27 14:49
+     * @since 1.0
+     */
     public static String customAppendStr(@This String source, String... appendList) {
         isNullException(source);
         return source.customAppendStr(Arrays.asList(appendList));
     }
 
     /**
-      * 字符串拼接
-      * @param source
-    * @param appendList
-      * @return java.lang.String
-      * @author Henny
-      * @cdate 2022/11/27 14:49
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/27 14:49
-      * @exception
-      */
+     * 字符串拼接
+     *
+     * @param source
+     * @param appendList
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/27 14:49
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/27 14:49
+     * @since 1.0
+     */
     public static String customAppendStr(@This String source, List<String> appendList) {
         isNullException(source);
         StringBuilder stringBuilder = new StringBuilder(source);

@@ -14,6 +14,101 @@ import java.util.stream.Collectors;
 @Extension
 public class ListExtension {
 
+    //region 判断型
+    public static Boolean customIsNull(@This List<Object> source) {
+        return source == null;
+    }
+
+    /**
+     * If source Is Not Null Re true Else Re false
+     * Null Range : Null
+     *
+     * @param source 源数据
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/5 14:26
+     * @version 1.0
+     * @mdate 2022/8/5 14:26
+     * @since 1.0
+     */
+    public static Boolean customIsNotNull(@This List<Object> source) {
+        return !source.customIsNull();
+    }
+
+    /**
+     * If source Is Not Null Re source Else Re errorBack
+     * Null Range : Null
+     *
+     * @param source    源数据
+     * @param errorBack 错误返回
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/5 15:08
+     * @version 1.0
+     * @mdate 2022/8/5 15:08
+     * @since 1.0
+     */
+    public static @Self List<Object> customIsNotNull(@This List<Object> source, List<Object> errorBack) {
+        return source.customIsNotNull() ? source : errorBack;
+    }
+
+    /**
+     * If source Is Empty Re true Else Re false
+     * Null Range : Null , ""
+     *
+     * @param source 源数据
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/5 14:54
+     * @version 1.0
+     * @mdate 2022/8/5 14:54
+     * @since 1.0
+     */
+    public static Boolean customIsEmpty(@This List<Object> source) {
+        return source.customIsNull() || (source.count() == 0);
+    }
+
+    /**
+     * If source Is Not Empty Re true Else Re false
+     * Null Range : Null , ""
+     * 20221025修改引用错误
+     * 20221026改错接口了掉到了IsNull上
+     *
+     * @param source 源数据
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/5 14:57
+     * @version 1.0.2
+     * @mdate 2022/10/25 11:57
+     * @since 1.0
+     */
+    public static Boolean customIsNotEmpty(@This List<Object> source) {
+        return !source.customIsEmpty();
+    }
+
+    /**
+     * If source Is Not Empty Re true Else Re false
+     * Null Range : Null , ""
+     *
+     * @param source    源数据
+     * @param errorBack 错误返回
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2022/8/5 15:09
+     * @version 1.0
+     * @mdate 2022/8/5 15:09
+     * @since 1.0
+     */
+    public static @Self List<Object> customIsNotEmpty(@This List<Object> source, List<Object> errorBack) {
+        return source.customIsNotEmpty() ? source : errorBack;
+    }
+    //endregion
+
     /**
      * 连续向队列添加元素
      *
@@ -87,34 +182,36 @@ public class ListExtension {
     //}
 
     /**
-      * 始终获得一个非null的对象
-      * @param source
-    * @param errorBack
-      * @return java.util.List<E>
-      * @author Henny
-      * @cdate 2022/11/25 15:44
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/25 15:44
-      * @exception
-      */
+     * 始终获得一个非null的对象
+     *
+     * @param source
+     * @param errorBack
+     * @return java.util.List<E>
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 15:44
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 15:44
+     * @since 1.0
+     */
     public static <E, T> List<E> customGetValue(@This List<E> source, List<E> errorBack) {
         return source == null ? errorBack : source;
     }
 
     /**
-      * 始终获得一个非null的对象
-      * @param source
-      * @return java.util.List<E>
-      * @author Henny
-      * @cdate 2022/11/25 15:45
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/25 15:45
-      * @exception
-      */
+     * 始终获得一个非null的对象
+     *
+     * @param source
+     * @return java.util.List<E>
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 15:45
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 15:45
+     * @since 1.0
+     */
     public static <E, T> List<E> customGetValue(@This List<E> source) {
         return source == null ? new ArrayList<>() : source;
     }
