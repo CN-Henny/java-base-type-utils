@@ -37,6 +37,12 @@ import static java.time.temporal.ChronoUnit.*;
 public class DemoApplication {
 
     public static void main(String[] args) {
+
+        String adasd = "asdasda,23423,afasd,23423,fasdf,235";
+        List<Long> asdsa = adasd.customStrToList(",",Long.class,true);
+        //List<Long> asdasdasd = adasd.customStrToList(",",Long.class,false);
+
+
         JSONArray asdfasdds = new JSONArray();
         JSONArray asdfds = null;
         JSONArray sfsfs = asdfds.customGetValue();

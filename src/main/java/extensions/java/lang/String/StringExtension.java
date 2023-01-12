@@ -112,11 +112,13 @@ public class StringExtension {
      */
     private static <T> T isClassException(String source, Class<T> t) {
         try {
-            List<Method> methods = t.getDeclaredMethods().toList().customToLambdaSelect(e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
+            List<Method> methods = t.getDeclaredMethods().toList()
+                    .customToLambdaSelect(
+                            e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
             return t.cast(methods[0].invoke(null, source));
         } catch (Exception ex) {
             //TODO 增加异常返回
-            throw new NullPointerException("com.dlanqi:base-type-utils Error : Type Error  : " + source);
+            throw new ClassCastException("com.dlanqi:base-type-utils Error : Type Error  : convert fail,value is " + source);
         }
     }
 
@@ -139,7 +141,7 @@ public class StringExtension {
             List<Method> methods = t.getDeclaredMethods().toList().customToLambdaSelect(e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
             return t.cast(methods[0].invoke(null, source));
         } catch (Exception ex) {
-            System.out.println("com.dlanqi:base-type-utils Error : Type Warning  : " + source);
+            System.out.println("com.dlanqi:base-type-utils Warning : Type Warning  : convert fail,value is " + source);
             return null;
         }
     }
@@ -1073,7 +1075,7 @@ public class StringExtension {
      * 截取字符串
      *
      * @param source
-     * @param len
+     * @param start
      * @return java.lang.String
      * @throws
      * @author Henny
@@ -1083,13 +1085,13 @@ public class StringExtension {
      * @mdate 2022/11/25 16:48
      * @since 1.0
      */
-    public static String customSubStr(@This String source, Integer len) {
+    public static String customSubStr(@This String source, Integer start) {
         isNullException(source);
-        isLenException(source, len);
-        if (len.equals(len.customAbs())) {
-            return source.substring(0, len);
+        isLenException(source, start);
+        if (start.equals(start.customAbs())) {
+            return source.substring(start);
         } else {
-            return source.substring(source.length() - len.customAbs());
+            return source.substring(source.length() - start.customAbs());
         }
     }
 
