@@ -96,6 +96,20 @@ public class StringExtension {
         }
     }
 
+    /**
+     * 判断类型转换是否报错,如果报错则throw
+     *
+     * @param source
+     * @param t
+     * @return T
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/12 18:51
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/12 18:51
+     * @since 1.0
+     */
     private static <T> T isClassException(String source, Class<T> t) {
         try {
             List<Method> methods = t.getDeclaredMethods().toList().customToLambdaSelect(e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
@@ -106,6 +120,20 @@ public class StringExtension {
         }
     }
 
+    /**
+     * 判断类型转换是否报错,如果报错则提醒
+     *
+     * @param source
+     * @param t
+     * @return T
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/12 18:51
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/12 18:51
+     * @since 1.0
+     */
     private static <T> T isClassWarning(String source, Class<T> t) {
         try {
             List<Method> methods = t.getDeclaredMethods().toList().customToLambdaSelect(e -> e.getName().contains("parse") && Arrays.stream(e.getParameterTypes()).count() == 1);
