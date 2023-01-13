@@ -1117,15 +1117,13 @@ public class StringExtension {
             if (start.equals(start.customAbs())) {
                 return source.substring(start, start + len);
             } else {
-                start--;
+                //start--;
                 return source.substring(source.length() - start.customAbs(), source.length() - start.customAbs() + len.customAbs());
             }
         } else {
-            start++;
             if (start.equals(start.customAbs())) {
                 return source.substring(start - len.customAbs(), start);
             } else {
-                start--;
                 return source.substring(source.length() - start.customAbs() - len.customAbs(), source.length() - start.customAbs());
             }
         }
