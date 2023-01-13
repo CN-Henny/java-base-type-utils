@@ -22,16 +22,16 @@ public class BigDecimalExtension {
     /**
      * 默认精度为12
      */
-    private static int scala = 12;
+    private static int scala = 2;
 
     /**
      * 默认舍入模式为 BigDecimal.ROUND_CEILING
      */
-    private static int roundingMode = BigDecimal.ROUND_CEILING;
+    private static int roundingMode = BigDecimal.ROUND_HALF_UP;
 
     private static void initPara() {
-        BigDecimalExtension.scala = 12;
-        BigDecimalExtension.roundingMode = BigDecimal.ROUND_CEILING;
+        BigDecimalExtension.scala = 2;
+        BigDecimalExtension.roundingMode = BigDecimal.ROUND_HALF_UP;
     }
 
     private static void initPara(int scala) {
@@ -176,6 +176,23 @@ public class BigDecimalExtension {
     //region   功能型
 
     /**
+      * 四舍五入
+      * @param source
+      * @return java.math.BigDecimal
+      * @author Henny
+      * @cdate 2023/1/13 16:39
+      * @since 1.0
+      * @version 1.0
+      * @muser Henny
+      * @mdate 2023/1/13 16:39
+      * @exception
+      */
+    public static BigDecimal customRound(@This BigDecimal source) {
+        initPara();
+        return of(source);
+    }
+
+    /**
      * 四舍五入
      *
      * @param source
@@ -188,7 +205,7 @@ public class BigDecimalExtension {
      * @mdate 2022/11/8 10:51
      * @since 1.0
      */
-    public static BigDecimal customRoundHalf(@This BigDecimal source, int scala) {
+    public static BigDecimal customRound(@This BigDecimal source, int scala) {
         initPara(scala);
         return of(source);
     }
@@ -207,7 +224,7 @@ public class BigDecimalExtension {
      * @mdate 2022/11/10 10:50
      * @since 1.0
      */
-    public static BigDecimal customRoundHalf(@This BigDecimal source, int scala, int roundingMode) {
+    public static BigDecimal customRound(@This BigDecimal source, int scala, int roundingMode) {
         initPara(scala, roundingMode);
         return of(source);
     }

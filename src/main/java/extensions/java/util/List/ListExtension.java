@@ -109,6 +109,32 @@ public class ListExtension {
     }
     //endregion
 
+    //region 功能型
+
+    /**
+     * 获取list中第一个元素如果没有返回默认值
+     *
+     * @param source
+     * @param clazz
+     * @return T
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/13 16:54
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/13 16:54
+     * @since 1.0
+     */
+    public static <E, T> T customFindFirstOrDefault(@This List<E> source, T clazz) {
+        if (source.count() < 1) {
+            return clazz;
+        } else {
+            return (T) source.get(0);
+        }
+    }
+
+    //endregion
+
     /**
      * 连续向队列添加元素
      *

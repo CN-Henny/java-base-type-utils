@@ -512,7 +512,7 @@ public class DoubleExtension {
     public static Double customRoundHalfUp(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
     /**
@@ -534,7 +534,7 @@ public class DoubleExtension {
      */
     public static Double customRoundHalfUp(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
+            return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_HALF_UP).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -559,7 +559,7 @@ public class DoubleExtension {
     public static Double customRoundHalfDown(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
+        return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
     }
 
     /**
@@ -581,7 +581,7 @@ public class DoubleExtension {
      */
     public static Double customRoundHalfDown(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
+            return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_HALF_DOWN).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -606,7 +606,7 @@ public class DoubleExtension {
     public static Double customRoundDown(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
+        return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
     }
 
     /**
@@ -628,7 +628,7 @@ public class DoubleExtension {
      */
     public static Double customRoundDown(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
+            return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_DOWN).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
@@ -653,7 +653,7 @@ public class DoubleExtension {
     public static Double customRoundUp(@This Double source, Integer decimalsLength) {
         isNullException(source);
         compareDecimalsLengthToEnter(source, decimalsLength);
-        return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
+        return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
     }
 
     /**
@@ -675,7 +675,7 @@ public class DoubleExtension {
      */
     public static Double customRoundUp(@This Double source, Integer decimalsLength, Double errorBack) {
         try {
-            return new BigDecimal(source).customRoundHalf(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
+            return new BigDecimal(source).customRound(decimalsLength, BigDecimal.ROUND_UP).doubleValue();
         } catch (Exception ex) {
             return errorBack;
         }
