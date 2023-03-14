@@ -6,6 +6,9 @@ import manifold.ext.rt.api.This;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Extension
 public class IterableExtension {
@@ -36,14 +39,54 @@ public class IterableExtension {
         return objectList;
     }
 
-    public static <T, R> List<T> customToLambdaDistinct(@This Iterable<T> thiz, LambdaGetValueInterface<? super T, R> after) {
-        List<T> objectList = new ArrayList<>();
+    /**
+     * 按某些字段去重
+     *
+     * @param thiz
+     * @param keyExtractor
+     * @return java.util.List<T>
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/14 23:56
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/14 23:56
+     * @since 1.0
+     */
+    public static <T, U extends Comparable<? super U>> List<T> customToLambdaDistinct(@This Iterable<T> thiz, boolean isIgnore, Function<? super T, ? extends U> keyExtractor) {
+        TreeSet<T> trees = new TreeSet<>(Comparator.comparing(keyExtractor));
+        List<T> list = new ArrayList<>();
         for (T element : thiz) {
-            R a = after.apply(element);
-            System.out.println(a);
+            U r = keyExtractor.apply(element);
+            if (r != null) {
+                trees.add(element);
+            } else {
+                if (!isIgnore) {
+                    list.add(element);
+                }
+            }
         }
+        return trees.toList().customAddAll(list);
+    }
 
-        return null;
+    /**
+     * 按一个字段进行排序
+     *
+     * @param thiz
+     * @param keyExtractor
+     * @return java.util.List<T>
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/15 20:53
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/15 20:53
+     * @since 1.0
+     */
+    public static <T, U extends Comparable<? super U>> List<T> customSort(@This Iterable<T> thiz, Function<? super T, ? extends U> keyExtractor, String sort) {
+        return StreamSupport.stream(thiz.spliterator(), false)
+                .sorted(Comparator.comparing(keyExtractor).reversed())
+                .collect(Collectors.toList());
     }
 
     //endregion

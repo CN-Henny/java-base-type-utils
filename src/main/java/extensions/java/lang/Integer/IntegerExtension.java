@@ -651,28 +651,5 @@ public class IntegerExtension {
         }
         return source;
     }
-
-    /**
-     * Sum Number Re integer Exception Re errorBack
-     *
-     * @param source
-     * @param errorBack
-     * @param nums
-     * @return java.lang.Integer
-     * @throws
-     * @author Henny
-     * @cdate 2022/10/18 15:50
-     * @version 1.0
-     * @mdate 2022/10/18 15:50
-     * @since 1.0
-     */
-    public static Integer customSumAll(@This Integer source, Integer errorBack, Integer... nums) {
-        try {
-            return source.customSumAll(nums);
-        } catch (Exception ex) {
-            return errorBack;
-        }
-    }
-
     //endregion
 }

@@ -1,13 +1,12 @@
 package extensions.java.lang.Double;
 
+import com.Const.java.lang.Double.CustomConstDouble;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
-import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Double Extension
@@ -43,6 +42,13 @@ public class DoubleExtension {
         if (source.customIsNull()) {
             //TODO 增加异常返回
             throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
+        }
+    }
+
+    private static void isMaxPercentage(Double source) {
+        if (source > CustomConstDouble.OneHundred) {
+            //TODO 增加异常返回
+            System.out.println("com.dlanqi:base-type-utils Warning : Percentage Overstep 100%");
         }
     }
 
@@ -701,34 +707,36 @@ public class DoubleExtension {
     }
 
     /**
-      * 是中获取一个可用的对象
-      * @param source
-    * @param errorBack
-      * @return java.lang.Double
-      * @author Henny
-      * @cdate 2022/11/25 15:42
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/25 15:42
-      * @exception
-      */
+     * 是中获取一个可用的对象
+     *
+     * @param source
+     * @param errorBack
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 15:42
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 15:42
+     * @since 1.0
+     */
     public static Double customGetValue(@This Double source, Double errorBack) {
         return source.customIsNull() ? errorBack : source;
     }
 
     /**
-      * 始终获取一个可用的对象
-      * @param source
-      * @return java.lang.Double
-      * @author Henny
-      * @cdate 2022/11/25 15:42
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2022/11/25 15:42
-      * @exception
-      */
+     * 始终获取一个可用的对象
+     *
+     * @param source
+     * @return java.lang.Double
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 15:42
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 15:42
+     * @since 1.0
+     */
     public static Double customGetValue(@This Double source) {
         return source.customIsNull() ? 0 : source;
     }
@@ -1019,11 +1027,40 @@ public class DoubleExtension {
 
     //region  加法
 
-    public static List<BigDecimal> customSumAll(Double... nums) {
-        nums.customToList().customToBigDecimalList(e -> e.customToBigDecimal());
-        return null;
+    public static Double customSumAll(@This Double source, Double... nums) {
+        int scala = 2;
+        int roundingMode = BigDecimal.ROUND_HALF_UP;
+        return source.customSumAll(scala, roundingMode, nums);
     }
 
+    public static Double customSumAll(@This Double source, int scala, int roundingMode, Double... nums) {
+        return source.customSumAll(scala, roundingMode, Arrays.asList(nums));
+    }
+
+    public static Double customSumAll(@This Double source, List<Double> nums) {
+        int scala = 2;
+        int roundingMode = BigDecimal.ROUND_HALF_UP;
+        return source.customSumAll(scala, roundingMode, nums);
+    }
+
+    public static Double customSumAll(@This Double source, int scala, int roundingMode, List<Double> nums) {
+        BigDecimal bigDecimal = source.customToBigDecimal();
+        List<BigDecimal> bigDecimals = nums.customToBigDecimalList(e -> e.customToBigDecimal());
+        return bigDecimal.customSumAll(scala, roundingMode, bigDecimals).customToDouble();
+    }
+
+    public static Double customPercentage(@This Double source) {
+        isNullException(source);
+        Double result = source * CustomConstDouble.OneHundred;
+        //判断是否超过100%，如果超过则提示
+        isMaxPercentage(result);
+        return result;
+    }
+
+    public static Double customUnPercentage(@This Double source) {
+        isNullException(source);
+        return source / CustomConstDouble.OneHundred;
+    }
 
     //endregion
 

@@ -5,8 +5,6 @@ import com.alibaba.fastjson.JSON;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.Self;
 import manifold.ext.rt.api.This;
-
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,8 +12,29 @@ import java.util.stream.Collectors;
 @Extension
 public class ListExtension {
 
+    /**
+     * NULL异常
+     *
+     * @param source
+     * @return void
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/14 19:00
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/14 19:00
+     * @since 1.0
+     */
+    private static <E> void isNullException(List<E> source) {
+        if (source.customIsNull()) {
+            //TODO 增加异常返回
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
+        }
+    }
+
+
     //region 判断型
-    public static Boolean customIsNull(@This List<Object> source) {
+    public static <E> Boolean customIsNull(@This List<E> source) {
         return source == null;
     }
 
@@ -32,7 +51,7 @@ public class ListExtension {
      * @mdate 2022/8/5 14:26
      * @since 1.0
      */
-    public static Boolean customIsNotNull(@This List<Object> source) {
+    public static <E> Boolean customIsNotNull(@This List<E> source) {
         return !source.customIsNull();
     }
 
@@ -50,7 +69,7 @@ public class ListExtension {
      * @mdate 2022/8/5 15:08
      * @since 1.0
      */
-    public static @Self List<Object> customIsNotNull(@This List<Object> source, List<Object> errorBack) {
+    public static <E> @Self List<E> customIsNotNull(@This List<E> source, List<E> errorBack) {
         return source.customIsNotNull() ? source : errorBack;
     }
 
@@ -67,7 +86,7 @@ public class ListExtension {
      * @mdate 2022/8/5 14:54
      * @since 1.0
      */
-    public static Boolean customIsEmpty(@This List<Object> source) {
+    public static <E> Boolean customIsEmpty(@This List<E> source) {
         return source.customIsNull() || (source.count() == 0);
     }
 
@@ -86,7 +105,7 @@ public class ListExtension {
      * @mdate 2022/10/25 11:57
      * @since 1.0
      */
-    public static Boolean customIsNotEmpty(@This List<Object> source) {
+    public static <E> Boolean customIsNotEmpty(@This List<E> source) {
         return !source.customIsEmpty();
     }
 
@@ -104,12 +123,47 @@ public class ListExtension {
      * @mdate 2022/8/5 15:09
      * @since 1.0
      */
-    public static @Self List<Object> customIsNotEmpty(@This List<Object> source, List<Object> errorBack) {
+    public static <E> @Self List<E> customIsNotEmpty(@This List<E> source, List<E> errorBack) {
         return source.customIsNotEmpty() ? source : errorBack;
     }
     //endregion
 
     //region 功能型
+
+    /**
+     * 始终获得一个非null的对象
+     *
+     * @param source
+     * @param errorBack
+     * @return java.util.List<E>
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 15:44
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 15:44
+     * @since 1.0
+     */
+    public static <E> @Self List<E> customGetValue(@This List<E> source, List<E> errorBack) {
+        return source == null ? errorBack : source;
+    }
+
+    /**
+     * 始终获得一个非null的对象
+     *
+     * @param source
+     * @return java.util.List<E>
+     * @throws
+     * @author Henny
+     * @cdate 2022/11/25 15:45
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2022/11/25 15:45
+     * @since 1.0
+     */
+    public static <E> @Self List<E> customGetValue(@This List<E> source) {
+        return source == null ? new ArrayList<>() : source;
+    }
 
     /**
      * 获取list中第一个元素如果没有返回默认值
@@ -133,6 +187,10 @@ public class ListExtension {
         }
     }
 
+
+
+
+
     //endregion
 
     /**
@@ -153,7 +211,7 @@ public class ListExtension {
         return source;
     }
 
-    public static @Self List<Object> customAddAll(@This List<Object> source, List<Object> key) {
+    public static <E> @Self List<E> customAddAll(@This List<E> source, List<E> key) {
         source.addAll(key);
         return source;
     }
@@ -207,38 +265,5 @@ public class ListExtension {
     //    return 1;
     //}
 
-    /**
-     * 始终获得一个非null的对象
-     *
-     * @param source
-     * @param errorBack
-     * @return java.util.List<E>
-     * @throws
-     * @author Henny
-     * @cdate 2022/11/25 15:44
-     * @version 1.0
-     * @muser Henny
-     * @mdate 2022/11/25 15:44
-     * @since 1.0
-     */
-    public static <E, T> List<E> customGetValue(@This List<E> source, List<E> errorBack) {
-        return source == null ? errorBack : source;
-    }
 
-    /**
-     * 始终获得一个非null的对象
-     *
-     * @param source
-     * @return java.util.List<E>
-     * @throws
-     * @author Henny
-     * @cdate 2022/11/25 15:45
-     * @version 1.0
-     * @muser Henny
-     * @mdate 2022/11/25 15:45
-     * @since 1.0
-     */
-    public static <E, T> List<E> customGetValue(@This List<E> source) {
-        return source == null ? new ArrayList<>() : source;
-    }
 }

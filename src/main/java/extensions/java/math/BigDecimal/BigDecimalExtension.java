@@ -1,6 +1,6 @@
 package extensions.java.math.BigDecimal;
 
-import manifold.ext.rt.api.ComparableUsing;
+import com.Const.java.math.Bigdecimal.CustomConstBigDecmial;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
@@ -51,6 +51,13 @@ public class BigDecimalExtension {
         if (source.customIsNull()) {
             //TODO 增加异常返回
             throw new NullPointerException("com.dlanqi:base-type-utils Error : source is null");
+        }
+    }
+
+    private static void isNullWarning(BigDecimal source) {
+        if (source.customIsNull()) {
+            //TODO 增加异常返回
+            System.out.println("com.dlanqi:base-type-utils Warning : source is zero ");
         }
     }
 
@@ -176,17 +183,18 @@ public class BigDecimalExtension {
     //region   功能型
 
     /**
-      * 四舍五入
-      * @param source
-      * @return java.math.BigDecimal
-      * @author Henny
-      * @cdate 2023/1/13 16:39
-      * @since 1.0
-      * @version 1.0
-      * @muser Henny
-      * @mdate 2023/1/13 16:39
-      * @exception
-      */
+     * 四舍五入
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/13 16:39
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/13 16:39
+     * @since 1.0
+     */
     public static BigDecimal customRound(@This BigDecimal source) {
         initPara();
         return of(source);
@@ -247,17 +255,239 @@ public class BigDecimalExtension {
         return nf.format(source);
     }
 
+    /**
+     * 永远获取一个合法的bigdecmial
+     *
+     * @param source
+     * @param errorBack
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/18 12:16
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/18 12:16
+     * @since 1.0
+     */
     public static BigDecimal customGetValue(@This BigDecimal source, BigDecimal errorBack) {
         return source.customIsNull() ? errorBack : source;
     }
 
+    /**
+     * 永远获取一个合法的bigdecmial
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/18 12:17
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/18 12:17
+     * @since 1.0
+     */
     public static BigDecimal customGetValue(@This BigDecimal source) {
         return source.customIsNull() ? new BigDecimal(0) : source;
+    }
+
+    /**
+     * source 大于  target   返回true    否则返回false
+     *
+     * @param source
+     * @param target
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/18 12:19
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/18 12:19
+     * @since 1.0
+     */
+    public static Boolean customGreater(@This BigDecimal source, BigDecimal target) {
+        isNullException(source);
+        isNullException(target);
+        return source.compareTo(target) > 0;
+    }
+
+    /**
+     * source 大于等于  target   返回true    否则返回false
+     *
+     * @param source
+     * @param target
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/18 12:20
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/18 12:20
+     * @since 1.0
+     */
+    public static Boolean customGreaterAndEqual(@This BigDecimal source, BigDecimal target) {
+        isNullException(source);
+        isNullException(target);
+        return target.compareTo(source) < 0;
+    }
+
+    /**
+     * source 小于  target   返回true    否则返回false
+     *
+     * @param source
+     * @param target
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/18 12:20
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/18 12:20
+     * @since 1.0
+     */
+    public static Boolean customSmaller(@This BigDecimal source, BigDecimal target) {
+        isNullException(source);
+        isNullException(target);
+        return source.compareTo(target) < 0;
+    }
+
+    /**
+     * source 小于等于  target   返回true    否则返回false
+     *
+     * @param source
+     * @param target
+     * @return java.lang.Boolean
+     * @throws
+     * @author Henny
+     * @cdate 2023/1/18 12:20
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/1/18 12:20
+     * @since 1.0
+     */
+    public static Boolean customSmallerAndEqual(@This BigDecimal source, BigDecimal target) {
+        isNullException(source);
+        isNullException(target);
+        return target.compareTo(source) > 0;
+    }
+
+    /**
+     * 元转万元
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/2/22 14:18
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/2/22 14:18
+     * @since 2.1.37
+     */
+    @Deprecated
+    public static BigDecimal customConvertToTenThousand(@This BigDecimal source) {
+        isNullException(source);
+        return source.customDivideAll(CustomConstBigDecmial.TenThousand);
+    }
+
+    /**
+     * 万元转元
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/2/22 14:26
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/2/22 14:26
+     * @since 2.1.37
+     */
+    @Deprecated
+    public static BigDecimal customConvertFromTenThousand(@This BigDecimal source) {
+        isNullException(source);
+        return source.customSubtractAll(CustomConstBigDecmial.TenThousand);
+    }
+
+    /**
+     * 元转万元
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/2/22 14:18
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/2/22 14:18
+     * @since 2.1.39
+     */
+    public static BigDecimal customDivideTenThousand(@This BigDecimal source) {
+        isNullException(source);
+        return source.customDivideAll(CustomConstBigDecmial.TenThousand);
+    }
+
+    /**
+     * 万元转元
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/2/22 14:26
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/2/22 14:26
+     * @since 2.1.39
+     */
+    public static BigDecimal customSubtractTenThousand(@This BigDecimal source) {
+        isNullException(source);
+        return source.customSubtractAll(CustomConstBigDecmial.TenThousand);
+    }
+
+    /**
+     * 乘100
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/2/22 15:11
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/2/22 15:11
+     * @since 2.1.37
+     */
+    public static BigDecimal customMultiplyOneHundred(@This BigDecimal source) {
+        isNullException(source);
+        return source.customToDouble().customPercentage().customToBigDecimal();
+    }
+
+    /**
+     * 除100
+     *
+     * @param source
+     * @return java.math.BigDecimal
+     * @throws
+     * @author Henny
+     * @cdate 2023/2/22 15:11
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/2/22 15:11
+     * @since 2.1.37
+     */
+    public static BigDecimal customDivideOneHundred(@This BigDecimal source) {
+        isNullException(source);
+        return source.customToDouble().customUnPercentage().customToBigDecimal();
     }
 
     //endregion
 
     //region   转换型
+
+    public static Double customToDouble(@This BigDecimal source) {
+        isNullException(source);
+        return source.doubleValue();
+    }
 
     //endregion
 
@@ -299,11 +529,17 @@ public class BigDecimalExtension {
     private static BigDecimal customSum(BigDecimal source, List<BigDecimal> nums) {
         isNullException(source);
         BigDecimal bigDecimal = source;
-        for (BigDecimal item : nums) {
-            isNullException(item);
-            bigDecimal = bigDecimal.add(item);
+        //如果传进来一个空list则直接返回source
+        if (nums.customIsNotNull()) {
+            for (BigDecimal item : nums) {
+                isNullWarning(item);
+                //加法如果是list null则当成加了一个0
+                bigDecimal = bigDecimal.add(item.customGetValue());
+            }
+            return bigDecimal;
+        } else {
+            return source;
         }
-        return of(bigDecimal);
     }
 
     //endregion
@@ -344,11 +580,17 @@ public class BigDecimalExtension {
     private static BigDecimal customSubtract(BigDecimal source, List<BigDecimal> nums) {
         isNullException(source);
         BigDecimal bigDecimal = source;
-        for (BigDecimal item : nums) {
-            isNullException(item);
-            bigDecimal = bigDecimal.subtract(item);
+        //如果传进来一个空list则直接返回source
+        if (nums.customIsNotNull()) {
+            for (BigDecimal item : nums) {
+                isNullWarning(item);
+                //加法如果是list null则当成减了一个0
+                bigDecimal = bigDecimal.subtract(item.customGetValue());
+            }
+            return bigDecimal;
+        } else {
+            return source;
         }
-        return of(bigDecimal);
     }
 
     //endregion
@@ -393,7 +635,7 @@ public class BigDecimalExtension {
             isNullException(item);
             bigDecimal = bigDecimal.multiply(item);
         }
-        return of(bigDecimal);
+        return bigDecimal;
     }
 
     //endregion
@@ -436,9 +678,9 @@ public class BigDecimalExtension {
         BigDecimal bigDecimal = source;
         for (BigDecimal item : nums) {
             isZeroException(item);
-            bigDecimal = bigDecimal.divide(item);
+            bigDecimal = bigDecimal.divide(item, 12, BigDecimal.ROUND_HALF_UP);
         }
-        return of(bigDecimal);
+        return bigDecimal;
     }
 
     //endregion
@@ -484,7 +726,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customSumAll(@This BigDecimal source, int scala, int roundingMode, BigDecimal... nums) {
         initPara(scala, roundingMode);
-        return customSum(source, nums);
+        return of(customSum(source, nums));
     }
 
     /**
@@ -522,7 +764,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customSumAll(@This BigDecimal source, int scala, int roundingMode, List<BigDecimal> nums) {
         initPara(scala, roundingMode);
-        return customSum(source, nums);
+        return of(customSum(source, nums));
     }
 
     //endregion
@@ -564,7 +806,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customSubtractAll(@This BigDecimal source, int scala, int roundingMode, BigDecimal... nums) {
         initPara(scala, roundingMode);
-        return customSubtract(source, nums);
+        return of(customSubtract(source, nums));
     }
 
     /**
@@ -602,7 +844,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customSubtractAll(@This BigDecimal source, int scala, int roundingMode, List<BigDecimal> nums) {
         initPara(scala, roundingMode);
-        return customSubtract(source, nums);
+        return of(customSubtract(source, nums));
     }
 
     //endregion
@@ -644,7 +886,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customMultiplyAll(@This BigDecimal source, int scala, int roundingMode, BigDecimal... nums) {
         initPara(scala, roundingMode);
-        return customMultiply(source, nums);
+        return of(customMultiply(source, nums));
     }
 
     /**
@@ -682,7 +924,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customMultiplyAll(@This BigDecimal source, int scala, int roundingMode, List<BigDecimal> nums) {
         initPara(scala, roundingMode);
-        return customMultiply(source, nums);
+        return of(customMultiply(source, nums));
     }
 
     //endregion
@@ -724,7 +966,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customDivideAll(@This BigDecimal source, int scala, int roundingMode, BigDecimal... nums) {
         initPara(scala, roundingMode);
-        return customDivide(source, nums);
+        return of(customDivide(source, nums));
     }
 
     /**
@@ -762,7 +1004,7 @@ public class BigDecimalExtension {
      */
     public static BigDecimal customDivideAll(@This BigDecimal source, int scala, int roundingMode, List<BigDecimal> nums) {
         initPara(scala, roundingMode);
-        return customDivide(source, nums);
+        return of(customDivide(source, nums));
     }
 
     //endregion

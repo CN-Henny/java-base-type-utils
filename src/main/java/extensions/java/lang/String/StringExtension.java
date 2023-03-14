@@ -73,6 +73,11 @@ public class StringExtension {
     }
 
     private static void isLenException(String source, Integer start, Integer len) {
+        //判断长度问题
+        if (source.length() < start || source.length() < len) {
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
+        }
+        //判断截取问题
         if (start.equals(start.customAbs())) {
             if (len.equals(len.customAbs())) {
                 if (!(source.length() > start + len)) {
@@ -85,7 +90,7 @@ public class StringExtension {
             }
         } else {
             if (len.equals(len.customAbs())) {
-                if (source.length() - start.customAbs() + len >= source.length()) {
+                if (source.length() - start.customAbs() + len - 1 >= source.length()) {
                     throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
                 }
             } else {
@@ -93,6 +98,27 @@ public class StringExtension {
                     throw new NullPointerException("com.dlanqi:base-type-utils Error : len to long");
                 }
             }
+        }
+    }
+
+    /**
+     * 判断传入一个数是不是正数，不含0
+     *
+     * @param source
+     * @return void
+     * @throws
+     * @author Henny
+     * @cdate 2023/3/1 14:51
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/3/1 14:51
+     * @since 1.0
+     */
+    private static void isPositiveNumberException(Integer source) {
+        if (source == 0) {
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is Zero");
+        } else if (source < 0) {
+            throw new NullPointerException("com.dlanqi:base-type-utils Error : source is not Positive Number");
         }
     }
 
@@ -149,6 +175,7 @@ public class StringExtension {
     /**
      * Integer Exception
      * Is Not Integer Re False
+     * 修改不识别负号
      *
      * @param source 源数据
      * @return void
@@ -156,17 +183,23 @@ public class StringExtension {
      * @author Henny
      * @cdate 2022/8/6 16:14
      * @version 1.0
-     * @mdate 2022/8/6 16:14
-     * @since 1.0
+     * @mdate 2023/01/28 13:50
+     * @since 1.1
      */
     private static void isIntegerException(String source) {
         Character[] chars = source.customToCharacterArray();
+        int i = 0;
         for (Character charValue : chars) {
             if (!Character.isDigit(charValue)) {
-                //TODO 增加异常返回
-                throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is not Integer");
+                if (i == 0 && charValue.equals('-')) {
+                } else {
+                    //TODO 增加异常返回
+                    throw new NumberFormatException("com.dlanqi:base-type-utils Error : source is not Integer");
+                }
             }
+            i++;
         }
+
     }
 
     /**
@@ -1130,6 +1163,25 @@ public class StringExtension {
     }
 
     /**
+     * 截取掉后数几位
+     *
+     * @param source
+     * @param len
+     * @return java.lang.String
+     * @throws
+     * @author Henny
+     * @cdate 2023/3/1 15:02
+     * @version 1.0
+     * @muser Henny
+     * @mdate 2023/3/1 15:02
+     * @since 2.1.39
+     */
+    public static String customSubStrLast(@This String source, Integer len) {
+        isPositiveNumberException(len);
+        return source.customSubStr(0, source.length() - len);
+    }
+
+    /**
      * 字符串拼接
      *
      * @param source
@@ -1549,13 +1601,4 @@ public class StringExtension {
     }
     //endregion
 
-    public static String and(@This String source, String target) {
-
-        return source.customIsNotNull("") + "#" + target.customIsNotNull("");
-
-    }
-
-    public static String or(@This String source, String target) {
-        return source.customIsNotNull("") + "@" + target.customIsNotNull("");
-    }
 }

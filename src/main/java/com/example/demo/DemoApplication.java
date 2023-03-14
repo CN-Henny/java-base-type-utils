@@ -10,6 +10,7 @@ import com.dlanqi.utils.CustomNumberUtils;
 import extensions.java.lang.Object.ObjectExtension;
 import manifold.science.measures.Length;
 import manifold.science.measures.LengthUnit;
+import manifold.science.util.Rational;
 import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
@@ -21,6 +22,7 @@ import sun.util.calendar.ZoneInfo;
 import java.beans.FeatureDescriptor;
 import java.beans.PropertyDescriptor;
 import java.io.File;
+import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -32,17 +34,133 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static com.dlanqi.utils.GPSUtils.pi;
 import static java.time.temporal.ChronoUnit.*;
+import static manifold.science.util.CoercionConstants.r;
+import static manifold.science.util.UnitConstants.mph;
+import static science.unit.CustomUnitConstants.*;
 
 public class DemoApplication {
 
     public static void main(String[] args) {
+        String sgsfsd = "123456789";
+        //System.out.println(sgsfsd.customSubStrLast(90));
 
-        String adasd = "asdasda,23423,afasd,23423,fasdf,235";
-        List<Long> asdsa = adasd.customStrToList(",",Long.class,true);
-        //List<Long> asdasdasd = adasd.customStrToList(",",Long.class,false);
+        BigDecimal sergse = new BigDecimal(100);
+        sergse.customConvertToTenThousand();
+        System.out.println(sergse.customDivideOneHundred());
+        System.out.println(sergse.customMultiplyOneHundred());
+
+        UserData ud = new UserData();
+        UserData udccc = new UserData();
+        List<UserDDDD> udddlist = new ArrayList<>();
+        UserDDDD uddd = new UserDDDD();
+        uddd.setUserId(1L);
+        udddlist.add(uddd);
+        ud.setUaer(udddlist);
+
+        ud.customCopyPropertiesTo(udccc, 1);
 
 
+        String athtrgr = "-1";
+        Long gsfasefa = athtrgr.customToLong();
+
+        BigDecimal aaa1 = new BigDecimal(1);
+        BigDecimal aaa2 = new BigDecimal(3);
+        BigDecimal aaa3 = aaa1.customDivideAll(aaa2);
+
+
+        List<Long> trialCardasdList = new ArrayList<>();
+        trialCardasdList.add(1L);
+        trialCardasdList.add(2L);
+        trialCardasdList.add(1L);
+        trialCardasdList.add(1L);
+
+        List<Long> cgrsdfavvv = trialCardasdList.customToLambdaDistinct(true, e -> e);
+
+        // 最原始和基础的方式
+        /*
+        List<String> list = stream.collect(
+                ()->new ArrayList(),
+                (theList, item) -> theList.add(item),
+                (list1, list2) -> list1.addAll(list2)
+        );
+        */
+        Stream<String> stream = Stream.of("hello", "world", "helloworld");
+        List<String> listDetail = stream.collect(
+                () -> {
+                    ArrayList<String> arrayList = new ArrayList<>();
+                    System.out.println("第一个list诞生, size: " + arrayList.size());
+                    return arrayList;
+                },
+                (theList, item) -> {
+                    System.out.println("第二个list的size: " + theList.size());
+                    theList.add(item);
+                },
+                (list1, list2) -> {
+                    System.out.println("第三个list1的size: " + list1.size());
+                    System.out.println("第四个list2的size: " + list2.size());
+                    list1.addAll(list2);
+                }
+        );
+
+
+        List<UserAAA> trialCardList = new ArrayList<>();
+        UserAAA trialCard = new UserAAA();
+        trialCard.setUserId(1243L);
+        trialCard.setSix("1222");
+        UserAAA trialCard1 = new UserAAA();
+        trialCard1.setUserId(1231L);
+        trialCard1.setSix("1111");
+        UserAAA trialCard2 = new UserAAA();
+        trialCard2.setUserId(1323L);
+        trialCard2.setSix("12");
+        trialCardList.add(trialCard2);
+        trialCardList.add(trialCard1);
+        trialCardList.add(trialCard);
+        List<UserAAA> newstrialCardList22 = trialCardList.stream().sorted(Comparator.comparing(e -> e.getSix())).collect(Collectors.toList());
+        List<UserAAA> newstrialCardList = trialCardList.customToLambdaDistinct(true, e -> e.getUserId() + e.getSix());
+        List<UserAAA> newstrialCardList2 = trialCardList.customToLambdaDistinct(true, e -> e.getUserId());
+        List<UserAAA> newstrialCardList3 = trialCardList.customToLambdaDistinct(true, e -> e.getSix());
+        List<UserAAA> newstrialCardLis4t = trialCardList.customSort(e -> e.getUserId(), "");
+        List<Long> dgdthyr = new ArrayList<>();
+        dgdthyr.customAdd(1L).customAdd(1L).customAdd(1L).customAdd(1L);
+
+        List<Long> dgdthyr1 = dgdthyr.customToLambdaDistinct(true, e -> e);
+
+
+        List<UserAAA> newTrialCardList = trialCardList.stream()
+                .collect(Collectors.collectingAndThen(Collectors.toCollection(
+                        () -> new TreeSet<>(Comparator.comparing(o -> o.getUserId() + o.getSix() + o.getPassWord()))), ArrayList::new));
+
+
+        Double q1111 = 123.14234234;
+        Double q2222 = 345.3634345352;
+        Double q22222 = 345.3634345352;
+        Double q22223 = 345.3634345352;
+        Double q22224 = 345.3634345352;
+        Double q22225 = 345.3634345352;
+        Double q22226 = 345.3634345352;
+        Double q22227 = 345.3634345352;
+        Double q22228 = 345.3634345352;
+        long start = System.currentTimeMillis();
+        Double q3333 = q1111 + q2222 + q22222 + q22223 + q22224 + q22225 + q22226 + q22227 + q22228;
+        long finish = System.currentTimeMillis();
+        long timeElapsed = finish - start;
+
+        long start1 = System.currentTimeMillis();
+        long finish2 = System.currentTimeMillis();
+        Double q33333 = q1111.customSumAll(q2222, q22222, q22223, q22224, q22225, q22226, q22227, q22228);
+        long timeElapsed3 = finish2 - start1;
+
+        String ergsf = "asdas,1324,34523442";
+        List<Long> sdgsdfd = new ArrayList<>();
+        sdgsdfd.customIsNotNull();
+        List<UserAAA> sgrgtresf = new ArrayList<>();
+        sgrgtresf.customJoin(",");
+        sdgsdfd.add(1L);
+        Long atrht = sdgsdfd.customFindFirstOrDefault(new Long(0L));
+        sdgsdfd.customAdd(123L);
         JSONArray asdfasdds = new JSONArray();
         JSONArray asdfds = null;
         JSONArray sfsfs = asdfds.customGetValue();
@@ -69,7 +187,7 @@ public class DemoApplication {
 
         String thgg = "123456789";
         System.out.println(thgg.customSubStr(3, 2));
-        System.out.println(thgg.customSubStr(3, -2));
+        System.out.println(thgg.customSubStr(3, -3));
         System.out.println(thgg.customSubStr(-3, 2));
         System.out.println(thgg.customSubStr(-3, -2));
         System.out.println(thgg.customSubStr(-2));

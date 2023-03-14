@@ -2,7 +2,6 @@ package com.dlanqi.utils;
 
 import cn.hutool.extra.pinyin.PinyinUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.cloud.core.common.SymbolConst;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -31,7 +30,6 @@ public class CustomStringUtils {
      * @author Rex
      * @date 2021/6/8 15:43
      */
-    @Deprecated
     public static boolean isEmpty(Object str) {
         if (str == null) {
             return true;
@@ -50,7 +48,6 @@ public class CustomStringUtils {
      * @author Rex
      * @date 2021/6/8 15:43
      */
-    @Deprecated
     public static boolean isNotEmpty(Object str) {
         if (str == null) {
             return false;
@@ -114,7 +111,6 @@ public class CustomStringUtils {
      * @param html html字符串
      * @return {@link String}
      */
-    @Deprecated
     public static String replaceSpecialSymbols(String html) {
         //替换单引号
         html = html.replace("'", "&apos;");
@@ -142,7 +138,6 @@ public class CustomStringUtils {
      * @return {@link String}
      * @author Rex
      */
-    @Deprecated
     public static String removeHtmlTag(String inputString) {
         if (inputString == null) {
             return "";
@@ -175,7 +170,6 @@ public class CustomStringUtils {
      * @author Rex
      * @since 2021/11/25 10:45
      */
-    @Deprecated
     private static String getString(String htmlStr, String... args) {
         Pattern pScript;
         Matcher mScript;
@@ -195,7 +189,6 @@ public class CustomStringUtils {
      * @return {@link int}
      * @author Rex
      */
-    @Deprecated
     public static int getTextAreaWordCount(Object obj) {
         if (null == obj) {
             return 0;
@@ -240,7 +233,6 @@ public class CustomStringUtils {
      * @return {@link String}
      * @author Rex
      */
-    @Deprecated
     public static String replaceTemplateContent(String templateContent, Map<String, Object> paramMap) {
         if (templateContent == null || "".equals(templateContent)) {
             return null;
@@ -280,7 +272,6 @@ public class CustomStringUtils {
      * @return {@link String}
      * @author Rex
      */
-    @Deprecated
     public static String leftFill(int total, int i) {
         String result = "";
         //得到一个NumberFormat的实例
@@ -325,18 +316,33 @@ public class CustomStringUtils {
      * @author Rex
      */
     public static String getBoolStr(Object value) {
+        return getBoolStr(value, "否");
+    }
+
+    /**
+     * 获取布尔值翻译
+     *
+     * @param value  布尔对象
+     * @param defStr 默认值
+     * @return {@link String} 返回 是否
+     * @author Rex
+     */
+    public static String getBoolStr(Object value, String defStr) {
         try {
             if (null == value) {
-                return "否";
+                return defStr;
             }
-            if (1 == Integer.parseInt(value.toString())) {
+            if (1 == CustomNumberUtils.obj2Int(value)) {
                 return "是";
-            } else {
+            }
+            if (0 == CustomNumberUtils.obj2Int(value)) {
                 return "否";
+            } else {
+                return defStr;
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            return "否";
+            return defStr;
         }
     }
 
@@ -348,16 +354,16 @@ public class CustomStringUtils {
      * @return {@link Boolean} 如果包含返回true
      * @author Rex
      */
-    public static boolean checkStrInStrs(String str, String strs) {
-        if (CustomStringUtils.isEmpty(str)) {
-            return false;
-        }
-        if (CustomStringUtils.isEmpty(strs)) {
-            return false;
-        }
-        List<String> strArr = Arrays.asList(strs.split(SymbolConst.Symbol.COMMA).clone());
-        return strArr.contains(str);
-    }
+    //public static boolean checkStrInStrs(String str, String strs) {
+    //    if (CustomStringUtils.isEmpty(str)) {
+    //        return false;
+    //    }
+    //    if (CustomStringUtils.isEmpty(strs)) {
+    //        return false;
+    //    }
+    //    List<String> strArr = Arrays.asList(strs.split(SymbolConst.Symbol.COMMA).clone());
+    //    return strArr.contains(str);
+    //}
 
     /**
      * 手机号打码
@@ -366,7 +372,6 @@ public class CustomStringUtils {
      * @return 中间四位打码的手机号
      * @author Rex
      */
-    @Deprecated
     public static String maskPhone(String phone) {
         return phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
@@ -395,7 +400,6 @@ public class CustomStringUtils {
      * @author Rex
      * @date 2021/6/25 16:20
      */
-    @Deprecated
     public static boolean isJson(String content) {
         try {
             JSONObject.isValidObject(content);
